@@ -1,0 +1,35 @@
+.game-grid-component-container {
+  height: 100%;
+}
+
+.game-grid-card-padding {
+  padding: 0.75vw;
+}
+
+@media (max-width: 1499px) {
+  .game-grid-swipable-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 0.75vw;
+    overflow: auto;
+  }
+}
+
+@media (min-width: 1500px) {
+  .game-grid-swipable-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 1vw;
+    overflow: auto;
+  }
+}
