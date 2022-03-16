@@ -37,35 +37,31 @@ const giantBombPlatformIDs = {
 
 const defaults = {
   Switch: {
-    emuPath:
-      'C:\\Users\\Rishan\\AppData\\Local\\yuzu\\yuzu-windows-msvc\\yuzu.exe',
+    emuPath: '',
     gameDirectory: '',
   },
   WiiU: {
-    emuPath:
-      'D:\\Documents - Data Drive\\My Games\\Wii U Games\\cemu_1.20.2\\Cemu.exe',
+    emuPath: '',
     gameDirectory: '',
   },
   Wii: {
-    emuPath:
-      'D:\\Documents - Data Drive\\My Games\\Wii and Gamecube Games\\Dolphin-x64\\Dolphin.exe',
+    emuPath: '',
     gameDirectory: 'test',
   },
   GC: {
-    emuPath:
-      'D:\\Documents - Data Drive\\My Games\\Wii and Gamecube Games\\Dolphin-x64\\Dolphin.exe',
+    emuPath: '',
     gameDirectory: 'test',
   },
   ['3DS']: {
-    emuPath: 'D:\\Program Files (x86)\\Citra\\nightly-mingw\\citra-qt.exe',
+    emuPath: '',
     gameDirectory: '',
   },
   PS2: {
-    emuPath: 'D:\\Program Files (x86)\\PCSX2 1.4.0\\pcsx2.exe',
+    emuPath: '',
     gameDirectory: '',
   },
   PSP: {
-    emuPath: 'D:\\Program Files\\PPSSPP\\PPSSPPWindows64.exe',
+    emuPath: '',
     gameDirectory: '',
   },
   key: '',
