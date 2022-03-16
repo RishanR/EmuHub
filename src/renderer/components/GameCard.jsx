@@ -3,6 +3,7 @@ import './GameCard.css';
 import SwitchCover from '../../../assets/images/switch-cover.png';
 import WiiCover from '../../../assets/images/wii-cover-new.png';
 import GCCover from '../../../assets/images/gc-cover.png';
+import ThreeDSCover from '../../../assets/images/threeds-cover.png';
 
 const GameCard = ({
   image,
@@ -19,6 +20,8 @@ const GameCard = ({
       return SwitchCover;
     } else if (gameConsole == 'GC') {
       return GCCover;
+    } else if (gameConsole == '3DS') {
+      return ThreeDSCover;
     }
     return WiiCover;
   };

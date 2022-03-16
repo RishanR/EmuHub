@@ -21,6 +21,7 @@ const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { execFile } = require('child_process');
+const _ = require('lodash');
 
 const giantBombUrl = 'https://www.giantbomb.com';
 const giantBombPlatformIDs = {
@@ -148,6 +149,14 @@ const getCover = async (gameName, gamePlatform) => {
   return filteredArray[0];
 };
 
+const sortGamesBy = (arr, order, key) => {
+  return arr.sort((a, b) => {
+    const a_index = order.indexOf(a[key].toString());
+    const b_index = order.indexOf(b[key].toString());
+    return (a_index == -1 ? 99 : a_index) - (b_index == -1 ? 99 : b_index);
+  });
+};
+
 const getWiiGames = async () => {
   let wiiGames = [];
   const wiiMagicWord = '5d1c9ea3';
@@ -256,6 +265,13 @@ const getSwitchGames = async () => {
     console.log(err);
     return [];
   }
+
+  let regionOrder = ['USA', 'EUR', 'JPN'];
+  switch_db_json.releases.release = sortGamesBy(
+    switch_db_json.releases.release,
+    regionOrder,
+    'region'
+  );
   // console.log(switch_db_json.releases);
   // fs.writeFileSync(getAssetPath('NSWreleases.json'));
 
@@ -306,8 +322,65 @@ const getSwitchGames = async () => {
   return switchGames;
 };
 
-const get3DSGames = () => {
-  return [];
+const get3DSGames = async () => {
+  let threedsGames = [];
+  const threedsMagicWord = 'ncsd';
+  const allowedFileExtensions = ['.3ds', '.cci'];
+  const gamePaths = getAllFiles(
+    store.get('3DS.gameDirectory'),
+    allowedFileExtensions
+  );
+
+  const threeds_db_xml = fs.readFileSync(getAssetPath('3dsreleases.xml'));
+  let threeds_db_json = null;
+
+  try {
+    threeds_db_json = await xml2js.parseStringPromise(threeds_db_xml, {
+      mergeAttrs: true,
+    });
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+
+  let regionOrder = ['USA', 'EUR', 'JPN'];
+  threeds_db_json.releases.release = sortGamesBy(
+    threeds_db_json.releases.release,
+    regionOrder,
+    'region'
+  );
+
+  for (const gamePath of gamePaths) {
+    let fd = fs.openSync(gamePath, 'r');
+    let buffer = Buffer.alloc(16);
+    let byteSize = fs.statSync(gamePath).size;
+    if (byteSize > 0x100) {
+      fs.readSync(fd, buffer, 0, 16, 0x100);
+      if (
+        buffer.toString('utf-8', 0x0, 0x4).toLowerCase() == threedsMagicWord
+      ) {
+        // Calculate info
+        buffer.swap64();
+        const gameID = buffer.toString('hex', 0x8, 0x10);
+        for (const game of threeds_db_json.releases.release) {
+          if (game.titleid.toString().toLowerCase().includes(gameID)) {
+            let gameCover = await getCover(game.name.toString(), '3DS');
+
+            let threedsSingleGame = {
+              name: game.name.toString(),
+              image: gameCover,
+              gamePath,
+              gameConsole: '3DS',
+            };
+
+            threedsGames.push(threedsSingleGame);
+            break;
+          }
+        }
+      }
+    }
+  }
+  return threedsGames;
 };
 
 const getPS2Games = () => {
