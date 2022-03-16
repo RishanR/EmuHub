@@ -17,8 +17,6 @@ import axios from 'axios';
 import { URL } from 'url';
 import { resolveHtmlPath } from './util';
 
-// npm i sqlite3
-
 const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
@@ -326,7 +324,7 @@ ipcMain.handle('exec-switch', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
-      index: arg.index,
+      name: arg.name,
       gameConsole: arg.gameConsole,
       output: getExecMessage(err, arg.gamePath, emuPath),
     });
@@ -338,7 +336,7 @@ ipcMain.handle('exec-wii-u', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
-      index: arg.index,
+      name: arg.name,
       gameConsole: arg.gameConsole,
       output: getExecMessage(err, arg.gamePath, emuPath),
     });
@@ -357,7 +355,7 @@ ipcMain.handle('exec-wii-gamecube', async (event, arg) => {
     ],
     (err, stdout, stderr) => {
       event.sender.send('game-ended', {
-        index: arg.index,
+        name: arg.name,
         gameConsole: arg.gameConsole,
         output: getExecMessage(err, arg.gamePath, emuPath),
       });
@@ -370,7 +368,7 @@ ipcMain.handle('exec-3ds', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, [arg.gamePath], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
-      index: arg.index,
+      name: arg.name,
       gameConsole: arg.gameConsole,
       output: getExecMessage(err, arg.gamePath, emuPath),
     });
@@ -382,7 +380,7 @@ ipcMain.handle('exec-ps2', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
-      index: arg.index,
+      name: arg.name,
       gameConsole: arg.gameConsole,
       output: getExecMessage(err, arg.gamePath, emuPath),
     });
@@ -394,7 +392,7 @@ ipcMain.handle('exec-psp', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
-      index: arg.index,
+      name: arg.name,
       gameConsole: arg.gameConsole,
       output: getExecMessage(err, arg.gamePath, emuPath),
     });

@@ -10,7 +10,6 @@ const GameCard = ({
   gameConsole,
   gamePath,
   gameRunning,
-  index,
   setRunning,
 }) => {
   const getCover = (gameConsole) => {
@@ -25,11 +24,11 @@ const GameCard = ({
   };
   const launchGame = async () => {
     if (!gameRunning) {
-      setRunning(index, gameConsole, true);
+      setRunning(name, gameConsole, true);
       const result = await window.api[`exec${gameConsole}`]({
         gamePath,
         gameConsole,
-        index,
+        name,
       });
       console.log(result);
     }

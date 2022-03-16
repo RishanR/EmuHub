@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import errorMap from './error';
 import consoles from './consoles';
@@ -6,21 +6,26 @@ import GameCard from './components/GameCard';
 import GameGrid from './components/GameGrid';
 import { Oval } from 'react-loader-spinner';
 import Refresh from '../../assets/images/refresh.png';
+import gamesReducer from './reducers';
 import './App.css';
 
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
   const [selectedConsole, setSelectedConsole] = useState('Wii');
-  const [games, setGames] = useState({});
+  const [games, dispatch] = useReducer(gamesReducer, { test: '' });
   const [showEmuPrompt, setShowEmuPrompt] = useState(false);
   const [showGamePrompt, setShowGamePrompt] = useState(false);
-  const [refresh, setRefresh] = useState(false);
 
-  const setRunning = (index, gameConsole, value) => {
-    let gamesList = games;
-    gamesList[gameConsole][index].gameRunning = value;
-    console.log(gamesList);
-    setGames({ ...gamesList });
+  const setRunning = (name, gameConsole, value) => {
+    dispatch({
+      type: 'SET_GAME_PROPERTY',
+      payload: {
+        keyConsole: gameConsole,
+        keyGame: name,
+        key: 'gameRunning',
+        value,
+      },
+    });
   };
 
   const getFrontGames = async () => {
@@ -39,21 +44,19 @@ const Dashboard = () => {
         </div>
       ),
     });
-    let gamesList = games;
-    console.log(gamesList);
     let gamesResult = await window.api.getGames(selectedConsole);
     if (gamesResult.emuPath && gamesResult.gameDirectory) {
-      gamesList[selectedConsole] = gamesResult.results;
-
-      // Modify this so that it checks if the games list on the console is available. And if it is, then
-      // look for the game in the pre-existing list. If it already exists then set the pre-existing game
-      // running to the current game object running
-      gamesList[selectedConsole].forEach((game) => (game.gameRunning = false));
-      setGames(gamesList);
+      dispatch({
+        type: 'SET_GAME_CONSOLE_GAMES',
+        payload: {
+          key: selectedConsole,
+          value: [...gamesResult.results],
+        },
+      });
 
       setStatus({
         loading: false,
-        message: `${gamesList[selectedConsole].length} ${selectedConsole} games loaded.`,
+        message: `${gamesResult.results.length} ${selectedConsole} games loaded.`,
       });
     } else {
       if (!gamesResult.emuPath) {
@@ -62,7 +65,10 @@ const Dashboard = () => {
       if (!gamesResult.gameDirectory) {
         setShowGamePrompt(true);
       }
-      setStatus('Set your emulator path and/or game directory');
+      setStatus({
+        loading: false,
+        message: 'Set your emulator path and/or game directory',
+      });
     }
   };
 
@@ -75,7 +81,7 @@ const Dashboard = () => {
           // We have mapped the error. Do what you want to do with Issue and Solution here
           console.log(`Issue: ${mappedError.issue}`);
           if (mappedError.solution) {
-            console.log(`Solution: ${mappedError.solution}`);
+            console.log(`Solution:  ${mappedError.solution}`);
           }
         } else {
           // The error was not mapped. Do what you want with the whole error object.
@@ -83,7 +89,7 @@ const Dashboard = () => {
         }
       }
       console.log(arg.output.message);
-      setRunning(arg.index, arg.gameConsole, false);
+      setRunning(arg.name, arg.gameConsole, false);
     });
     // Clean the listener after the component is dismounted
     return () => {
@@ -100,7 +106,11 @@ const Dashboard = () => {
         message: `${games[selectedConsole].length} ${selectedConsole} games loaded.`,
       });
     }
-  }, [selectedConsole, refresh]);
+  }, [selectedConsole]);
+
+  useEffect(() => {
+    console.log('Games Changed: ', games[selectedConsole]);
+  }, [games]);
 
   return (
     <div className="main-container">
@@ -134,10 +144,7 @@ const Dashboard = () => {
         <div className="info-bar">
           {status.message}
           {!status.loading && (
-            <button
-              className="info-bar-refresh"
-              onClick={() => getFrontGames()}
-            >
+            <button className="info-bar-refresh" onClick={getFrontGames}>
               <img className="info-bar-refresh-icon" src={Refresh} />
             </button>
           )}
