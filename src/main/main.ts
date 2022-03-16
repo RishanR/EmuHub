@@ -21,7 +21,6 @@ const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { execFile } = require('child_process');
-const _ = require('lodash');
 
 const giantBombUrl = 'https://www.giantbomb.com';
 const giantBombPlatformIDs = {
