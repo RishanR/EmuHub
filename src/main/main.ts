@@ -353,7 +353,7 @@ const get3DSGames = async () => {
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(16);
     let byteSize = fs.statSync(gamePath).size;
-    if (byteSize > 0x100) {
+    if (byteSize > 0x110) {
       fs.readSync(fd, buffer, 0, 16, 0x100);
       if (
         buffer.toString('utf-8', 0x0, 0x4).toLowerCase() == threedsMagicWord
