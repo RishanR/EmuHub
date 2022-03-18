@@ -82,6 +82,7 @@ const getAssetPath = (...paths: string[]): string => {
 let switch_db_json = null;
 let threeds_db_json = null;
 let psp_db_json = require(getAssetPath('pspReleases.json'));
+let wiiu_db_json = require(getAssetPath('wiiuReleasesHashMap.json'));
 
 let ps2IdFileExt = [...Array(100).keys()].map(
   (num) => `*.${String(num).padStart(4, '0')}`
@@ -263,9 +264,8 @@ const getWiiUGames = async () => {
   );
 
   for (const gamePath of gamePaths) {
-    let xml_path = path.normalize(
-      path.dirname(path.dirname(gamePath)) + '/meta/meta.xml'
-    );
+    // TO-DO: Confirm that its not an update file
+    let xml_path = path.normalize(path.dirname(gamePath) + '/app.xml');
     if (fs.existsSync(xml_path)) {
       const wiiu_game_xml = fs.readFileSync(xml_path);
       let wiiu_game_meta_json = null;
@@ -277,18 +277,21 @@ const getWiiUGames = async () => {
         console.log(err);
         continue;
       }
-      const gameName = wiiu_game_meta_json?.menu?.longname_en[0]?.['_'];
-      if (gameName) {
-        let gameCover = await getCover(gameName, 'WiiU');
+      const gameID = wiiu_game_meta_json?.app?.title_id[0]?.['_'];
+      if (gameID && gameID.includes('00050000')) {
+        let gameName = wiiu_db_json[gameID]?.name;
+        if (gameName) {
+          let gameCover = await getCover(gameName, 'WiiU');
 
-        let wiiuSingleGame = {
-          name: gameName,
-          image: gameCover,
-          gamePath,
-          gameConsole: 'WiiU',
-        };
+          let wiiuSingleGame = {
+            name: gameName,
+            image: gameCover,
+            gamePath,
+            gameConsole: 'WiiU',
+          };
 
-        wiiuGames.push(wiiuSingleGame);
+          wiiuGames.push(wiiuSingleGame);
+        }
       }
     }
   }
@@ -668,7 +671,7 @@ const loadDatabases = async () => {
     });
 
     // // convert it to a JSON string
-    // switch_db_json = JSON.stringify(result, null, 4);
+    // switch_db_json = JSON.stringify(result, null, 4);u
   } catch (err) {
     console.log(err);
   }

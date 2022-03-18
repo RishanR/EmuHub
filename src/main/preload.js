@@ -33,7 +33,8 @@ contextBridge.exposeInMainWorld('api', {
   execPSP: async (gamePath) => {
     return await ipcRenderer.invoke('exec-psp', gamePath);
   },
-  getGames: async (gameConsole) => {
-    return await ipcRenderer.invoke('get-games', gameConsole);
+  getGames: async (gameConsole, callback) => {
+    let games = await ipcRenderer.invoke('get-games', gameConsole);
+    callback(games);
   },
 });

@@ -43,34 +43,35 @@ const Dashboard = () => {
         </div>
       ),
     });
-    let gamesResult = await window.api.getGames(selectedConsole);
-    if (gamesResult.emuPath && gamesResult.gameDirectory) {
-      dispatch({
-        type: 'SET_GAME_CONSOLE_GAMES',
-        payload: {
-          key: selectedConsole,
-          value: [...gamesResult.results],
-        },
-      });
-      let gamesLength = gamesResult.results.length;
-      setStatus({
-        loading: false,
-        message: `${gamesLength} ${selectedConsole} game${
-          gamesLength === 1 ? '' : 's'
-        } loaded.`,
-      });
-    } else {
-      if (!gamesResult.emuPath) {
-        setShowEmuPrompt(true);
+    window.api.getGames(selectedConsole, (gamesResult) => {
+      if (gamesResult.emuPath && gamesResult.gameDirectory) {
+        dispatch({
+          type: 'SET_GAME_CONSOLE_GAMES',
+          payload: {
+            key: selectedConsole,
+            value: [...gamesResult.results],
+          },
+        });
+        let gamesLength = gamesResult.results.length;
+        setStatus({
+          loading: false,
+          message: `${gamesLength} ${selectedConsole} game${
+            gamesLength === 1 ? '' : 's'
+          } loaded.`,
+        });
+      } else {
+        if (!gamesResult.emuPath) {
+          setShowEmuPrompt(true);
+        }
+        if (!gamesResult.gameDirectory) {
+          setShowGamePrompt(true);
+        }
+        setStatus({
+          loading: false,
+          message: 'Set your emulator path and/or game directory',
+        });
       }
-      if (!gamesResult.gameDirectory) {
-        setShowGamePrompt(true);
-      }
-      setStatus({
-        loading: false,
-        message: 'Set your emulator path and/or game directory',
-      });
-    }
+    });
   };
 
   useEffect(() => {
