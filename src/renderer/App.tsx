@@ -2,7 +2,6 @@ import { useState, useEffect, useReducer } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import errorMap from './error';
 import consoles from './consoles';
-import GameCard from './components/GameCard';
 import GameGrid from './components/GameGrid';
 import { Oval } from 'react-loader-spinner';
 import Refresh from '../../assets/images/refresh.png';
@@ -12,7 +11,7 @@ import './App.css';
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
   const [selectedConsole, setSelectedConsole] = useState('Wii');
-  const [games, dispatch] = useReducer(gamesReducer, { test: '' });
+  const [games, dispatch] = useReducer(gamesReducer, {});
   const [showEmuPrompt, setShowEmuPrompt] = useState(false);
   const [showGamePrompt, setShowGamePrompt] = useState(false);
 
@@ -99,9 +98,9 @@ const Dashboard = () => {
     };
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!(selectedConsole in games)) {
-      await getFrontGames();
+      getFrontGames();
     } else {
       let gamesLength = games[selectedConsole].length;
       setStatus({

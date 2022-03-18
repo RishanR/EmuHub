@@ -21,6 +21,7 @@ const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { execFile } = require('child_process');
+const BrowserFS = require('browserfs');
 
 const giantBombUrl = 'https://www.giantbomb.com';
 const giantBombPlatformIDs = {
@@ -253,8 +254,46 @@ const getGCGames = async () => {
   return gcGames;
 };
 
-const getWiiUGames = () => {
-  return [];
+const getWiiUGames = async () => {
+  let wiiuGames = [];
+  const allowedFileExtensions = ['.rpx'];
+  const gamePaths = getAllFiles(
+    store.get('WiiU.gameDirectory'),
+    allowedFileExtensions
+  );
+
+  for (const gamePath of gamePaths) {
+    let xml_path = path.normalize(
+      path.dirname(path.dirname(gamePath)) + '/meta/meta.xml'
+    );
+    if (fs.existsSync(xml_path)) {
+      const wiiu_game_xml = fs.readFileSync(xml_path);
+      let wiiu_game_meta_json = null;
+      try {
+        wiiu_game_meta_json = await xml2js.parseStringPromise(wiiu_game_xml, {
+          mergeAttrs: true,
+        });
+      } catch (err) {
+        console.log(err);
+        continue;
+      }
+      const gameName = wiiu_game_meta_json?.menu?.longname_en[0]?.['_'];
+      if (gameName) {
+        let gameCover = await getCover(gameName, 'WiiU');
+
+        let wiiuSingleGame = {
+          name: gameName,
+          image: gameCover,
+          gamePath,
+          gameConsole: 'WiiU',
+        };
+
+        wiiuGames.push(wiiuSingleGame);
+      }
+    }
+  }
+
+  return wiiuGames;
 };
 
 const getSwitchGames = async () => {
@@ -395,6 +434,37 @@ const getPS2Games = async () => {
     allowedFileExtensions
   );
 
+  // await Promise.allSettled(
+  //   gamePaths.map((gamePath) => {
+  //     return new Promise((resolve, reject) => {
+  //       //here our function should be implemented
+  //       console.log('reading iso...');
+  //       fs.readFile(gamePath, { encoding: 'buffer' }, (err, data) => {
+  //         if (err) throw err;
+  //         console.log('read iso!');
+  //         BrowserFS.configure(
+  //           {
+  //             fs: 'IsoFS',
+  //             options: {
+  //               data,
+  //             },
+  //           },
+  //           (e) => {
+  //             console.log('browserfs ready!');
+  //             if (e) {
+  //               console.log(e);
+  //               reject(new Error(`Error occured during reading: ${e}`));
+  //             }
+
+  //             const stringData = fs.readFileSync('SYSTEM.CNF', 'utf-8', 'r');
+  //             console.log(`${path.basename(gamePath)}: ${stringData}`);
+  //             resolve();
+  //           }
+  //         );
+  //       });
+  //     });
+  //   })
+  // );
   console.log('Finished!');
 
   return [];
