@@ -4,6 +4,7 @@ import SwitchCover from '../../../assets/images/switch-cover.png';
 import WiiCover from '../../../assets/images/wii-cover-new.png';
 import GCCover from '../../../assets/images/gc-cover.png';
 import ThreeDSCover from '../../../assets/images/threeds-cover.png';
+import PSPCover from '../../../assets/images/psp-cover.png';
 
 const GameCard = ({
   image,
@@ -22,6 +23,8 @@ const GameCard = ({
       return GCCover;
     } else if (gameConsole == '3DS') {
       return ThreeDSCover;
+    } else if (gameConsole == 'PSP') {
+      return PSPCover;
     }
     return WiiCover;
   };

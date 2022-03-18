@@ -215,10 +215,12 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "browserfs": "^1.4.3",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.4",
     "electron-store": "^8.0.1",
     "electron-updater": "^4.6.5",
+    "filereader": "^0.10.3",
     "history": "^5.2.0",
     "husky": "^7.0.4",
     "react": "^17.0.2",

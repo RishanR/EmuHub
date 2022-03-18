@@ -70,6 +70,22 @@ const giantBombAPIKey = store.get('key');
 
 console.log(app.getPath('userData'));
 
+const RESOURCES_PATH = app.isPackaged
+  ? path.join(process.resourcesPath, 'assets')
+  : path.join(__dirname, '../../assets');
+
+const getAssetPath = (...paths: string[]): string => {
+  return path.join(RESOURCES_PATH, ...paths);
+};
+
+let switch_db_json = null;
+let threeds_db_json = null;
+let psp_db_json = require(getAssetPath('pspReleases.json'));
+
+let ps2IdFileExt = [...Array(100).keys()].map(
+  (num) => `*.${String(num).padStart(4, '0')}`
+);
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -250,18 +266,7 @@ const getSwitchGames = async () => {
     allowedFileExtensions
   );
 
-  const switch_db_xml = fs.readFileSync(getAssetPath('NSWreleases.xml'));
-  let switch_db_json = null;
-
-  try {
-    switch_db_json = await xml2js.parseStringPromise(switch_db_xml, {
-      mergeAttrs: true,
-    });
-
-    // // convert it to a JSON string
-    // switch_db_json = JSON.stringify(result, null, 4);
-  } catch (err) {
-    console.log(err);
+  if (!switch_db_json) {
     return [];
   }
 
@@ -330,15 +335,7 @@ const get3DSGames = async () => {
     allowedFileExtensions
   );
 
-  const threeds_db_xml = fs.readFileSync(getAssetPath('3dsreleases.xml'));
-  let threeds_db_json = null;
-
-  try {
-    threeds_db_json = await xml2js.parseStringPromise(threeds_db_xml, {
-      mergeAttrs: true,
-    });
-  } catch (err) {
-    console.log(err);
+  if (!threeds_db_json) {
     return [];
   }
 
@@ -382,12 +379,74 @@ const get3DSGames = async () => {
   return threedsGames;
 };
 
-const getPS2Games = () => {
+const readableToString = async (readable) => {
+  let result = '';
+  for await (const chunk of readable) {
+    result += chunk;
+  }
+  return result;
+};
+
+const getPS2Games = async () => {
+  let ps2Games = [];
+  const allowedFileExtensions = ['.iso'];
+  const gamePaths = getAllFiles(
+    store.get('PS2.gameDirectory'),
+    allowedFileExtensions
+  );
+
+  console.log('Finished!');
+
   return [];
 };
 
-const getPSPGames = () => {
-  return [];
+const getPSPGames = async () => {
+  const standardISO9660Identifier = 'cd001';
+  const pspMagicWord = 'psp game';
+  let pspGames = [];
+  const allowedFileExtensions = ['.iso'];
+  const gamePaths = getAllFiles(
+    store.get('PSP.gameDirectory'),
+    allowedFileExtensions
+  );
+
+  for (const gamePath of gamePaths) {
+    let fd = fs.openSync(gamePath, 'r');
+    let buffer = Buffer.alloc(893);
+    let byteSize = fs.statSync(gamePath).size;
+
+    // The first 32 KiB is the unused sector of the ISO9660 file system
+    // The next 2048 bytes is the first Volume Descriptor on the PS2 game (Primary Volume Descriptor)
+    if (byteSize > 32768 + 2048) {
+      fs.readSync(fd, buffer, 0, 893, 32768);
+      if (
+        buffer.readInt8(0) == 1 &&
+        buffer.toString('utf-8', 0x01, 0x06).toLowerCase() ==
+          standardISO9660Identifier &&
+        buffer.toString('utf-8', 0x08, 0x10).toLowerCase() == pspMagicWord
+      ) {
+        const gameID = buffer.toString('utf-8', 0x373, 0x37d);
+
+        for (const game of psp_db_json) {
+          if (game.id.toLowerCase().includes(gameID.toLowerCase())) {
+            let gameCover = await getCover(game.name, 'PSP');
+
+            let pspSingleGame = {
+              name: game.name,
+              image: gameCover,
+              gamePath,
+              gameConsole: 'PSP',
+            };
+
+            pspGames.push(pspSingleGame);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  return pspGames;
 };
 
 // GAME EXECUTION METHODS START //
@@ -529,12 +588,33 @@ const installExtensions = async () => {
     )
     .catch(console.log);
 };
-const RESOURCES_PATH = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '../../assets');
 
-const getAssetPath = (...paths: string[]): string => {
-  return path.join(RESOURCES_PATH, ...paths);
+const loadDatabases = async () => {
+  const switch_db_xml = fs.readFileSync(getAssetPath('NSWreleases.xml'));
+
+  try {
+    switch_db_json = await xml2js.parseStringPromise(switch_db_xml, {
+      mergeAttrs: true,
+    });
+
+    // // convert it to a JSON string
+    // switch_db_json = JSON.stringify(result, null, 4);
+  } catch (err) {
+    console.log(err);
+  }
+
+  const threeds_db_xml = fs.readFileSync(getAssetPath('3dsreleases.xml'));
+
+  try {
+    threeds_db_json = await xml2js.parseStringPromise(threeds_db_xml, {
+      mergeAttrs: true,
+    });
+
+    // // convert it to a JSON string
+    // switch_db_json = JSON.stringify(result, null, 4);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const createWindow = async () => {
@@ -598,7 +678,8 @@ app.on('window-all-closed', () => {
 
 app
   .whenReady()
-  .then(() => {
+  .then(async () => {
+    await loadDatabases();
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the

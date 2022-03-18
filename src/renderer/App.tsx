@@ -53,10 +53,12 @@ const Dashboard = () => {
           value: [...gamesResult.results],
         },
       });
-
+      let gamesLength = gamesResult.results.length;
       setStatus({
         loading: false,
-        message: `${gamesResult.results.length} ${selectedConsole} games loaded.`,
+        message: `${gamesLength} ${selectedConsole} game${
+          gamesLength === 1 ? '' : 's'
+        } loaded.`,
       });
     } else {
       if (!gamesResult.emuPath) {
@@ -101,9 +103,12 @@ const Dashboard = () => {
     if (!(selectedConsole in games)) {
       await getFrontGames();
     } else {
+      let gamesLength = games[selectedConsole].length;
       setStatus({
         loading: false,
-        message: `${games[selectedConsole].length} ${selectedConsole} games loaded.`,
+        message: `${gamesLength} ${selectedConsole} game${
+          gamesLength === 1 ? '' : 's'
+        } loaded.`,
       });
     }
   }, [selectedConsole]);
