@@ -117,6 +117,23 @@ const getExecMessage = (err, gamePath, emuPath) => {
   };
 };
 
+// Need to asynchronize recursive directory search
+
+async function* getFiles(dir, allowedFileExtensions) {
+  const dirents = await fs.promises.readdir(dir, { withFileTypes: true });
+  for (const dirent of dirents) {
+    const res = path.resolve(dir, dirent.name);
+    if (dirent.isDirectory()) {
+      yield* getFiles(res, allowedFileExtensions);
+    } else {
+      if (allowedFileExtensions.includes(path.extname(res))) {
+        // console.log(res);
+        yield res;
+      }
+    }
+  }
+}
+
 const getAllFiles = function (
   dirPath,
   allowedFileExtensions,
@@ -175,15 +192,12 @@ const sortGamesBy = (arr, order, key) => {
 };
 
 const getWiiGames = async () => {
-  let wiiGames = [];
-  const wiiMagicWord = '5d1c9ea3';
   const allowedFileExtensions = ['.iso', '.wbfs'];
-  const gamePaths = getAllFiles(
-    store.get('Wii.gameDirectory'),
-    allowedFileExtensions
-  );
+  let promises = [];
+  let wiiGames = [];
 
-  for (const gamePath of gamePaths) {
+  const getWiiGame = async (gamePath, callback) => {
+    const wiiMagicWord = '5d1c9ea3';
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(96);
     let byteSize = fs.statSync(gamePath).size;
@@ -209,24 +223,44 @@ const getWiiGames = async () => {
           gameConsole: 'Wii',
         };
 
-        wiiGames.push(wiiSingleGame);
+        callback(wiiSingleGame);
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('Wii.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getWiiGame(gamePath, (wiiSingleGame) => {
+          if (wiiSingleGame) {
+            wiiGames.push(wiiSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
 
-  return wiiGames;
+  await Promise.allSettled(promises);
+
+  return wiiGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const getGCGames = async () => {
-  let gcGames = [];
-  const gcMagicWord = 'c2339f3d';
   const allowedFileExtensions = ['.iso', '.gcm'];
-  const gamePaths = getAllFiles(
-    store.get('GC.gameDirectory'),
-    allowedFileExtensions
-  );
 
-  for (const gamePath of gamePaths) {
+  let promises = [];
+  let gcGames = [];
+
+  // function
+  const getGCGame = async (gamePath, callback) => {
+    const gcMagicWord = 'c2339f3d';
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(96);
     let byteSize = fs.statSync(gamePath).size;
@@ -248,23 +282,42 @@ const getGCGames = async () => {
           gameConsole: 'GC',
         };
 
-        gcGames.push(gcSingleGame);
+        callback(gcSingleGame);
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('GC.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getGCGame(gamePath, (gcSingleGame) => {
+          if (gcSingleGame) {
+            gcGames.push(gcSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
-  return gcGames;
+
+  await Promise.allSettled(promises);
+
+  return gcGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const getWiiUGames = async () => {
-  let wiiuGames = [];
   const allowedFileExtensions = ['.rpx'];
-  const gamePaths = getAllFiles(
-    store.get('WiiU.gameDirectory'),
-    allowedFileExtensions
-  );
 
-  for (const gamePath of gamePaths) {
-    // TO-DO: Confirm that its not an update file
+  let promises = [];
+  let wiiuGames = [];
+
+  const getWiiUGame = async (gamePath, callback) => {
     let xml_path = path.normalize(path.dirname(gamePath) + '/app.xml');
     if (fs.existsSync(xml_path)) {
       const wiiu_game_xml = fs.readFileSync(xml_path);
@@ -275,7 +328,7 @@ const getWiiUGames = async () => {
         });
       } catch (err) {
         console.log(err);
-        continue;
+        callback(null);
       }
       const gameID = wiiu_game_meta_json?.app?.title_id[0]?.['_'];
       if (gameID && gameID.includes('00050000')) {
@@ -290,38 +343,44 @@ const getWiiUGames = async () => {
             gameConsole: 'WiiU',
           };
 
-          wiiuGames.push(wiiuSingleGame);
+          callback(wiiuSingleGame);
         }
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('WiiU.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getWiiUGame(gamePath, (wiiuSingleGame) => {
+          if (wiiuSingleGame) {
+            wiiuGames.push(wiiuSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
 
-  return wiiuGames;
+  await Promise.allSettled(promises);
+
+  return wiiuGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const getSwitchGames = async () => {
-  let switchGames = [];
-  const switchMagicWord = 'pfs0';
   const allowedFileExtensions = ['.nsp'];
-  const gamePaths = getAllFiles(
-    store.get('Switch.gameDirectory'),
-    allowedFileExtensions
-  );
+  let promises = [];
+  let switchGames = [];
 
-  if (!switch_db_json) {
-    return [];
-  }
-
-  let regionOrder = ['USA', 'EUR', 'JPN'];
-  switch_db_json.releases.release = sortGamesBy(
-    switch_db_json.releases.release,
-    regionOrder,
-    'region'
-  );
-  // console.log(switch_db_json.releases);
-  // fs.writeFileSync(getAssetPath('NSWreleases.json'));
-
-  for (const gamePath of gamePaths) {
+  // function
+  const getSwitchGame = async (gamePath, callback) => {
+    const switchMagicWord = 'pfs0';
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(16);
     let byteSize = fs.statSync(gamePath).size;
@@ -358,37 +417,45 @@ const getSwitchGames = async () => {
               gameConsole: 'Switch',
             };
 
-            switchGames.push(switchSingleGame);
-            break;
+            callback(switchSingleGame);
+            return;
           }
         }
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('Switch.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getSwitchGame(gamePath, (switchSingleGame) => {
+          if (switchSingleGame) {
+            switchGames.push(switchSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
-  return switchGames;
+
+  await Promise.allSettled(promises);
+
+  return switchGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const get3DSGames = async () => {
-  let threedsGames = [];
-  const threedsMagicWord = 'ncsd';
   const allowedFileExtensions = ['.3ds', '.cci'];
-  const gamePaths = getAllFiles(
-    store.get('3DS.gameDirectory'),
-    allowedFileExtensions
-  );
+  let promises = [];
+  let threedsGames = [];
 
-  if (!threeds_db_json) {
-    return [];
-  }
-
-  let regionOrder = ['USA', 'EUR', 'JPN'];
-  threeds_db_json.releases.release = sortGamesBy(
-    threeds_db_json.releases.release,
-    regionOrder,
-    'region'
-  );
-
-  for (const gamePath of gamePaths) {
+  const get3DSGame = async (gamePath, callback) => {
+    const threedsMagicWord = 'ncsd';
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(16);
     let byteSize = fs.statSync(gamePath).size;
@@ -411,14 +478,36 @@ const get3DSGames = async () => {
               gameConsole: '3DS',
             };
 
-            threedsGames.push(threedsSingleGame);
-            break;
+            callback(threedsSingleGame);
+            return;
           }
         }
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('3DS.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        get3DSGame(gamePath, (threedsSingleGame) => {
+          if (threedsSingleGame) {
+            threedsGames.push(threedsSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
-  return threedsGames;
+
+  await Promise.allSettled(promises);
+
+  return threedsGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const readableToString = async (readable) => {
@@ -474,16 +563,14 @@ const getPS2Games = async () => {
 };
 
 const getPSPGames = async () => {
-  const standardISO9660Identifier = 'cd001';
-  const pspMagicWord = 'psp game';
-  let pspGames = [];
   const allowedFileExtensions = ['.iso'];
-  const gamePaths = getAllFiles(
-    store.get('PSP.gameDirectory'),
-    allowedFileExtensions
-  );
+  let promises = [];
+  let pspGames = [];
 
-  for (const gamePath of gamePaths) {
+  const getPSPGame = async (gamePath, callback) => {
+    const standardISO9660Identifier = 'cd001';
+    const pspMagicWord = 'psp game';
+
     let fd = fs.openSync(gamePath, 'r');
     let buffer = Buffer.alloc(893);
     let byteSize = fs.statSync(gamePath).size;
@@ -511,15 +598,36 @@ const getPSPGames = async () => {
               gameConsole: 'PSP',
             };
 
-            pspGames.push(pspSingleGame);
-            break;
+            callback(pspSingleGame);
+            return;
           }
         }
       }
     }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('PSP.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getPSPGame(gamePath, (pspSingleGame) => {
+          if (pspSingleGame) {
+            pspGames.push(pspSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
 
-  return pspGames;
+  await Promise.allSettled(promises);
+
+  return pspGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 // GAME EXECUTION METHODS START //
@@ -646,7 +754,7 @@ const isDevelopment =
   process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
 
 if (isDevelopment) {
-  require('electron-debug')();
+  require('electron-debug')({ showDevTools: false });
 }
 
 const installExtensions = async () => {
@@ -670,8 +778,12 @@ const loadDatabases = async () => {
       mergeAttrs: true,
     });
 
-    // // convert it to a JSON string
-    // switch_db_json = JSON.stringify(result, null, 4);u
+    let regionOrder = ['USA', 'EUR', 'JPN'];
+    switch_db_json.releases.release = sortGamesBy(
+      switch_db_json.releases.release,
+      regionOrder,
+      'region'
+    );
   } catch (err) {
     console.log(err);
   }
@@ -683,8 +795,12 @@ const loadDatabases = async () => {
       mergeAttrs: true,
     });
 
-    // // convert it to a JSON string
-    // switch_db_json = JSON.stringify(result, null, 4);
+    let regionOrder = ['USA', 'EUR', 'JPN'];
+    threeds_db_json.releases.release = sortGamesBy(
+      threeds_db_json.releases.release,
+      regionOrder,
+      'region'
+    );
   } catch (err) {
     console.log(err);
   }
