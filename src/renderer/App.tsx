@@ -167,7 +167,7 @@ const Dashboard = () => {
             <div className="game-grid-loading-container">
               <Triangle
                 wrapperClass="game-grid-loading"
-                color="#ecf0f1"
+                color="#ecf0f1d7"
                 height={175}
                 width={175}
               />

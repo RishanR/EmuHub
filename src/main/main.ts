@@ -17,6 +17,7 @@ import axios from 'axios';
 import { URL } from 'url';
 import { resolveHtmlPath } from './util';
 import { gbaNintendoLogo } from './magics';
+import Database from 'better-sqlite3';
 
 const Store = require('electron-store');
 const fs = require('fs');
@@ -75,6 +76,7 @@ const defaults = {
 
 const store = new Store({ defaults });
 const giantBombAPIKey = store.get('key');
+const db = new Database(path.join(app.getPath('userData'), 'emuhub.db'));
 
 console.log(app.getPath('userData'));
 
@@ -142,36 +144,47 @@ async function* getFiles(dir, allowedFileExtensions) {
 
 const getCover = async (gameName, gamePlatform) => {
   let result = null;
-  try {
-    result = await axios(
-      new URL(
-        `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
-      ).toString()
-    );
-  } catch (err) {
-    console.log(err);
-    return null;
-  }
+  const row = db
+    .prepare('SELECT * FROM covers WHERE name = ? AND console = ?')
+    .get(gameName, gamePlatform);
+  if (row) {
+    return row.image;
+  } else {
+    try {
+      result = await axios(
+        new URL(
+          `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
+        ).toString()
+      );
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
 
-  // console.log(result.data.results.platforms);
-  if (result) {
-    const filteredArray = result.data.results
-      .filter((game) => {
-        if (
-          Object.prototype.toString.call(game.platforms) == '[object Array]'
-        ) {
-          for (const platform of game.platforms) {
-            if (platform.id == giantBombPlatformIDs[gamePlatform]) {
-              return true;
+    // console.log(result.data.results.platforms);
+    if (result) {
+      const filteredArray = result.data.results
+        .filter((game) => {
+          if (
+            Object.prototype.toString.call(game.platforms) == '[object Array]'
+          ) {
+            for (const platform of game.platforms) {
+              if (platform.id == giantBombPlatformIDs[gamePlatform]) {
+                return true;
+              }
             }
           }
-        }
-        return false;
-      })
-      .map((game) => game.image.super_url);
+          return false;
+        })
+        .map((game) => game.image.super_url);
 
-    if (filteredArray.length > 0) {
-      return filteredArray[0];
+      if (filteredArray.length > 0) {
+        let sql = db.prepare(
+          'INSERT INTO covers (name, image, console) VALUES (?,?,?)'
+        );
+        sql.run(gameName, filteredArray[0], gamePlatform);
+        return filteredArray[0];
+      }
     }
   }
 
@@ -870,6 +883,10 @@ const installExtensions = async () => {
 };
 
 const loadDatabases = async () => {
+  db.prepare(
+    'CREATE TABLE IF NOT EXISTS covers(name varchar(255), image varchar(255), console varchar(255))'
+  ).run();
+
   const switch_db_xml = fs.readFileSync(getAssetPath('NSWreleases.xml'));
 
   try {
