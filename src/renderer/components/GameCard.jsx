@@ -47,11 +47,17 @@ const GameCard = ({
   };
   return (
     <div className="game-card-container" onClick={launchGame}>
-      <img
-        className={`game-card-image aspect-ratio-${gameConsole}`}
-        alt={name}
-        src={image}
-      />
+      {image ? (
+        <img
+          className={`game-card-image aspect-ratio-${gameConsole}`}
+          alt={name}
+          src={image}
+        />
+      ) : (
+        <div className={`game-card-no-image aspect-ratio-${gameConsole}`}>
+          {name}
+        </div>
+      )}
       <img className="game-card-cover" src={getCover(gameConsole)} />
       <div
         className={gameRunning ? 'game-card-running' : 'game-card-not-running'}
