@@ -16,12 +16,14 @@ import MenuBuilder from './menu';
 import axios from 'axios';
 import { URL } from 'url';
 import { resolveHtmlPath } from './util';
+import { gbaNintendoLogo } from './magics';
 
 const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { execFile } = require('child_process');
 const BrowserFS = require('browserfs');
+const unzipper = require('unzipper');
 
 const giantBombUrl = 'https://www.giantbomb.com';
 const giantBombPlatformIDs = {
@@ -32,6 +34,7 @@ const giantBombPlatformIDs = {
   GC: 23,
   PS2: 19,
   PSP: 18,
+  GBA: 4,
 };
 
 const defaults = {
@@ -52,6 +55,10 @@ const defaults = {
     gameDirectory: 'test',
   },
   ['3DS']: {
+    emuPath: '',
+    gameDirectory: '',
+  },
+  GBA: {
     emuPath: '',
     gameDirectory: '',
   },
@@ -83,6 +90,7 @@ let switch_db_json = null;
 let threeds_db_json = null;
 let psp_db_json = require(getAssetPath('pspReleases.json'));
 let wiiu_db_json = require(getAssetPath('wiiuReleasesHashMap.json'));
+let gba_db_json = require(getAssetPath('gbaReleasesHashMap.json'));
 
 let ps2IdFileExt = [...Array(100).keys()].map(
   (num) => `*.${String(num).padStart(4, '0')}`
@@ -117,8 +125,6 @@ const getExecMessage = (err, gamePath, emuPath) => {
   };
 };
 
-// Need to asynchronize recursive directory search
-
 async function* getFiles(dir, allowedFileExtensions) {
   const dirents = await fs.promises.readdir(dir, { withFileTypes: true });
   for (const dirent of dirents) {
@@ -134,38 +140,19 @@ async function* getFiles(dir, allowedFileExtensions) {
   }
 }
 
-const getAllFiles = function (
-  dirPath,
-  allowedFileExtensions,
-  currentArrayOfFiles = []
-) {
-  let files = fs.readdirSync(dirPath);
-
-  let arrayOfFiles = currentArrayOfFiles;
-
-  files.forEach(function (file) {
-    if (fs.statSync(dirPath + '/' + file).isDirectory()) {
-      arrayOfFiles = getAllFiles(
-        dirPath + '/' + file,
-        allowedFileExtensions,
-        arrayOfFiles
-      );
-    } else {
-      if (allowedFileExtensions.includes(path.extname(file).toLowerCase())) {
-        arrayOfFiles.push(path.join(dirPath, '/', file));
-      }
-    }
-  });
-
-  return arrayOfFiles;
-};
-
 const getCover = async (gameName, gamePlatform) => {
-  const result = await axios(
-    new URL(
-      `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
-    ).toString()
-  );
+  let result;
+  try {
+    result = await axios(
+      new URL(
+        `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
+      ).toString()
+    );
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+
   // console.log(result.data.results.platforms);
   const filteredArray = result.data.results
     .filter((game) => {
@@ -180,7 +167,11 @@ const getCover = async (gameName, gamePlatform) => {
     })
     .map((game) => game.image.super_url);
 
-  return filteredArray[0];
+  if (filteredArray.length > 0) {
+    return filteredArray[0];
+  }
+  // TO-DO: Maybe change this return to return a string path to a no cover image
+  return null;
 };
 
 const sortGamesBy = (arr, order, key) => {
@@ -510,6 +501,93 @@ const get3DSGames = async () => {
   );
 };
 
+const getGBAGames = async () => {
+  const allowedFileExtensions = ['.zip', '.gba'];
+
+  let promises = [];
+  let gbaGames = [];
+
+  const getGBAGame = async (gamePath, callback) => {
+    let buffer = null;
+    let extension = path.extname(gamePath);
+    if (extension == '.zip') {
+      const directory = await unzipper.Open.file(gamePath);
+      const file = directory.files.find(
+        (d) => path.extname(d.path).toLowerCase() === '.gba'
+      );
+      await Promise.allSettled([
+        new Promise((resolve, reject) => {
+          let data = [];
+          let currentSize = 0;
+          let chunk;
+          let stream = file.stream();
+          stream
+            .on('readable', () => {
+              while (currentSize < 176 && (chunk = stream.read(176)) != null) {
+                data.push(chunk);
+                currentSize += chunk.length;
+              }
+              stream.destroy();
+            })
+            .on('close', (err) => {
+              if (err) console.log(err);
+              buffer = Buffer.concat(data).slice(4);
+              resolve();
+            });
+        }),
+      ]);
+    } else if (extension == '.gba') {
+      let byteSize = fs.statSync(gamePath).size;
+      if (byteSize > 176) {
+        buffer = Buffer.alloc(172);
+        let fd = fs.openSync(gamePath, 'r');
+        fs.readSync(fd, buffer, 0, 172, 0x4);
+      }
+    }
+    if (buffer !== null && buffer.length >= 172) {
+      if (gbaNintendoLogo.compare(buffer, 0, 156) === 0) {
+        let gameID = buffer.toString('utf-8', 168, 172);
+        if (gba_db_json && gba_db_json[gameID]) {
+          let gameName = gba_db_json[gameID].name;
+          let gameCover = await getCover(gameName, 'GBA');
+
+          let gbaSingleGame = {
+            name: gameName,
+            image: gameCover,
+            gamePath,
+            gameConsole: 'GBA',
+          };
+
+          callback(gbaSingleGame);
+        }
+      }
+    }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('GBA.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getGBAGame(gamePath, (gbaSingleGame) => {
+          if (gbaSingleGame) {
+            gbaGames.push(gbaSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
+  }
+
+  await Promise.allSettled(promises);
+
+  return gbaGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
+};
+
 const readableToString = async (readable) => {
   let result = '';
   for await (const chunk of readable) {
@@ -521,10 +599,10 @@ const readableToString = async (readable) => {
 const getPS2Games = async () => {
   let ps2Games = [];
   const allowedFileExtensions = ['.iso'];
-  const gamePaths = getAllFiles(
-    store.get('PS2.gameDirectory'),
-    allowedFileExtensions
-  );
+  // const gamePaths = getAllFiles(
+  //   store.get('PS2.gameDirectory'),
+  //   allowedFileExtensions
+  // );
 
   // await Promise.allSettled(
   //   gamePaths.map((gamePath) => {
@@ -557,7 +635,7 @@ const getPS2Games = async () => {
   //     });
   //   })
   // );
-  console.log('Finished!');
+  // console.log('Finished!');
 
   return [];
 };
@@ -679,6 +757,18 @@ ipcMain.handle('exec-wii-gamecube', async (event, arg) => {
 ipcMain.handle('exec-3ds', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, [arg.gamePath], (err, stdout, stderr) => {
+    event.sender.send('game-ended', {
+      name: arg.name,
+      gameConsole: arg.gameConsole,
+      output: getExecMessage(err, arg.gamePath, emuPath),
+    });
+  });
+  return `started ${path.basename(emuPath)} game`;
+});
+
+ipcMain.handle('exec-gba', async (event, arg) => {
+  const emuPath = store.get(`${arg.gameConsole}.emuPath`);
+  execFile(emuPath, [arg.gamePath, '-F'], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
       name: arg.name,
       gameConsole: arg.gameConsole,

@@ -1,14 +1,39 @@
+.aspect-ratio-Switch {
+  aspect-ratio: 900/1458;
+}
+
+.aspect-ratio-Wii {
+  aspect-ratio: 1407/2016;
+}
+
+.aspect-ratio-WiiU {
+  aspect-ratio: 1418/2031;
+}
+
+.aspect-ratio-GC {
+  aspect-ratio: 455/649;
+}
+
+.aspect-ratio-3DS {
+  aspect-ratio: 1/1;
+}
+
+.aspect-ratio-GBA {
+  aspect-ratio: 1/1;
+}
+
+.aspect-ratio-PSP {
+  aspect-ratio: 778/1354;
+}
+
 .game-card-container {
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  border: 2px solid transparent;
-  z-index: 1;
-  box-shadow: 0 0 0px #ecf0f1, 8px 10px 10px rgba(0, 0, 0, 0.2);
-  transform: scale(1);
-  transition: transform ease-in-out 0.15s, border ease-in-out 0.1s,
-    box-shadow ease-in-out 0.1s;
+  box-shadow: 0 0 0px #ecf0f1, 6px 9px 9px rgba(0, 0, 0, 0.2);
+  transition: box-shadow ease-in-out 0.05s;
+  box-sizing: border-box;
 }
 
 .game-card-image {
@@ -27,17 +52,15 @@
   height: 100%;
   object-fit: fill;
   border-radius: 10px;
+  z-index: 3;
 }
 
 .game-card-container:hover,
 .game-card-container:focus {
   cursor: pointer;
-  outline: none;
-  border: 2px solid #ecf0f1;
+  outline: 2px solid #ecf0f1;
   box-shadow: 0 0 10px #ecf0f1, 10px 15px 15px rgba(0, 0, 0, 0.2);
-  transform: scale(1.025);
-  transition: transform ease-in-out 0.15s, border ease-in-out 0.1s,
-    box-shadow ease-in-out 0.1s;
+  transition: box-shadow ease-in-out 0.05s;
 }
 
 .game-card-running,
@@ -60,13 +83,13 @@
   font-weight: bold;
   padding: 20px;
   border-radius: 10px;
-  z-index: 3;
-  transition: all 0.25s ease-in-out;
+  z-index: 4;
+  transition: all 0.15s ease-in-out;
 }
 
 .game-card-not-running {
   opacity: 0;
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
 }
 
 .game-card-not-running:hover {

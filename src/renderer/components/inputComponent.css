@@ -1,0 +1,54 @@
+.input-link {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 14px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  border: none;
+  background-color: white;
+}
+
+.input-link:focus {
+  outline: none;
+}
+
+.choose-file-button-light {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 35px;
+  background-color: #7e57c2;
+  padding: 10px 40px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  transform: scale(1);
+  transition: transform 0.1s ease-in-out;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choose-file-button-light:hover {
+  cursor: pointer;
+  transform: scale(1.025);
+  transition: transform 0.1s ease-in-out;
+}
+
+.input-container {
+  width: 30%;
+  height: 100%;
+  position: relative;
+  background-color: transparent;
+}

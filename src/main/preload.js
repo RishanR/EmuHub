@@ -12,26 +12,29 @@ contextBridge.exposeInMainWorld('api', {
       ipcRenderer.removeAllListeners();
     },
   },
-  execWii: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-wii-gamecube', gamePath);
+  execWii: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-wii-gamecube', gameInfo);
   },
-  execGC: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-wii-gamecube', gamePath);
+  execGC: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-wii-gamecube', gameInfo);
   },
-  execSwitch: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-switch', gamePath);
+  execSwitch: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-switch', gameInfo);
   },
-  execWiiU: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-wii-u', gamePath);
+  execWiiU: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-wii-u', gameInfo);
   },
-  exec3DS: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-3ds', gamePath);
+  exec3DS: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-3ds', gameInfo);
   },
-  execPS2: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-ps2', gamePath);
+  execGBA: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-gba', gameInfo);
   },
-  execPSP: async (gamePath) => {
-    return await ipcRenderer.invoke('exec-psp', gamePath);
+  execPS2: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-ps2', gameInfo);
+  },
+  execPSP: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-psp', gameInfo);
   },
   getGames: async (gameConsole, callback) => {
     let games = await ipcRenderer.invoke('get-games', gameConsole);

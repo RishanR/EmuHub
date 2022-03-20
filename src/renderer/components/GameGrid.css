@@ -5,6 +5,13 @@
 .game-grid-card-padding {
   padding: 0.75vw;
 }
+.game-card-padding::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  padding-bottom: calc(1 / 25 * 100%) !important;
+}
 
 @media (max-width: 1499px) {
   .game-grid-swipable-container {

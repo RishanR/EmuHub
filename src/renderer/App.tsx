@@ -6,12 +6,14 @@ import GameGrid from './components/GameGrid';
 import { Oval } from 'react-loader-spinner';
 import Refresh from '../../assets/images/refresh.png';
 import gamesReducer from './reducers';
+import InputComponent from './components/inputComponent';
 import './App.css';
 
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
   const [selectedConsole, setSelectedConsole] = useState('Wii');
   const [games, dispatch] = useReducer(gamesReducer, {});
+  const [search, setSearch] = useState('');
   const [showEmuPrompt, setShowEmuPrompt] = useState(false);
   const [showGamePrompt, setShowGamePrompt] = useState(false);
 
@@ -117,6 +119,28 @@ const Dashboard = () => {
     console.log('Games Changed: ', games[selectedConsole]);
   }, [games]);
 
+  const filterGames = (property) => {
+    let val = search
+      .replace(/ |-/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\.,-\/#!$%\^&\*;:{}=\-_`'~()@\+\?><\[\]\+]/g, '')
+      .toLowerCase();
+    if (
+      property.name
+        .replace(/ |-/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[\.,-\/#!$%\^&\*;:{}=\-_`'~()@\+\?><\[\]\+]/g, '')
+        .toLowerCase()
+        .includes(val)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="main-container">
       <div className="navigation-menu">
@@ -141,7 +165,7 @@ const Dashboard = () => {
         <div className="game-grid">
           {games && games[selectedConsole] && (
             <GameGrid
-              selectedGames={games[selectedConsole]}
+              selectedGames={games[selectedConsole].filter(filterGames)}
               setRunning={setRunning}
             />
           )}
@@ -153,6 +177,13 @@ const Dashboard = () => {
               <img className="info-bar-refresh-icon" src={Refresh} />
             </button>
           )}
+          <InputComponent
+            className="info-bar-search"
+            value={search}
+            placeholder={`Search ${selectedConsole} games...`}
+            handlerInput={(val) => setSearch(val)}
+            showButton={false}
+          />
         </div>
       </div>
     </div>

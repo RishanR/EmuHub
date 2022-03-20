@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import './GameCard.css';
 import SwitchCover from '../../../assets/images/switch-cover.png';
-import WiiCover from '../../../assets/images/wii-cover-new.png';
+import WiiCover from '../../../assets/images/wii-cover-new-new.png';
 import GCCover from '../../../assets/images/gc-cover.png';
 import ThreeDSCover from '../../../assets/images/threeds-cover.png';
 import PSPCover from '../../../assets/images/psp-cover.png';
 import WiiUCover from '../../../assets/images/wii-u-cover.png';
+import GBACover from '../../../assets/images/gba-cover-new.png';
 
 const GameCard = ({
   image,
@@ -28,6 +29,8 @@ const GameCard = ({
       return PSPCover;
     } else if (gameConsole == 'WiiU') {
       return WiiUCover;
+    } else if (gameConsole == 'GBA') {
+      return GBACover;
     }
     return WiiCover;
   };
@@ -44,7 +47,11 @@ const GameCard = ({
   };
   return (
     <div className="game-card-container" onClick={launchGame}>
-      <img className="game-card-image" alt={name} src={image} />
+      <img
+        className={`game-card-image aspect-ratio-${gameConsole}`}
+        alt={name}
+        src={image}
+      />
       <img className="game-card-cover" src={getCover(gameConsole)} />
       <div
         className={gameRunning ? 'game-card-running' : 'game-card-not-running'}

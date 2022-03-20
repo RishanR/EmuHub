@@ -5,6 +5,7 @@ import gamecube from '../../assets/images/gamecube.png';
 import wii from '../../assets/images/wii.png';
 import ps2 from '../../assets/images/ps2.png';
 import psp from '../../assets/images/psp.png';
+import gba from '../../assets/images/gba.png';
 
 const consoles = [
   { name: 'Switch', icon: nSwitch },
@@ -12,6 +13,7 @@ const consoles = [
   { name: 'Wii', icon: wii },
   { name: 'GC', icon: gamecube },
   { name: '3DS', icon: threeDS },
+  { name: 'GBA', icon: gba },
   { name: 'PS2', icon: ps2 },
   { name: 'PSP', icon: psp },
 ];
