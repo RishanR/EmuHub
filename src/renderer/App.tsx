@@ -3,7 +3,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import errorMap from './error';
 import consoles from './consoles';
 import GameGrid from './components/GameGrid';
-import { Oval } from 'react-loader-spinner';
+import { Oval, Triangle } from 'react-loader-spinner';
 import Refresh from '../../assets/images/refresh.png';
 import gamesReducer from './reducers';
 import InputComponent from './components/inputComponent';
@@ -163,6 +163,17 @@ const Dashboard = () => {
       </div>
       <div className="content">
         <div className="game-grid">
+          {status.loading && (
+            <div className="game-grid-loading-container">
+              <Triangle
+                wrapperClass="game-grid-loading"
+                color="#ecf0f1"
+                height={175}
+                width={175}
+              />
+              <div className="game-grid-loading-text">LOADING</div>
+            </div>
+          )}
           {games && games[selectedConsole] && (
             <GameGrid
               selectedGames={games[selectedConsole].filter(filterGames)}
@@ -173,7 +184,11 @@ const Dashboard = () => {
         <div className="info-bar">
           {status.message}
           {!status.loading && (
-            <button className="info-bar-refresh" onClick={getFrontGames}>
+            <button
+              tabindex="-1"
+              className="info-bar-refresh"
+              onClick={getFrontGames}
+            >
               <img className="info-bar-refresh-icon" src={Refresh} />
             </button>
           )}

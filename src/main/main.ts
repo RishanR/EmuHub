@@ -141,7 +141,7 @@ async function* getFiles(dir, allowedFileExtensions) {
 }
 
 const getCover = async (gameName, gamePlatform) => {
-  let result;
+  let result = null;
   try {
     result = await axios(
       new URL(
@@ -154,22 +154,27 @@ const getCover = async (gameName, gamePlatform) => {
   }
 
   // console.log(result.data.results.platforms);
-  const filteredArray = result.data.results
-    .filter((game) => {
-      if (Object.prototype.toString.call(game.platforms) == '[object Array]') {
-        for (const platform of game.platforms) {
-          if (platform.id == giantBombPlatformIDs[gamePlatform]) {
-            return true;
+  if (result) {
+    const filteredArray = result.data.results
+      .filter((game) => {
+        if (
+          Object.prototype.toString.call(game.platforms) == '[object Array]'
+        ) {
+          for (const platform of game.platforms) {
+            if (platform.id == giantBombPlatformIDs[gamePlatform]) {
+              return true;
+            }
           }
         }
-      }
-      return false;
-    })
-    .map((game) => game.image.super_url);
+        return false;
+      })
+      .map((game) => game.image.super_url);
 
-  if (filteredArray.length > 0) {
-    return filteredArray[0];
+    if (filteredArray.length > 0) {
+      return filteredArray[0];
+    }
   }
+
   // TO-DO: Maybe change this return to return a string path to a no cover image
   return null;
 };
@@ -215,6 +220,7 @@ const getWiiGames = async () => {
         };
 
         callback(wiiSingleGame);
+        return;
       }
     }
     callback(null);
@@ -274,6 +280,7 @@ const getGCGames = async () => {
         };
 
         callback(gcSingleGame);
+        return;
       }
     }
     callback(null);
@@ -320,6 +327,7 @@ const getWiiUGames = async () => {
       } catch (err) {
         console.log(err);
         callback(null);
+        return;
       }
       const gameID = wiiu_game_meta_json?.app?.title_id[0]?.['_'];
       if (gameID && gameID.includes('00050000')) {
@@ -335,6 +343,7 @@ const getWiiUGames = async () => {
           };
 
           callback(wiiuSingleGame);
+          return;
         }
       }
     }
@@ -559,6 +568,7 @@ const getGBAGames = async () => {
           };
 
           callback(gbaSingleGame);
+          return;
         }
       }
     }
@@ -582,7 +592,6 @@ const getGBAGames = async () => {
   }
 
   await Promise.allSettled(promises);
-
   return gbaGames.sort((a, b) =>
     a.name > b.name ? 1 : b.name > a.name ? -1 : 0
   );
@@ -768,7 +777,7 @@ ipcMain.handle('exec-3ds', async (event, arg) => {
 
 ipcMain.handle('exec-gba', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, [arg.gamePath, '-F'], (err, stdout, stderr) => {
+  execFile(emuPath, ['-f', arg.gamePath], (err, stdout, stderr) => {
     event.sender.send('game-ended', {
       name: arg.name,
       gameConsole: arg.gameConsole,

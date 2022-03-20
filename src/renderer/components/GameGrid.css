@@ -3,7 +3,7 @@
 }
 
 .game-grid-card-padding {
-  padding: 0.75vw;
+  padding: 1vw;
 }
 .game-card-padding::before {
   content: '';
