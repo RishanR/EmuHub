@@ -6,16 +6,18 @@ import wii from '../../assets/images/wii.png';
 import ps2 from '../../assets/images/ps2.png';
 import psp from '../../assets/images/psp.png';
 import gba from '../../assets/images/gba.png';
+import ds from '../../assets/images/ds.png';
 
 const consoles = [
-  { name: 'Switch', icon: nSwitch },
-  { name: 'WiiU', icon: wiiU },
-  { name: 'Wii', icon: wii },
-  { name: 'GC', icon: gamecube },
-  { name: '3DS', icon: threeDS },
-  { name: 'GBA', icon: gba },
-  { name: 'PS2', icon: ps2 },
-  { name: 'PSP', icon: psp },
+  { name: 'Switch', icon: nSwitch, emu: 'Yuzu' },
+  { name: 'WiiU', icon: wiiU, emu: 'Cemu' },
+  { name: 'Wii', icon: wii, emu: 'Dolphin' },
+  { name: 'GC', icon: gamecube, emu: 'Dolphin' },
+  { name: '3DS', icon: threeDS, emu: 'Citra' },
+  { name: 'DS', icon: ds, emu: 'DeSmuME' },
+  { name: 'GBA', icon: gba, emu: 'mGBA' },
+  { name: 'PS2', icon: ps2, emu: 'PCSX2' },
+  { name: 'PSP', icon: psp, emu: 'PPSSPP' },
 ];
 
 export default consoles;

@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld('api', {
   exec3DS: async (gameInfo) => {
     return await ipcRenderer.invoke('exec-3ds', gameInfo);
   },
+  execDS: async (gameInfo) => {
+    return await ipcRenderer.invoke('exec-ds', gameInfo);
+  },
   execGBA: async (gameInfo) => {
     return await ipcRenderer.invoke('exec-gba', gameInfo);
   },
@@ -39,5 +42,14 @@ contextBridge.exposeInMainWorld('api', {
   getGames: async (gameConsole, callback) => {
     let games = await ipcRenderer.invoke('get-games', gameConsole);
     callback(games);
+  },
+  setEmulatorPath: (gameConsole, emuPath) => {
+    return ipcRenderer.invoke('set-emu-path', { gameConsole, emuPath });
+  },
+  setGameDirectory: (gameConsole, gameDirectory) => {
+    return ipcRenderer.invoke('set-game-directory', {
+      gameConsole,
+      gameDirectory,
+    });
   },
 });

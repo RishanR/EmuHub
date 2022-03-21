@@ -8,6 +8,7 @@ import Refresh from '../../assets/images/refresh.png';
 import gamesReducer from './reducers';
 import InputComponent from './components/inputComponent';
 import './App.css';
+import { stat } from 'fs';
 
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
@@ -102,18 +103,20 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (!(selectedConsole in games)) {
-      getFrontGames();
-    } else {
-      let gamesLength = games[selectedConsole].length;
-      setStatus({
-        loading: false,
-        message: `${gamesLength} ${selectedConsole} game${
-          gamesLength === 1 ? '' : 's'
-        } loaded.`,
-      });
+    if (!showEmuPrompt && !showGamePrompt) {
+      if (!(selectedConsole in games)) {
+        getFrontGames();
+      } else {
+        let gamesLength = games[selectedConsole].length;
+        setStatus({
+          loading: false,
+          message: `${gamesLength} ${selectedConsole} game${
+            gamesLength === 1 ? '' : 's'
+          } loaded.`,
+        });
+      }
     }
-  }, [selectedConsole]);
+  }, [selectedConsole, showEmuPrompt, showGamePrompt]);
 
   useEffect(() => {
     console.log('Games Changed: ', games[selectedConsole]);
@@ -174,12 +177,53 @@ const Dashboard = () => {
               <div className="game-grid-loading-text">LOADING</div>
             </div>
           )}
-          {games && games[selectedConsole] && (
-            <GameGrid
-              selectedGames={games[selectedConsole].filter(filterGames)}
-              setRunning={setRunning}
-            />
+          {status.message == 'Set your emulator path and/or game directory' && (
+            <div className="game-grid-path-container">
+              {showEmuPrompt && (
+                <InputComponent
+                  id="input-emu-path"
+                  className="game-grid-path-input margin-bottom"
+                  placeholder={`Enter your ${
+                    consoles.find((console) => console.name === selectedConsole)
+                      .emu
+                  } emulator path`}
+                  showButton={true}
+                  buttonText={'Apply'}
+                  handlerButton={(val) => {
+                    window.api.setEmulatorPath(selectedConsole, val);
+                    setShowEmuPrompt(false);
+                  }}
+                />
+              )}
+              {showGamePrompt && (
+                <InputComponent
+                  id="input-game-directory"
+                  className="game-grid-path-input"
+                  placeholder={`Enter your ${selectedConsole} games directory`}
+                  showButton={true}
+                  buttonText={'Apply'}
+                  handlerButton={(val) => {
+                    window.api.setGameDirectory(selectedConsole, val);
+                    setShowGamePrompt(false);
+                  }}
+                />
+              )}
+            </div>
           )}
+          {!showEmuPrompt &&
+            !showGamePrompt &&
+            (games &&
+            games[selectedConsole] &&
+            games[selectedConsole].length > 0 ? (
+              <GameGrid
+                selectedGames={games[selectedConsole].filter(filterGames)}
+                setRunning={setRunning}
+              />
+            ) : (
+              !status.loading && (
+                <div className="games-grid-no-games">No games found.</div>
+              )
+            ))}
         </div>
         <div className="info-bar">
           {status.message}
@@ -193,6 +237,7 @@ const Dashboard = () => {
             </button>
           )}
           <InputComponent
+            id="search-games"
             className="info-bar-search"
             value={search}
             placeholder={`Search ${selectedConsole} games...`}

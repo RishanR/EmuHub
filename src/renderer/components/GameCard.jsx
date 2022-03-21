@@ -7,6 +7,7 @@ import ThreeDSCover from '../../../assets/images/threeds-cover.png';
 import PSPCover from '../../../assets/images/psp-cover.png';
 import WiiUCover from '../../../assets/images/wii-u-cover.png';
 import GBACover from '../../../assets/images/gba-cover-new.png';
+import DSCover from '../../../assets/images/ds-cover.png';
 
 const GameCard = ({
   image,
@@ -31,6 +32,8 @@ const GameCard = ({
       return WiiUCover;
     } else if (gameConsole == 'GBA') {
       return GBACover;
+    } else if (gameConsole == 'DS') {
+      return DSCover;
     }
     return WiiCover;
   };

@@ -36,6 +36,7 @@ const giantBombPlatformIDs = {
   PS2: 19,
   PSP: 18,
   GBA: 4,
+  DS: 52,
 };
 
 const defaults = {
@@ -56,6 +57,10 @@ const defaults = {
     gameDirectory: 'test',
   },
   ['3DS']: {
+    emuPath: '',
+    gameDirectory: '',
+  },
+  DS: {
     emuPath: '',
     gameDirectory: '',
   },
@@ -150,18 +155,19 @@ const getCover = async (gameName, gamePlatform) => {
   if (row) {
     return row.image;
   } else {
-    try {
-      result = await axios(
-        new URL(
-          `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
-        ).toString()
-      );
-    } catch (err) {
-      console.log(err);
-      return null;
+    if (giantBombAPIKey) {
+      try {
+        result = await axios(
+          new URL(
+            `${giantBombUrl}/api/search/?api_key=${giantBombAPIKey}&format=json&query=${gameName}&resources=game&field_list=platforms,image&page=1&limit=10`
+          ).toString()
+        );
+      } catch (err) {
+        console.log(err);
+        return null;
+      }
     }
 
-    // console.log(result.data.results.platforms);
     if (result) {
       const filteredArray = result.data.results
         .filter((game) => {
@@ -523,6 +529,10 @@ const get3DSGames = async () => {
   );
 };
 
+const getDSGames = async () => {
+  return [];
+};
+
 const getGBAGames = async () => {
   const allowedFileExtensions = ['.zip', '.gba'];
 
@@ -788,6 +798,22 @@ ipcMain.handle('exec-3ds', async (event, arg) => {
   return `started ${path.basename(emuPath)} game`;
 });
 
+ipcMain.handle('exec-ds', async (event, arg) => {
+  const emuPath = store.get(`${arg.gameConsole}.emuPath`);
+  execFile(
+    emuPath,
+    [arg.gamePath, '--windowed-fullscreen'],
+    (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
+    }
+  );
+  return `started ${path.basename(emuPath)} game`;
+});
+
 ipcMain.handle('exec-gba', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
   execFile(emuPath, ['-f', arg.gamePath], (err, stdout, stderr) => {
@@ -849,6 +875,16 @@ ipcMain.handle('get-games', async (event, arg) => {
     gameDirectory,
     results: [],
   };
+});
+
+ipcMain.handle('set-emu-path', (event, arg) => {
+  store.set(`${arg.gameConsole}.emuPath`, arg.emuPath);
+  return true;
+});
+
+ipcMain.handle('set-game-directory', (event, arg) => {
+  store.set(`${arg.gameConsole}.gameDirectory`, arg.gameDirectory);
+  return true;
 });
 
 ipcMain.on('ipc-example', async (event, arg) => {
