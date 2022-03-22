@@ -16,7 +16,7 @@ import MenuBuilder from './menu';
 import axios from 'axios';
 import { URL } from 'url';
 import { resolveHtmlPath } from './util';
-import { gbaNintendoLogo } from './magics';
+import { nintendoLogo } from './magics';
 import Database from 'better-sqlite3';
 
 const Store = require('electron-store');
@@ -98,6 +98,7 @@ let threeds_db_json = null;
 let psp_db_json = require(getAssetPath('pspReleases.json'));
 let wiiu_db_json = require(getAssetPath('wiiuReleasesHashMap.json'));
 let gba_db_json = require(getAssetPath('gbaReleasesHashMap.json'));
+let ds_db_json = require(getAssetPath('dsReleasesHashMap.json'));
 
 let ps2IdFileExt = [...Array(100).keys()].map(
   (num) => `*.${String(num).padStart(4, '0')}`
@@ -530,7 +531,89 @@ const get3DSGames = async () => {
 };
 
 const getDSGames = async () => {
-  return [];
+  const allowedFileExtensions = ['.zip', '.nds'];
+  let promises = [];
+  let dsGames = [];
+
+  const getDSGame = async (gamePath, callback) => {
+    let buffer = null;
+    let extension = path.extname(gamePath);
+    if (extension == '.zip') {
+      const directory = await unzipper.Open.file(gamePath);
+      const file = directory.files.find(
+        (d) => path.extname(d.path).toLowerCase() === '.nds'
+      );
+      await Promise.allSettled([
+        new Promise((resolve, reject) => {
+          let data = [];
+          let currentSize = 0;
+          let chunk;
+          let stream = file.stream();
+          stream
+            .on('readable', () => {
+              while (currentSize < 348 && (chunk = stream.read(348)) != null) {
+                data.push(chunk);
+                currentSize += chunk.length;
+              }
+              stream.destroy();
+            })
+            .on('close', (err) => {
+              if (err) console.log(err);
+              buffer = Buffer.concat(data);
+              resolve();
+            });
+        }),
+      ]);
+    } else if (extension == '.nds') {
+      let byteSize = fs.statSync(gamePath).size;
+      if (byteSize > 348) {
+        buffer = Buffer.alloc(348);
+        let fd = fs.openSync(gamePath, 'r');
+        fs.readSync(fd, buffer, 0, 348, 0);
+      }
+    }
+    if (buffer !== null && buffer.length >= 348) {
+      if (nintendoLogo.compare(buffer, 0xc0, 0x15c) === 0) {
+        let gameID = buffer.toString('utf-8', 0xc, 0x10);
+        if (ds_db_json && ds_db_json[gameID]) {
+          let gameName = ds_db_json[gameID].name;
+          let gameCover = await getCover(gameName, 'DS');
+
+          let dsSingleGame = {
+            name: gameName,
+            image: gameCover,
+            gamePath,
+            gameConsole: 'DS',
+          };
+
+          callback(dsSingleGame);
+          return;
+        }
+      }
+    }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('DS.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getDSGame(gamePath, (dsSingleGame) => {
+          if (dsSingleGame) {
+            dsGames.push(dsSingleGame);
+          }
+          resolve();
+        });
+      })
+    );
+  }
+
+  await Promise.allSettled(promises);
+  return dsGames.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const getGBAGames = async () => {
@@ -577,7 +660,7 @@ const getGBAGames = async () => {
       }
     }
     if (buffer !== null && buffer.length >= 172) {
-      if (gbaNintendoLogo.compare(buffer, 0, 156) === 0) {
+      if (nintendoLogo.compare(buffer, 0, 156) === 0) {
         let gameID = buffer.toString('utf-8', 168, 172);
         if (gba_db_json && gba_db_json[gameID]) {
           let gameName = gba_db_json[gameID].name;
