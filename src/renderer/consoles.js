@@ -3,7 +3,6 @@ import nSwitch from '../../assets/images/switch.png';
 import wiiU from '../../assets/images/wii-u.png';
 import gamecube from '../../assets/images/gamecube.png';
 import wii from '../../assets/images/wii.png';
-import ps2 from '../../assets/images/ps2.png';
 import psp from '../../assets/images/psp.png';
 import gba from '../../assets/images/gba.png';
 import ds from '../../assets/images/ds.png';
@@ -16,7 +15,6 @@ const consoles = [
   { name: '3DS', icon: threeDS, emu: 'Citra' },
   { name: 'DS', icon: ds, emu: 'DeSmuME' },
   { name: 'GBA', icon: gba, emu: 'mGBA' },
-  { name: 'PS2', icon: ps2, emu: 'PCSX2' },
   { name: 'PSP', icon: psp, emu: 'PPSSPP' },
 ];
 

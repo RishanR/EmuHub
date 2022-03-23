@@ -99,6 +99,7 @@ let psp_db_json = require(getAssetPath('pspReleases.json'));
 let wiiu_db_json = require(getAssetPath('wiiuReleasesHashMap.json'));
 let gba_db_json = require(getAssetPath('gbaReleasesHashMap.json'));
 let ds_db_json = require(getAssetPath('dsReleasesHashMap.json'));
+let wii_db_json = require(getAssetPath('wiiReleasesHashMap.json'));
 
 let ps2IdFileExt = [...Array(100).keys()].map(
   (num) => `*.${String(num).padStart(4, '0')}`
@@ -226,9 +227,15 @@ const getWiiGames = async () => {
       if (buffer.toString('hex', 0x018, 0x01c).toLowerCase() == wiiMagicWord) {
         // Valid Game. From here do what you need to create the game object and then push it into a games array
 
-        let gameName = buffer
-          .toString('utf-8', 0x020, 0x060)
-          .replace(/\0.*$/g, '');
+        let gameID = buffer.toString('utf-8', 0x0, 0x6);
+        let gameName;
+        if (wii_db_json[gameID]) {
+          gameName = wii_db_json[gameID].name;
+        } else {
+          gameName = buffer
+            .toString('utf-8', 0x020, 0x060)
+            .replace(/\0.*$/g, '');
+        }
 
         let gameCover = await getCover(gameName, 'Wii');
 
