@@ -43,13 +43,20 @@ contextBridge.exposeInMainWorld('api', {
     let games = await ipcRenderer.invoke('get-games', gameConsole);
     callback(games);
   },
-  setEmulatorPath: (gameConsole, emuPath) => {
+  setEmulatorPath: async (gameConsole, emuPath) => {
     return ipcRenderer.invoke('set-emu-path', { gameConsole, emuPath });
   },
-  setGameDirectory: (gameConsole, gameDirectory) => {
+  setGameDirectory: async (gameConsole, gameDirectory) => {
     return ipcRenderer.invoke('set-game-directory', {
       gameConsole,
       gameDirectory,
     });
+  },
+  getSettings: async () => {
+    console.log('Test');
+    return ipcRenderer.invoke('get-settings');
+  },
+  setSettings: async (settings) => {
+    return ipcRenderer.invoke('set-settings', settings);
   },
 });

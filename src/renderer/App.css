@@ -185,7 +185,7 @@ a:hover {
   color: #ecf0f1;
 }
 
-.info-bar-refresh {
+.info-bar-button {
   border-radius: 0;
   margin-right: 0;
   margin-left: 5px;
@@ -197,12 +197,12 @@ a:hover {
   height: 40px;
   background-color: #2c3e50;
 }
-.info-bar-refresh:hover {
+.info-bar-button:hover {
   background-color: #435466;
   transform: scale(1);
 }
 
-.info-bar-refresh-icon {
+.info-bar-button-icon {
   width: 14px;
   height: 14px;
   object-fit: contain;
@@ -239,6 +239,7 @@ a:hover {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #ecf0f1;
+  border-radius: 15px;
 }
 
 /* Handle on hover */

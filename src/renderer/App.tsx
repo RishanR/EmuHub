@@ -5,10 +5,11 @@ import consoles from './consoles';
 import GameGrid from './components/GameGrid';
 import { Oval, Triangle } from 'react-loader-spinner';
 import Refresh from '../../assets/images/refresh.png';
+import Settings from '../../assets/images/settings.png';
 import gamesReducer from './reducers';
 import InputComponent from './components/inputComponent';
+import SettingsModal from './components/SettingsModal';
 import './App.css';
-import { stat } from 'fs';
 
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
@@ -17,6 +18,7 @@ const Dashboard = () => {
   const [search, setSearch] = useState('');
   const [showEmuPrompt, setShowEmuPrompt] = useState(false);
   const [showGamePrompt, setShowGamePrompt] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const setRunning = (name, gameConsole, value) => {
     dispatch({
@@ -103,20 +105,18 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (!showEmuPrompt && !showGamePrompt) {
-      if (!(selectedConsole in games)) {
-        getFrontGames();
-      } else {
-        let gamesLength = games[selectedConsole].length;
-        setStatus({
-          loading: false,
-          message: `${gamesLength} ${selectedConsole} game${
-            gamesLength === 1 ? '' : 's'
-          } loaded.`,
-        });
-      }
+    if (!(selectedConsole in games)) {
+      getFrontGames();
+    } else {
+      let gamesLength = games[selectedConsole].length;
+      setStatus({
+        loading: false,
+        message: `${gamesLength} ${selectedConsole} game${
+          gamesLength === 1 ? '' : 's'
+        } loaded.`,
+      });
     }
-  }, [selectedConsole, showEmuPrompt, showGamePrompt]);
+  }, [selectedConsole]);
 
   useEffect(() => {
     console.log('Games Changed: ', games[selectedConsole]);
@@ -189,9 +189,12 @@ const Dashboard = () => {
                   } emulator path`}
                   showButton={true}
                   buttonText={'Apply'}
-                  handlerButton={(val) => {
-                    window.api.setEmulatorPath(selectedConsole, val);
+                  handlerButton={async (val) => {
+                    await window.api.setEmulatorPath(selectedConsole, val);
                     setShowEmuPrompt(false);
+                    if (!showGamePrompt) {
+                      getFrontGames();
+                    }
                   }}
                 />
               )}
@@ -202,9 +205,12 @@ const Dashboard = () => {
                   placeholder={`Enter your ${selectedConsole} games directory`}
                   showButton={true}
                   buttonText={'Apply'}
-                  handlerButton={(val) => {
-                    window.api.setGameDirectory(selectedConsole, val);
+                  handlerButton={async (val) => {
+                    await window.api.setGameDirectory(selectedConsole, val);
                     setShowGamePrompt(false);
+                    if (!showEmuPrompt) {
+                      getFrontGames();
+                    }
                   }}
                 />
               )}
@@ -230,12 +236,19 @@ const Dashboard = () => {
           {!status.loading && (
             <button
               tabindex="-1"
-              className="info-bar-refresh"
+              className="info-bar-button"
               onClick={getFrontGames}
             >
-              <img className="info-bar-refresh-icon" src={Refresh} />
+              <img className="info-bar-button-icon" src={Refresh} />
             </button>
           )}
+          <button
+            tabindex="-1"
+            className="info-bar-button"
+            onClick={() => setShowSettings(true)}
+          >
+            <img className="info-bar-button-icon" src={Settings} />
+          </button>
           <InputComponent
             id="search-games"
             className="info-bar-search"
@@ -246,6 +259,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      {showSettings && <SettingsModal setShowSettings={setShowSettings} />}
     </div>
   );
 };

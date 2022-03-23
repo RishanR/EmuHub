@@ -68,10 +68,6 @@ const defaults = {
     emuPath: '',
     gameDirectory: '',
   },
-  PS2: {
-    emuPath: '',
-    gameDirectory: '',
-  },
   PSP: {
     emuPath: '',
     gameDirectory: '',
@@ -718,50 +714,6 @@ const readableToString = async (readable) => {
   return result;
 };
 
-const getPS2Games = async () => {
-  let ps2Games = [];
-  const allowedFileExtensions = ['.iso'];
-  // const gamePaths = getAllFiles(
-  //   store.get('PS2.gameDirectory'),
-  //   allowedFileExtensions
-  // );
-
-  // await Promise.allSettled(
-  //   gamePaths.map((gamePath) => {
-  //     return new Promise((resolve, reject) => {
-  //       //here our function should be implemented
-  //       console.log('reading iso...');
-  //       fs.readFile(gamePath, { encoding: 'buffer' }, (err, data) => {
-  //         if (err) throw err;
-  //         console.log('read iso!');
-  //         BrowserFS.configure(
-  //           {
-  //             fs: 'IsoFS',
-  //             options: {
-  //               data,
-  //             },
-  //           },
-  //           (e) => {
-  //             console.log('browserfs ready!');
-  //             if (e) {
-  //               console.log(e);
-  //               reject(new Error(`Error occured during reading: ${e}`));
-  //             }
-
-  //             const stringData = fs.readFileSync('SYSTEM.CNF', 'utf-8', 'r');
-  //             console.log(`${path.basename(gamePath)}: ${stringData}`);
-  //             resolve();
-  //           }
-  //         );
-  //       });
-  //     });
-  //   })
-  // );
-  // console.log('Finished!');
-
-  return [];
-};
-
 const getPSPGames = async () => {
   const allowedFileExtensions = ['.iso'];
   let promises = [];
@@ -945,10 +897,13 @@ ipcMain.handle('exec-psp', async (event, arg) => {
 ipcMain.handle('get-games', async (event, arg) => {
   let emuPath = true;
   let gameDirectory = true;
-  if (!store.get(`${arg}.emuPath`)) {
+
+  let emuPathString = store.get(`${arg}.emuPath`);
+  let gameDirectoryString = store.get(`${arg}.gameDirectory`);
+  if (!emuPathString || !fs.existsSync(emuPathString)) {
     emuPath = false;
   }
-  if (!store.get(`${arg}.gameDirectory`)) {
+  if (!gameDirectoryString || !fs.existsSync(gameDirectoryString)) {
     gameDirectory = false;
   }
   // Get Games of the specified console
@@ -967,13 +922,22 @@ ipcMain.handle('get-games', async (event, arg) => {
   };
 });
 
-ipcMain.handle('set-emu-path', (event, arg) => {
+ipcMain.handle('set-emu-path', async (event, arg) => {
   store.set(`${arg.gameConsole}.emuPath`, arg.emuPath);
   return true;
 });
 
-ipcMain.handle('set-game-directory', (event, arg) => {
+ipcMain.handle('set-game-directory', async (event, arg) => {
   store.set(`${arg.gameConsole}.gameDirectory`, arg.gameDirectory);
+  return true;
+});
+
+ipcMain.handle('get-settings', async () => {
+  return store.store;
+});
+
+ipcMain.handle('set-settings', async (event, arg) => {
+  store.store = arg;
   return true;
 });
 
