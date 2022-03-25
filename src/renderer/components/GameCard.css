@@ -75,8 +75,8 @@
   z-index: 3;
 }
 
-.game-card-container:hover,
-.game-card-container:focus {
+.game-card-container:focus,
+.game-card-container:hover {
   cursor: pointer;
   outline: 2px solid #ecf0f1;
   box-shadow: 0 0 10px #ecf0f1, 10px 15px 15px rgba(0, 0, 0, 0.2);
@@ -104,17 +104,18 @@
   padding: 20px;
   border-radius: 10px;
   z-index: 4;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.05s ease-in-out;
 }
 
 .game-card-not-running {
   opacity: 0;
-  transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.05s ease-in-out;
 }
 
+.game-card-not-running-highlighted,
 .game-card-not-running:hover {
   opacity: 1;
-  transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.05s ease-in-out;
 }
 
 .game-card-running-indicator {

@@ -5,12 +5,38 @@ import './GameGrid.css';
 import Pagination from './PaginationFiles/Pagination';
 
 const GameGrid = ({ selectedGames, setRunning }) => {
+  const [numElementsPerRow, setNumElementsPerRow] = useState(5);
+  useEffect(() => {
+    if (window.innerWidth < 1500) {
+      numElementsPerRow !== 4 && setNumElementsPerRow(4);
+    } else {
+      numElementsPerRow !== 5 && setNumElementsPerRow(5);
+    }
+    console.log(numElementsPerRow);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const handleResize = (event) => {
+    if (window.innerWidth < 1500) {
+      numElementsPerRow !== 4 && setNumElementsPerRow(4);
+    } else {
+      numElementsPerRow !== 5 && setNumElementsPerRow(5);
+    }
+  };
+  window.addEventListener('resize', handleResize);
   return (
     <React.Fragment>
       <div className="game-grid-swipable-container">
         {selectedGames.map((game, index) => {
           return (
-            <div className="game-grid-card-padding">
+            <div
+              id={`item-${index % numElementsPerRow}-${Math.floor(
+                index / numElementsPerRow
+              )}`}
+              className="game-grid-card-padding"
+            >
               <GameCard
                 image={game.image}
                 name={game.name}

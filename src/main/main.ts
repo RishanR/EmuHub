@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, dialog, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -50,11 +50,11 @@ const defaults = {
   },
   Wii: {
     emuPath: '',
-    gameDirectory: 'test',
+    gameDirectory: '',
   },
   GC: {
     emuPath: '',
-    gameDirectory: 'test',
+    gameDirectory: '',
   },
   ['3DS']: {
     emuPath: '',
@@ -73,13 +73,11 @@ const defaults = {
     gameDirectory: '',
   },
   key: '',
+  firstTime: true,
 };
 
 const store = new Store({ defaults });
-const giantBombAPIKey = store.get('key');
 const db = new Database(path.join(app.getPath('userData'), 'emuhub.db'));
-
-console.log(app.getPath('userData'));
 
 const RESOURCES_PATH = app.isPackaged
   ? path.join(process.resourcesPath, 'assets')
@@ -91,11 +89,21 @@ const getAssetPath = (...paths: string[]): string => {
 
 let switch_db_json = null;
 let threeds_db_json = null;
-let psp_db_json = require(getAssetPath('pspReleases.json'));
-let wiiu_db_json = require(getAssetPath('wiiuReleasesHashMap.json'));
-let gba_db_json = require(getAssetPath('gbaReleasesHashMap.json'));
-let ds_db_json = require(getAssetPath('dsReleasesHashMap.json'));
-let wii_db_json = require(getAssetPath('wiiReleasesHashMap.json'));
+let psp_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('pspReleasesHashMap.json'))
+);
+let wiiu_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('wiiuReleasesHashMap.json'))
+);
+let gba_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('gbaReleasesHashMap.json'))
+);
+let ds_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('dsReleasesHashMap.json'))
+);
+let wii_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('wiiReleasesHashMap.json'))
+);
 
 let ps2IdFileExt = [...Array(100).keys()].map(
   (num) => `*.${String(num).padStart(4, '0')}`
@@ -153,6 +161,7 @@ const getCover = async (gameName, gamePlatform) => {
   if (row) {
     return row.image;
   } else {
+    const giantBombAPIKey = store.get('key');
     if (giantBombAPIKey) {
       try {
         result = await axios(
@@ -739,20 +748,19 @@ const getPSPGames = async () => {
       ) {
         const gameID = buffer.toString('utf-8', 0x373, 0x37d);
 
-        for (const game of psp_db_json) {
-          if (game.id.toLowerCase().includes(gameID.toLowerCase())) {
-            let gameCover = await getCover(game.name, 'PSP');
+        if (psp_db_json[gameID]) {
+          const gameName = psp_db_json[gameID].name;
+          let gameCover = await getCover(gameName, 'PSP');
 
-            let pspSingleGame = {
-              name: game.name,
-              image: gameCover,
-              gamePath,
-              gameConsole: 'PSP',
-            };
+          let pspSingleGame = {
+            name: gameName,
+            image: gameCover,
+            gamePath,
+            gameConsole: 'PSP',
+          };
 
-            callback(pspSingleGame);
-            return;
-          }
+          callback(pspSingleGame);
+          return;
         }
       }
     }
@@ -932,13 +940,35 @@ ipcMain.handle('set-game-directory', async (event, arg) => {
   return true;
 });
 
+ipcMain.handle('get-first-time', async () => {
+  return store.get('firstTime');
+});
+
 ipcMain.handle('get-settings', async () => {
   return store.store;
 });
 
 ipcMain.handle('set-settings', async (event, arg) => {
-  store.store = arg;
+  store.store = { ...store.store, ...arg };
   return true;
+});
+
+ipcMain.handle('choose-file', async () => {
+  let path = dialog.showOpenDialogSync(mainWindow, {
+    properties: ['openFile'],
+  }) ?? [''];
+  return path[0];
+});
+
+ipcMain.handle('choose-directory', async () => {
+  let directory = dialog.showOpenDialogSync(mainWindow, {
+    properties: ['openDirectory'],
+  }) ?? [''];
+  return directory[0];
+});
+
+ipcMain.handle('close-program', async () => {
+  app.quit();
 });
 
 ipcMain.on('ipc-example', async (event, arg) => {
@@ -1038,6 +1068,19 @@ const createWindow = async () => {
       mainWindow.minimize();
     } else {
       mainWindow.show();
+    }
+  });
+
+  mainWindow.on('close', function (e) {
+    var choice = require('electron').dialog.showMessageBoxSync(this, {
+      type: 'question',
+      buttons: ['Yes', 'No'],
+      title: 'Confirm',
+      message:
+        'Are you sure you want to quit EmuHub and all running emulators?',
+    });
+    if (choice == 1) {
+      e.preventDefault();
     }
   });
 

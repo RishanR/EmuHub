@@ -52,11 +52,22 @@ contextBridge.exposeInMainWorld('api', {
       gameDirectory,
     });
   },
+  getFirstTime: async () => {
+    return ipcRenderer.invoke('get-first-time');
+  },
   getSettings: async () => {
-    console.log('Test');
     return ipcRenderer.invoke('get-settings');
   },
   setSettings: async (settings) => {
     return ipcRenderer.invoke('set-settings', settings);
+  },
+  ChooseFile: async () => {
+    return ipcRenderer.invoke('choose-file');
+  },
+  ChooseDirectory: async () => {
+    return ipcRenderer.invoke('choose-directory');
+  },
+  closeProgram: async () => {
+    ipcRenderer.invoke('close-program');
   },
 });

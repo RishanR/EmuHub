@@ -79,6 +79,12 @@
       ],
       "category": "Development"
     },
+    "nsis": {
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": true
+    },
     "directories": {
       "app": "release/app",
       "buildResources": "assets",
@@ -226,6 +232,7 @@
     "react": "^17.0.2",
     "react-aspect-ratio": "^1.0.50",
     "react-dom": "^17.0.2",
+    "react-gamepad": "github:SBRK/react-gamepad",
     "react-loader-spinner": "^6.0.0-0",
     "react-router-dom": "^6.2.1",
     "react-swipeable-views": "^0.14.0",

@@ -6,6 +6,7 @@ const InputComponent = (props) => {
     className: `input-link${props.showButton ? ' input-link-with-button' : ''}`,
     type: 'text',
   };
+  if (props.type) inputProps.type = props.type;
   if (props.id) inputProps.id = props.id;
   if (props.value) inputProps.value = props.value;
   if (props.placeholder) inputProps.placeholder = props.placeholder;

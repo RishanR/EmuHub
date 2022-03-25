@@ -49,7 +49,7 @@ const GameCard = ({
     }
   };
   return (
-    <div className="game-card-container" onClick={launchGame}>
+    <div tabIndex={-1} className="game-card-container" onClick={launchGame}>
       {image ? (
         <img
           className={`game-card-image aspect-ratio-${gameConsole}`}
