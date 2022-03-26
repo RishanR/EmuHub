@@ -121,15 +121,13 @@ let mainWindow: BrowserWindow | null = null;
 
 const getExecMessage = (err, gamePath, emuPath) => {
   if (err) {
-    // Just printing to console for testing
-    console.log(err);
     return {
       error: {
         code: err.code,
         filename: path.basename(emuPath),
         gamepath: gamePath,
       },
-      message: `ended ${path.basename(emuPath)} game`,
+      message: 'An error occurred while launching the game.',
     };
   }
   return {
@@ -170,7 +168,6 @@ const getCover = async (gameName, gamePlatform) => {
           ).toString()
         );
       } catch (err) {
-        console.log(err);
         return null;
       }
     }
@@ -794,110 +791,175 @@ const getPSPGames = async () => {
 
 ipcMain.handle('exec-switch', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
+  try {
+    execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
     });
-  });
-  return `started ${path.basename(emuPath)} game`;
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-wii-u', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
+  try {
+    execFile(emuPath, ['-f', '-g', arg.gamePath], (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
     });
-  });
-  return `started ${path.basename(emuPath)} game`;
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-wii-gamecube', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(
-    emuPath,
-    [
-      '--batch',
-      `--exec=${arg.gamePath}`,
-      '--config=Dolphin.Display.Fullscreen=True',
-    ],
-    (err, stdout, stderr) => {
-      event.sender.send('game-ended', {
-        name: arg.name,
-        gameConsole: arg.gameConsole,
-        output: getExecMessage(err, arg.gamePath, emuPath),
-      });
-    }
-  );
-  return `started ${path.basename(emuPath)} game`;
+  try {
+    execFile(
+      emuPath,
+      [
+        '--batch',
+        `--exec=${arg.gamePath}`,
+        '--config=Dolphin.Display.Fullscreen=True',
+      ],
+      (err, stdout, stderr) => {
+        event.sender.send('game-ended', {
+          name: arg.name,
+          gameConsole: arg.gameConsole,
+          output: getExecMessage(err, arg.gamePath, emuPath),
+        });
+      }
+    );
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-3ds', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, [arg.gamePath], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
-    });
-  });
-  return `started ${path.basename(emuPath)} game`;
-});
-
-ipcMain.handle('exec-ds', async (event, arg) => {
-  const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(
-    emuPath,
-    [arg.gamePath, '--windowed-fullscreen'],
-    (err, stdout, stderr) => {
+  try {
+    execFile(emuPath, [arg.gamePath], (err, stdout, stderr) => {
       event.sender.send('game-ended', {
         name: arg.name,
         gameConsole: arg.gameConsole,
         output: getExecMessage(err, arg.gamePath, emuPath),
       });
-    }
-  );
-  return `started ${path.basename(emuPath)} game`;
+    });
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
+});
+
+ipcMain.handle('exec-ds', async (event, arg) => {
+  const emuPath = store.get(`${arg.gameConsole}.emuPath`);
+  try {
+    execFile(
+      emuPath,
+      [arg.gamePath, '--windowed-fullscreen'],
+      (err, stdout, stderr) => {
+        event.sender.send('game-ended', {
+          name: arg.name,
+          gameConsole: arg.gameConsole,
+          output: getExecMessage(err, arg.gamePath, emuPath),
+        });
+      }
+    );
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-gba', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, ['-f', arg.gamePath], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
+  try {
+    execFile(emuPath, ['-f', arg.gamePath], (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
     });
-  });
-  return `started ${path.basename(emuPath)} game`;
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-ps2', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
+  try {
+    execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
     });
-  });
-  return `started ${path.basename(emuPath)} game`;
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 ipcMain.handle('exec-psp', async (event, arg) => {
   const emuPath = store.get(`${arg.gameConsole}.emuPath`);
-  execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
-    event.sender.send('game-ended', {
-      name: arg.name,
-      gameConsole: arg.gameConsole,
-      output: getExecMessage(err, arg.gamePath, emuPath),
+  try {
+    execFile(emuPath, [arg.gamePath, '--fullscreen'], (err, stdout, stderr) => {
+      event.sender.send('game-ended', {
+        name: arg.name,
+        gameConsole: arg.gameConsole,
+        output: getExecMessage(err, arg.gamePath, emuPath),
+      });
     });
-  });
-  return `started ${path.basename(emuPath)} game`;
+  } catch (err) {
+    console.log('Error caught: ', err);
+    return {
+      error: err,
+      message: 'An error occured while launching game.',
+    };
+  }
+  return { error: null, message: `started ${path.basename(emuPath)} game` };
 });
 
 // GAME EXECUTION METHODS END //

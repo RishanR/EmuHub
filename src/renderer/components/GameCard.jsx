@@ -16,6 +16,7 @@ const GameCard = ({
   gamePath,
   gameRunning,
   setRunning,
+  setStatus,
 }) => {
   const getCover = (gameConsole) => {
     if (gameConsole == 'Wii') {
@@ -39,13 +40,19 @@ const GameCard = ({
   };
   const launchGame = async () => {
     if (!gameRunning) {
-      setRunning(name, gameConsole, true);
       const result = await window.api[`exec${gameConsole}`]({
         gamePath,
         gameConsole,
         name,
       });
-      console.log(result);
+      if (result.error) {
+        console.log(result.error);
+        setStatus((prevState) => {
+          return { ...prevState, message: result.message };
+        });
+      } else {
+        setRunning(name, gameConsole, true);
+      }
     }
   };
   return (

@@ -18,7 +18,7 @@ body {
     #dd5789 51.77%,
     #7a2c9e 129.35%
   );
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
@@ -83,6 +83,7 @@ a:hover {
 }
 
 .navigation-menu {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,6 +118,51 @@ a:hover {
 .navigation-item-selected {
   background-color: #34495e !important;
   transition: background-color 0.25s ease-in-out;
+}
+
+.controls-bumper-left-container,
+.controls-bumper-right-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+}
+
+.controls-bumper-left-container {
+  top: 0;
+}
+
+.controls-bumper-right-container {
+  bottom: 0;
+}
+
+.controls-bumper-arrow {
+  width: 25px;
+  height: 25px;
+  filter: invert(1);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.controls-bumper-icon {
+  width: 40px;
+  height: 40px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.controls-bar-icon {
+  margin-left: 20px;
+  width: 30px;
+  height: 30px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.controls-slash {
+  font-weight: 400;
+  font-size: 25px;
 }
 
 .content {
@@ -218,11 +264,19 @@ a:hover {
   image-rendering: -webkit-optimize-contrast;
 }
 
-.info-bar-search {
+.info-bar-search-controls-container {
   position: absolute;
   left: 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+}
+
+.info-bar-search {
+  flex: 1;
   border: 7px solid transparent;
-  width: 30%;
 }
 
 .loading-status-indicator {

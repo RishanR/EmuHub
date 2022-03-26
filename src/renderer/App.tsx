@@ -12,6 +12,16 @@ import InputComponent from './components/inputComponent';
 import SettingsModal from './components/SettingsModal';
 import GiantBombModal from './components/GiantBombModal';
 import EmuHubGamepad from './components/EmuHubGamepad';
+import DownArrow from '../../assets/images/down-arrow.png';
+import UpArrow from '../../assets/images/up-arrow.png';
+import XboxLB from '../../assets/images/xbox_lb.png';
+import XboxRB from '../../assets/images/xbox_rb.png';
+import XboxA from '../../assets/images/xbox_a.png';
+import XboxB from '../../assets/images/xbox_b.png';
+import XboxY from '../../assets/images/xbox_y.png';
+import XboxStart from '../../assets/images/xbox_start.png';
+import XboxDpad from '../../assets/images/xbox_dpad.png';
+import XboxLeftJoystick from '../../assets/images/xbox_left_joystick.png';
 import './App.css';
 
 const Dashboard = () => {
@@ -26,7 +36,6 @@ const Dashboard = () => {
   const [emuPathString, setEmuPathString] = useState('');
   const [gamePathString, setGamePathString] = useState('');
   const [focusedGameID, setFocusedGameIDState] = useState('item-0-0');
-  const [showControls, setShowControls] = useState(false);
   const [showCursor, setShowCursorState] = useState(true);
   const [gamepadsConnected, setGamepadsConnected] = useState({});
   const [enableGamepad, setEnableGamepad] = useState(true);
@@ -82,6 +91,34 @@ const Dashboard = () => {
         .getElementById(focusedGameIDRef.current)
         ?.getElementsByClassName('game-card-not-running')[0]
         ?.classList.remove('game-card-not-running-highlighted');
+    }
+  };
+
+  const isShowingGames = () => {
+    return (
+      !showEmuPrompt &&
+      !showGamePrompt &&
+      !showSettings &&
+      games &&
+      games[selectedConsole] &&
+      games[selectedConsole].length > 0
+    );
+  };
+
+  const focusTheFocusedGameID = (gameID = focusedGameID) => {
+    if (isShowingGames() && document.getElementById(gameID) && !showCursor) {
+      document
+        .getElementById(gameID)
+        ?.getElementsByClassName('game-card-container')[0]
+        ?.focus();
+      let not_running_element_new = document
+        .getElementById(gameID)
+        ?.getElementsByClassName('game-card-not-running')[0];
+      if (not_running_element_new) {
+        not_running_element_new.classList.add(
+          'game-card-not-running-highlighted'
+        );
+      }
     }
   };
 
@@ -180,13 +217,18 @@ const Dashboard = () => {
         const mappedError = errorMap(arg.output.error);
         if (mappedError) {
           // We have mapped the error. Do what you want to do with Issue and Solution here
-          console.log(`Issue: ${mappedError.issue}`);
+          let errorMessage = mappedError.issue;
           if (mappedError.solution) {
-            console.log(`Solution:  ${mappedError.solution}`);
+            errorMessage += ` ${mappedError.solution}`;
           }
+          setStatus((prevState) => {
+            return { ...prevState, message: errorMessage };
+          });
         } else {
           // The error was not mapped. Do what you want with the whole error object.
-          console.log(arg.output.error);
+          setStatus((prevState) => {
+            return { ...prevState, message: arg.output.message };
+          });
         }
       }
       console.log(arg.output.message);
@@ -210,6 +252,7 @@ const Dashboard = () => {
       getFrontGames();
     } else {
       removeControllerFocus();
+      focusTheFocusedGameID('item-0-0');
       setFocusedGameID('item-0-0');
       setShowEmuPrompt(false);
       setEmuPathString('');
@@ -230,8 +273,10 @@ const Dashboard = () => {
   }, [setRunning]);
 
   useEffect(() => {
-    console.log('Games Changed: ', games[selectedConsole]);
-  }, [games]);
+    if (!showCursor) {
+      focusTheFocusedGameID();
+    }
+  }, [games, showCursor]);
 
   const filterGames = (property) => {
     let val = search
@@ -284,6 +329,18 @@ const Dashboard = () => {
               />
             </div>
           ))}
+          {!showCursor && (
+            <>
+              <div className="controls-bumper-left-container">
+                <img className="controls-bumper-arrow" src={UpArrow} />
+                <img className="controls-bumper-icon" src={XboxLB} />
+              </div>
+              <div className="controls-bumper-right-container">
+                <img className="controls-bumper-arrow" src={DownArrow} />
+                <img className="controls-bumper-icon" src={XboxRB} />
+              </div>
+            </>
+          )}
         </div>
         <div className="content">
           <div className="game-grid">
@@ -314,7 +371,6 @@ const Dashboard = () => {
                     buttonText={emuPathString ? 'Apply' : 'Browse'}
                     value={emuPathString ?? ''}
                     handlerInput={(val) => {
-                      console.log(val);
                       setEmuPathString(val);
                     }}
                     handlerButton={handleEmuPathChange}
@@ -330,7 +386,6 @@ const Dashboard = () => {
                     value={gamePathString ?? ''}
                     buttonType={gamePathString ? 'button' : 'file'}
                     handlerInput={(val) => {
-                      console.log(val);
                       setGamePathString(val);
                     }}
                     handlerButton={handleGamePathChange}
@@ -346,6 +401,7 @@ const Dashboard = () => {
                 <GameGrid
                   selectedGames={games[selectedConsole].filter(filterGames)}
                   setRunning={setRunning}
+                  setStatus={setStatus}
                 />
               ) : (
                 !status.loading && (
@@ -356,13 +412,21 @@ const Dashboard = () => {
           <div className="info-bar">
             {status.message}
             {!status.loading && (
-              <button
-                tabIndex="-1"
-                className="info-bar-button"
-                onClick={getFrontGames}
-              >
-                <img className="info-bar-button-icon" src={Refresh} />
-              </button>
+              <>
+                {!showCursor && (
+                  <img className="controls-bar-icon" src={XboxY} />
+                )}
+                <button
+                  tabIndex="-1"
+                  className="info-bar-button"
+                  onClick={getFrontGames}
+                >
+                  <img className="info-bar-button-icon" src={Refresh} />
+                </button>
+              </>
+            )}
+            {!showCursor && (
+              <img className="controls-bar-icon" src={XboxStart} />
             )}
             <button
               tabIndex="-1"
@@ -371,6 +435,7 @@ const Dashboard = () => {
             >
               <img className="info-bar-button-icon" src={Settings} />
             </button>
+            {!showCursor && <img className="controls-bar-icon" src={XboxB} />}
             <button
               tabIndex="-1"
               className="info-bar-button"
@@ -378,14 +443,33 @@ const Dashboard = () => {
             >
               <img className="info-bar-button-icon" src={PowerOff} />
             </button>
-            <InputComponent
-              id="search-games"
-              className="info-bar-search"
-              value={search}
-              placeholder={`Search ${selectedConsole} games...`}
-              handlerInput={(val) => setSearch(val)}
-              showButton={false}
-            />
+            <div
+              style={{ width: showCursor ? '30%' : '40%' }}
+              className="info-bar-search-controls-container"
+            >
+              <InputComponent
+                id="search-games"
+                className="info-bar-search"
+                value={search}
+                placeholder={`Search ${selectedConsole} games...`}
+                handlerInput={(val) => setSearch(val)}
+                showButton={false}
+              />
+              {!showCursor && (
+                <>
+                  <img className="controls-bar-icon" src={XboxA} />
+                  <div style={{ marginLeft: 5 }}>Select Game</div>
+                  <img className="controls-bar-icon" src={XboxLeftJoystick} />
+                  <span className="controls-slash">/</span>
+                  <img
+                    style={{ marginLeft: 0 }}
+                    className="controls-bar-icon"
+                    src={XboxDpad}
+                  />
+                  <div style={{ marginLeft: 5 }}>Navigate Games</div>
+                </>
+              )}
+            </div>
           </div>
         </div>
         {showSettings && (
@@ -396,13 +480,8 @@ const Dashboard = () => {
         )}
         {showAPIModal && <GiantBombModal setShowGiantBomb={setShowAPIModal} />}
         <EmuHubGamepad
-          showEmuPrompt={showEmuPrompt}
-          showGamePrompt={showGamePrompt}
           showSettings={showSettings}
           setShowSettings={setShowSettings}
-          games={games}
-          showControls={showControls}
-          setShowControls={setShowControls}
           focusedGameID={focusedGameID}
           setFocusedGameID={setFocusedGameID}
           selectedConsole={selectedConsole}
@@ -413,6 +492,8 @@ const Dashboard = () => {
           setSearch={setSearch}
           setGamepadsConnected={setGamepadsConnected}
           enableGamepad={enableGamepad}
+          isShowingGames={isShowingGames}
+          focusTheFocusedGameID={focusTheFocusedGameID}
         />
       </div>
     </div>

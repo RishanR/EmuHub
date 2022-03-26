@@ -104,18 +104,18 @@
   padding: 20px;
   border-radius: 10px;
   z-index: 4;
-  transition: all 0.05s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .game-card-not-running {
   opacity: 0;
-  transition: opacity 0.05s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
 }
 
 .game-card-not-running-highlighted,
 .game-card-not-running:hover {
   opacity: 1;
-  transition: opacity 0.05s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
 }
 
 .game-card-running-indicator {

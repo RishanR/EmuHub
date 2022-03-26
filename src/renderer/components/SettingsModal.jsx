@@ -10,7 +10,6 @@ const SettingsModal = ({ setShowSettings, getFrontGames }) => {
 
   useEffect(async () => {
     let allSettings = await window.api.getSettings();
-    console.log(allSettings);
     setSettings({ ...allSettings });
   }, []);
 

@@ -12,19 +12,12 @@ const EmuHubGamepad = (props) => {
     axisDirectionRef.current = data;
     setAxisDirectionState(data);
   };
-  const isShowingGames = () => {
-    return (
-      !props.showEmuPrompt &&
-      !props.showGamePrompt &&
-      !props.showSettings &&
-      props.games &&
-      props.games[props.selectedConsole] &&
-      props.games[props.selectedConsole].length > 0
-    );
-  };
-  const isShowingGamesRef = useRef(isShowingGames);
+
+  useEffect(() => {
+    props.focusTheFocusedGameID();
+  }, [props.focusedGameID]);
+
   const navigateGameGrid = (direction) => {
-    console.log('here');
     let itemArr = props.focusedGameID.split('-');
     let x = parseInt(itemArr[1]);
     let y = parseInt(itemArr[2]);
@@ -48,25 +41,11 @@ const EmuHubGamepad = (props) => {
     itemArr[2] = y.toString();
     let newID = itemArr.join('-');
     if (document.getElementById(newID)) {
-      document
-        .getElementById(newID)
-        .getElementsByClassName('game-card-container')[0]
-        .focus();
-
       let not_running_element_old = document
         ?.getElementById(props.focusedGameID)
         ?.getElementsByClassName('game-card-not-running')[0];
       if (not_running_element_old) {
         not_running_element_old.classList.remove(
-          'game-card-not-running-highlighted'
-        );
-      }
-
-      let not_running_element_new = document
-        .getElementById(newID)
-        .getElementsByClassName('game-card-not-running')[0];
-      if (not_running_element_new) {
-        not_running_element_new.classList.add(
           'game-card-not-running-highlighted'
         );
       }
@@ -77,18 +56,15 @@ const EmuHubGamepad = (props) => {
   const navigateGameGridRef = useRef(navigateGameGrid);
   useInterval(() => {
     if (axisDirection !== 'none') {
-      if (props.enableGamepad && isShowingGames()) {
+      if (props.enableGamepad && props.isShowingGames()) {
         navigateGameGrid(axisDirection);
       }
     }
-    console.log(axisDirection);
   }, 100);
   const handleConnect = (gamepadIndex) => {
     props.setGamepadsConnected((prevState) => {
-      props.setShowControls(true);
       return { ...prevState, [gamepadIndex]: true };
     });
-    console.log('Connected: ', gamepadIndex);
   };
 
   const handleDisconnect = (gamepadIndex) => {
@@ -99,13 +75,13 @@ const EmuHubGamepad = (props) => {
       return newObj;
     });
     setAxisDirection('none');
-    console.log('Disconnected: ', gamepadIndex);
   };
 
   const handleButtonUp = (buttonName) => {
     if (props.enableGamepad) {
       if (props.showCursor) {
         props.setShowCursor(false);
+        return;
       }
       switch (buttonName) {
         case 'A':
@@ -159,25 +135,25 @@ const EmuHubGamepad = (props) => {
           break;
         case 'DPadUp':
           // Navigate game grid up (make this a function)
-          if (isShowingGames()) {
+          if (props.isShowingGames()) {
             navigateGameGrid('up');
           }
           break;
         case 'DPadDown':
           // Navigate game grid down
-          if (isShowingGames()) {
+          if (props.isShowingGames()) {
             navigateGameGrid('down');
           }
           break;
         case 'DPadLeft':
           // Navigate game grid left
-          if (isShowingGames()) {
+          if (props.isShowingGames()) {
             navigateGameGrid('left');
           }
           break;
         case 'DPadRight':
           // Navigate game grid right
-          if (isShowingGames()) {
+          if (props.isShowingGames()) {
             navigateGameGrid('right');
           }
           break;
@@ -191,6 +167,7 @@ const EmuHubGamepad = (props) => {
     if (props.enableGamepad) {
       if (props.showCursor) {
         props.setShowCursor(false);
+        return;
       }
       switch (axisName) {
         case 'LeftStickX':

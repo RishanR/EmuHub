@@ -4,7 +4,7 @@ import GameCard from './GameCard';
 import './GameGrid.css';
 import Pagination from './PaginationFiles/Pagination';
 
-const GameGrid = ({ selectedGames, setRunning }) => {
+const GameGrid = ({ selectedGames, setRunning, setStatus }) => {
   const [numElementsPerRow, setNumElementsPerRow] = useState(5);
   useEffect(() => {
     if (window.innerWidth < 1500) {
@@ -12,12 +12,8 @@ const GameGrid = ({ selectedGames, setRunning }) => {
     } else {
       numElementsPerRow !== 5 && setNumElementsPerRow(5);
     }
-    console.log(numElementsPerRow);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, []);
+
   const handleResize = (event) => {
     if (window.innerWidth < 1500) {
       numElementsPerRow !== 4 && setNumElementsPerRow(4);
@@ -45,6 +41,7 @@ const GameGrid = ({ selectedGames, setRunning }) => {
                 gameRunning={game.gameRunning}
                 index={index}
                 setRunning={setRunning}
+                setStatus={setStatus}
               />
             </div>
           );
