@@ -238,6 +238,7 @@
     "react-router-dom": "^6.2.1",
     "react-swipeable-views": "^0.14.0",
     "unzipper": "^0.10.11",
+    "use-sound": "^4.0.1",
     "xml2js": "^0.4.23"
   },
   "devEngines": {

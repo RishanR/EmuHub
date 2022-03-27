@@ -1,5 +1,7 @@
 import { useState, useEffect, useReducer, useRef } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import useSound from 'use-sound';
+import useAudio from './useAudio';
 import errorMap from './error';
 import consoles from './consoles';
 import GameGrid from './components/GameGrid';
@@ -22,6 +24,7 @@ import XboxY from '../../assets/images/xbox_y.png';
 import XboxStart from '../../assets/images/xbox_start.png';
 import XboxDpad from '../../assets/images/xbox_dpad.png';
 import XboxLeftJoystick from '../../assets/images/xbox_left_joystick.png';
+import backgroundMusic from '../../assets/sounds/background.mp3';
 import './App.css';
 
 const Dashboard = () => {
@@ -39,6 +42,12 @@ const Dashboard = () => {
   const [showCursor, setShowCursorState] = useState(true);
   const [gamepadsConnected, setGamepadsConnected] = useState({});
   const [enableGamepad, setEnableGamepad] = useState(true);
+  const [play, { pause, sound }] = useSound(backgroundMusic, {
+    loop: true,
+    volume: 0.1,
+    autoplay: true,
+  });
+  // const [playing, toggle] = useAudio(backgroundMusic);
 
   const focusedGameIDRef = useRef(focusedGameID);
   const showCursorRef = useRef(showCursor);
@@ -60,9 +69,11 @@ const Dashboard = () => {
         ).length;
       });
       if (running_count === 0) {
+        sound.fade(0, 1, 500);
         setEnableGamepad(true);
       }
     } else {
+      sound.fade(1, 0, 2000);
       setEnableGamepad(false);
     }
     dispatch({
@@ -211,6 +222,9 @@ const Dashboard = () => {
       setShowAPIModal(true);
       await window.api.setSettings({ firstTime: false });
     }
+    // if (!playing) {
+    //   toggle();
+    // }
     // Listen for the event
     window.api.ipcRenderer.on('game-ended', (arg) => {
       if (arg.output.error) {
@@ -232,6 +246,7 @@ const Dashboard = () => {
         }
       }
       console.log(arg.output.message);
+
       setRunningRef.current(arg.name, arg.gameConsole, false);
     });
 
@@ -246,6 +261,12 @@ const Dashboard = () => {
       window.api.ipcRenderer.removeAllListeners();
     };
   }, []);
+
+  useEffect(() => {
+    if (sound) {
+      sound.fade(0.1, 1, 500);
+    }
+  }, [sound]);
 
   useEffect(() => {
     if (!(selectedConsole in games) || !(games[selectedConsole].length > 0)) {
