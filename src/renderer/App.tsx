@@ -345,7 +345,6 @@ const Dashboard = () => {
       soundOpen &&
       soundSelect
     ) {
-      console.log('test');
       let settings = await window.api.getSettings();
       setMusicVolume(settings.musicVolume);
       setFXVolume(settings.fxVolume);

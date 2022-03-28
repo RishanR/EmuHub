@@ -23,7 +23,6 @@ const Store = require('electron-store');
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { execFile } = require('child_process');
-const BrowserFS = require('browserfs');
 const unzipper = require('unzipper');
 
 const giantBombUrl = 'https://www.giantbomb.com';
@@ -105,10 +104,6 @@ let ds_db_json = JSON.parse(
 );
 let wii_db_json = JSON.parse(
   fs.readFileSync(getAssetPath('wiiReleasesHashMap.json'))
-);
-
-let ps2IdFileExt = [...Array(100).keys()].map(
-  (num) => `*.${String(num).padStart(4, '0')}`
 );
 
 export default class AppUpdater {
