@@ -36,7 +36,7 @@ import './App.css';
 
 const Dashboard = () => {
   const [status, setStatus] = useState({ loading: true, message: '' });
-  const [selectedConsole, setSelectedConsole] = useState('Wii');
+  const [selectedConsole, setSelectedConsole] = useState(consoles[0].name);
   const [games, dispatch] = useReducer(gamesReducer, {});
   const [search, setSearch] = useState('');
   const [showEmuPrompt, setShowEmuPrompt] = useState(false);

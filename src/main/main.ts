@@ -74,8 +74,8 @@ const defaults = {
   },
   key: '',
   firstTime: true,
-  musicVolume: 100,
-  fxVolume: 100,
+  musicVolume: 50,
+  fxVolume: 50,
 };
 
 const store = new Store({ defaults });
@@ -129,7 +129,7 @@ const getExecMessage = (err, gamePath, emuPath) => {
         filename: path.basename(emuPath),
         gamepath: gamePath,
       },
-      message: 'An error occurred while launching the game.',
+      message: 'An error occurred while launching or closing the game.',
     };
   }
   return {
