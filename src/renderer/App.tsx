@@ -1,7 +1,6 @@
 import { useState, useEffect, useReducer, useRef } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import useSound from 'use-sound';
-import useAudio from './useAudio';
 import errorMap from './error';
 import consoles from './consoles';
 import GameGrid from './components/GameGrid';
@@ -24,7 +23,7 @@ import XboxY from '../../assets/images/xbox_y.png';
 import XboxStart from '../../assets/images/xbox_start.png';
 import XboxDpad from '../../assets/images/xbox_dpad.png';
 import XboxLeftJoystick from '../../assets/images/xbox_left_joystick.png';
-import backgroundMusic from '../../assets/sounds/background.mp3';
+import backgroundMusic from '../../assets/sounds/background.wav';
 import selectFX from '../../assets/sounds/select-fx.wav';
 import navigateFX from '../../assets/sounds/navigate-fx.wav';
 import errorFX from '../../assets/sounds/error-fx.wav';
@@ -280,27 +279,27 @@ const Dashboard = () => {
     // }
     // Listen for the event
     window.api.ipcRenderer.on('game-ended', (arg) => {
-      if (arg.output.error) {
-        const mappedError = errorMap(arg.output.error);
-        if (mappedError) {
-          // We have mapped the error. Do what you want to do with Issue and Solution here
-          let errorMessage = mappedError.issue;
-          if (mappedError.solution) {
-            errorMessage += ` ${mappedError.solution}`;
+      setTimeout(() => {
+        if (arg.output.error) {
+          const mappedError = errorMap(arg.output.error);
+          if (mappedError) {
+            // We have mapped the error. Do what you want to do with Issue and Solution here
+            let errorMessage = mappedError.issue;
+            if (mappedError.solution) {
+              errorMessage += ` ${mappedError.solution}`;
+            }
+            setStatus((prevState) => {
+              return { ...prevState, message: errorMessage };
+            });
+          } else {
+            // The error was not mapped. Do what you want with the whole error object.
+            setStatus((prevState) => {
+              return { ...prevState, message: arg.output.message };
+            });
           }
-          setStatus((prevState) => {
-            return { ...prevState, message: errorMessage };
-          });
-        } else {
-          // The error was not mapped. Do what you want with the whole error object.
-          setStatus((prevState) => {
-            return { ...prevState, message: arg.output.message };
-          });
         }
-      }
-      console.log(arg.output.message);
-
-      setRunningRef.current(arg.name, arg.gameConsole, false);
+        setRunningRef.current(arg.name, arg.gameConsole, false);
+      }, 500);
     });
 
     window.addEventListener('mousemove', (e) => {
