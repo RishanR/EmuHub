@@ -4,9 +4,20 @@ import InputComponent from './inputComponent';
 import consoles from '../consoles';
 import BrowseFile from '../../../assets/images/browseFile.png';
 import BrowseFolder from '../../../assets/images/browseFolder.png';
+import Slider from '@mui/material/Slider';
 
-const SettingsModal = ({ setShowSettings, getFrontGames }) => {
+const SettingsModal = ({
+  setShowSettings,
+  getFrontGames,
+  playClose,
+  playApply,
+  musicVolume,
+  fxVolume,
+  setMusicVolume,
+  setFXVolume,
+}) => {
   const [settings, setSettings] = useState({});
+  const [prevVolume, setPrevVolume] = useState({ musicVolume, fxVolume });
 
   useEffect(async () => {
     let allSettings = await window.api.getSettings();
@@ -27,6 +38,21 @@ const SettingsModal = ({ setShowSettings, getFrontGames }) => {
     }));
   };
 
+  const handleVolumeChange = (type, volume) => {
+    setSettings((prevState) => ({
+      ...prevState,
+      [`${type}Volume`]: volume,
+    }));
+    switch (type) {
+      case 'music':
+        setMusicVolume(volume);
+        break;
+      case 'fx':
+        setFXVolume(volume);
+        break;
+    }
+  };
+
   const handleChooseFile = async (console, key) => {
     let filePath = await window.api.ChooseFile();
     handleConsoleInputChange(console, key, filePath);
@@ -41,18 +67,20 @@ const SettingsModal = ({ setShowSettings, getFrontGames }) => {
     let result = await window.api.setSettings(settings);
     if (result) {
       getFrontGames();
+      playApply();
       setShowSettings(false);
     } else {
       console.log('Error modifying configuration.');
     }
   };
 
-  const onBack = async () => {
-    setShowSettings(false);
+  const onBack = (data = false) => {
+    playClose();
+    setShowSettings(data);
   };
 
   return (
-    <Modal setShowModal={setShowSettings}>
+    <Modal setShowModal={onBack}>
       <h1 className="modal-title">Settings</h1>
       {consoles.map((console) => {
         return (
@@ -104,6 +132,29 @@ const SettingsModal = ({ setShowSettings, getFrontGames }) => {
         );
       })}
       <div className="modal-general-group">
+        <div className="modal-subheading">Audio</div>
+        <div className="modal-input">
+          <label className="modal-label">Music Volume</label>
+          <Slider
+            value={musicVolume}
+            onChange={(event, val) => handleVolumeChange('music', val)}
+            aria-label="Music Volume"
+            valueLabelDisplay="auto"
+            sx={{ color: '#fff' }}
+          />
+        </div>
+        <div className="modal-input">
+          <label className="modal-label">Sound FX Volume</label>
+          <Slider
+            value={fxVolume}
+            onChange={(event, val) => handleVolumeChange('fx', val)}
+            aria-label="Sound FX Volume"
+            valueLabelDisplay="auto"
+            sx={{ color: '#fff' }}
+          />
+        </div>
+      </div>
+      <div className="modal-general-group">
         <div className="modal-subheading">Miscellaneous</div>
         <div className="modal-input">
           <label className="modal-label">Giant Bomb API Key</label>
@@ -118,7 +169,7 @@ const SettingsModal = ({ setShowSettings, getFrontGames }) => {
       <div className="modal-button-group">
         <label
           className="modal-button-outline"
-          onClick={onBack}
+          onClick={() => onBack()}
           style={{ flex: 1, marginRight: 10 }}
         >
           Back

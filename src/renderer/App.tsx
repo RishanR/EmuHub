@@ -25,6 +25,13 @@ import XboxStart from '../../assets/images/xbox_start.png';
 import XboxDpad from '../../assets/images/xbox_dpad.png';
 import XboxLeftJoystick from '../../assets/images/xbox_left_joystick.png';
 import backgroundMusic from '../../assets/sounds/background.mp3';
+import selectFX from '../../assets/sounds/select-fx.wav';
+import navigateFX from '../../assets/sounds/navigate-fx.wav';
+import errorFX from '../../assets/sounds/error-fx.wav';
+import changeConsoleFX from '../../assets/sounds/change-console-fx.wav';
+import closeMenuFX from '../../assets/sounds/close-menu-fx.wav';
+import openMenuFX from '../../assets/sounds/open-menu-fx.wav';
+import applyMenuFX from '../../assets/sounds/apply-menu-fx.wav';
 import './App.css';
 
 const Dashboard = () => {
@@ -42,12 +49,58 @@ const Dashboard = () => {
   const [showCursor, setShowCursorState] = useState(true);
   const [gamepadsConnected, setGamepadsConnected] = useState({});
   const [enableGamepad, setEnableGamepad] = useState(true);
+
+  const [musicVolume, setMusicVolume] = useState(-1);
+  const [fxVolume, setFXVolume] = useState(-1);
+
   const [play, { pause, sound }] = useSound(backgroundMusic, {
     loop: true,
-    volume: 0.1,
+    volume: 0,
     autoplay: true,
   });
-  // const [playing, toggle] = useAudio(backgroundMusic);
+  const [playNavigate, { stop: stopNavigate, sound: soundNavigate }] = useSound(
+    navigateFX,
+    {
+      interrupt: true,
+    }
+  );
+  const [playSelect, { stop: stopSelect, sound: soundSelect }] = useSound(
+    selectFX,
+    {
+      interrupt: true,
+    }
+  );
+  const [playError, { stop: stopError, sound: soundError }] = useSound(
+    errorFX,
+    {
+      interrupt: true,
+    }
+  );
+
+  const [playChange, { stop: stopChange, sound: soundChange }] = useSound(
+    changeConsoleFX,
+    {
+      interrupt: true,
+    }
+  );
+  const [playOpen, { stop: stopOpen, sound: soundOpen }] = useSound(
+    openMenuFX,
+    {
+      interrupt: true,
+    }
+  );
+  const [playClose, { stop: stopClose, sound: soundClose }] = useSound(
+    closeMenuFX,
+    {
+      interrupt: true,
+    }
+  );
+  const [playApply, { stop: stopApply, sound: soundApply }] = useSound(
+    applyMenuFX,
+    {
+      interrupt: true,
+    }
+  );
 
   const focusedGameIDRef = useRef(focusedGameID);
   const showCursorRef = useRef(showCursor);
@@ -69,11 +122,11 @@ const Dashboard = () => {
         ).length;
       });
       if (running_count === 0) {
-        sound.fade(0, 1, 500);
+        sound.fade(sound.volume(), musicVolume / 100, 500);
         setEnableGamepad(true);
       }
     } else {
-      sound.fade(1, 0, 2000);
+      sound.fade(sound.volume(), 0, 2000);
       setEnableGamepad(false);
     }
     dispatch({
@@ -264,9 +317,54 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (sound) {
-      sound.fade(0.1, 1, 500);
+      sound.fade(sound.volume(), musicVolume / 100, 500);
     }
-  }, [sound]);
+  }, [musicVolume]);
+
+  useEffect(() => {
+    console.log('test2');
+    console.log(fxVolume);
+    console.log();
+    if (soundNavigate) {
+      console.log('changing navigate');
+      soundNavigate.volume(fxVolume / 100);
+    }
+    if (soundApply) soundApply.volume(fxVolume / 100);
+    if (soundChange) soundChange.volume(fxVolume / 100);
+    if (soundClose) soundClose.volume(fxVolume / 100);
+    if (soundError) soundError.volume(fxVolume / 100);
+    if (soundOpen) soundOpen.volume(fxVolume / 100);
+    if (soundSelect) soundSelect.volume(fxVolume / 100);
+  }, [fxVolume]);
+
+  useEffect(async () => {
+    if (
+      !showSettings &&
+      sound &&
+      soundNavigate &&
+      soundApply &&
+      soundChange &&
+      soundClose &&
+      soundError &&
+      soundOpen &&
+      soundSelect
+    ) {
+      console.log('test');
+      let settings = await window.api.getSettings();
+      setMusicVolume(settings.musicVolume);
+      setFXVolume(settings.fxVolume);
+    }
+  }, [
+    showSettings,
+    sound,
+    soundNavigate,
+    soundApply,
+    soundChange,
+    soundClose,
+    soundError,
+    soundOpen,
+    soundSelect,
+  ]);
 
   useEffect(() => {
     if (!(selectedConsole in games) || !(games[selectedConsole].length > 0)) {
@@ -287,6 +385,7 @@ const Dashboard = () => {
         } loaded.`,
       });
     }
+    playChange();
   }, [selectedConsole]);
 
   useEffect(() => {
@@ -423,6 +522,9 @@ const Dashboard = () => {
                   selectedGames={games[selectedConsole].filter(filterGames)}
                   setRunning={setRunning}
                   setStatus={setStatus}
+                  playNavigate={playNavigate}
+                  playSelect={playSelect}
+                  playError={playError}
                 />
               ) : (
                 !status.loading && (
@@ -452,7 +554,10 @@ const Dashboard = () => {
             <button
               tabIndex="-1"
               className="info-bar-button"
-              onClick={() => setShowSettings(true)}
+              onClick={() => {
+                playOpen();
+                setShowSettings(true);
+              }}
             >
               <img className="info-bar-button-icon" src={Settings} />
             </button>
@@ -497,6 +602,12 @@ const Dashboard = () => {
           <SettingsModal
             setShowSettings={setShowSettings}
             getFrontGames={getFrontGames}
+            musicVolume={musicVolume}
+            fxVolume={fxVolume}
+            setMusicVolume={setMusicVolume}
+            setFXVolume={setFXVolume}
+            playApply={playApply}
+            playClose={playClose}
           />
         )}
         {showAPIModal && <GiantBombModal setShowGiantBomb={setShowAPIModal} />}
@@ -515,6 +626,9 @@ const Dashboard = () => {
           enableGamepad={enableGamepad}
           isShowingGames={isShowingGames}
           focusTheFocusedGameID={focusTheFocusedGameID}
+          playNavigate={playNavigate}
+          playOpen={playOpen}
+          playClose={playClose}
         />
       </div>
     </div>

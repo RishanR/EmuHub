@@ -93,7 +93,7 @@ const configuration: webpack.Configuration = {
         type: 'asset/resource',
       },
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|wav)$/i,
         loader: 'file-loader',
       },
     ],

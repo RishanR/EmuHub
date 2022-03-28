@@ -74,6 +74,8 @@ const defaults = {
   },
   key: '',
   firstTime: true,
+  musicVolume: 100,
+  fxVolume: 100,
 };
 
 const store = new Store({ defaults });

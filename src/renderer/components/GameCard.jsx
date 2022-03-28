@@ -17,6 +17,9 @@ const GameCard = ({
   gameRunning,
   setRunning,
   setStatus,
+  playNavigate,
+  playSelect,
+  playError,
 }) => {
   const getCover = (gameConsole) => {
     if (gameConsole == 'Wii') {
@@ -46,17 +49,24 @@ const GameCard = ({
         name,
       });
       if (result.error) {
+        playError();
         console.log(result.error);
         setStatus((prevState) => {
           return { ...prevState, message: result.message };
         });
       } else {
+        playSelect();
         setRunning(name, gameConsole, true);
       }
     }
   };
   return (
-    <div tabIndex={-1} className="game-card-container" onClick={launchGame}>
+    <div
+      onMouseEnter={() => playNavigate()}
+      tabIndex={-1}
+      className="game-card-container"
+      onClick={launchGame}
+    >
       {image ? (
         <img
           className={`game-card-image aspect-ratio-${gameConsole}`}

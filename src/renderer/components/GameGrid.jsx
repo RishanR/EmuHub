@@ -4,7 +4,14 @@ import GameCard from './GameCard';
 import './GameGrid.css';
 import Pagination from './PaginationFiles/Pagination';
 
-const GameGrid = ({ selectedGames, setRunning, setStatus }) => {
+const GameGrid = ({
+  selectedGames,
+  setRunning,
+  setStatus,
+  playNavigate,
+  playSelect,
+  playError,
+}) => {
   const [numElementsPerRow, setNumElementsPerRow] = useState(5);
   useEffect(() => {
     if (window.innerWidth < 1500) {
@@ -42,6 +49,9 @@ const GameGrid = ({ selectedGames, setRunning, setStatus }) => {
                 index={index}
                 setRunning={setRunning}
                 setStatus={setStatus}
+                playNavigate={playNavigate}
+                playSelect={playSelect}
+                playError={playError}
               />
             </div>
           );

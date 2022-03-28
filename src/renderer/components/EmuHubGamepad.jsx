@@ -50,6 +50,7 @@ const EmuHubGamepad = (props) => {
         );
       }
 
+      props.playNavigate();
       props.setFocusedGameID(newID);
     }
   };
@@ -91,6 +92,7 @@ const EmuHubGamepad = (props) => {
         case 'B':
           // Invoke closeProgram
           if (props.showSettings) {
+            props.playClose();
             props.setShowSettings(false);
           } else {
             window.api.closeProgram();
@@ -105,6 +107,11 @@ const EmuHubGamepad = (props) => {
           break;
         case 'Start':
           // Open settings
+          if (props.showSettings) {
+            props.playClose();
+          } else {
+            props.playOpen();
+          }
           props.setShowSettings(!props.showSettings);
           break;
         case 'LB':
