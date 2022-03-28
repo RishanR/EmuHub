@@ -321,9 +321,6 @@ const Dashboard = () => {
   }, [musicVolume]);
 
   useEffect(() => {
-    console.log('test2');
-    console.log(fxVolume);
-    console.log();
     if (soundNavigate) {
       console.log('changing navigate');
       soundNavigate.volume(fxVolume / 100);
