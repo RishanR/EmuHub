@@ -1,6 +1,6 @@
 # EmuHub
 
-A console emulator game launcher that serves as a hub for all your video games.
+A multi-console emulator game launcher that serves as a hub for all your video games.
 
 ## Emulator and File Support
 
