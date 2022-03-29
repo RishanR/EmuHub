@@ -67,6 +67,10 @@ const defaults = {
     emuPath: '',
     gameDirectory: '',
   },
+  PS2: {
+    emuPath: '',
+    gameDirectory: '',
+  },
   PSP: {
     emuPath: '',
     gameDirectory: '',
@@ -106,6 +110,10 @@ let wii_db_json = JSON.parse(
   fs.readFileSync(getAssetPath('wiiReleasesHashMap.json'))
 );
 
+let ps2_db_json = JSON.parse(
+  fs.readFileSync(getAssetPath('ps2ReleasesHashMap.json'))
+);
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -140,7 +148,7 @@ async function* getFiles(dir, allowedFileExtensions) {
     if (dirent.isDirectory()) {
       yield* getFiles(res, allowedFileExtensions);
     } else {
-      if (allowedFileExtensions.includes(path.extname(res))) {
+      if (allowedFileExtensions.includes(path.extname(res).toLowerCase())) {
         // console.log(res);
         yield res;
       }
@@ -709,12 +717,93 @@ const getGBAGames = async () => {
   );
 };
 
-const readableToString = async (readable) => {
-  let result = '';
-  for await (const chunk of readable) {
-    result += chunk;
+const getPS2Games = async () => {
+  const allowedFileExtensions = ['.iso'];
+  let promises = [];
+  let ps2Games = [];
+
+  const getPS2Game = async (gamePath, callback) => {
+    const standardISO9660Identifier = 'cd001';
+    const ps2MagicWord = 'playstation';
+
+    let fd = fs.openSync(gamePath, 'r');
+    let buffer = Buffer.alloc(19);
+    let byteSize = fs.statSync(gamePath).size;
+
+    // The first 32 KiB is the unused sector of the ISO9660 file system
+    // The next 2048 bytes is the first Volume Descriptor on the PS2 game (Primary Volume Descriptor)
+    if (byteSize > 32768 + 2048) {
+      fs.readSync(fd, buffer, 0, 19, 32768);
+      if (
+        buffer.readInt8(0) == 1 &&
+        buffer.toString('utf-8', 0x01, 0x06).toLowerCase() ==
+          standardISO9660Identifier &&
+        buffer.toString('utf-8', 0x08, 0x13).toLowerCase() == ps2MagicWord
+      ) {
+        let gameID = '';
+        let dataPrev = Buffer.alloc(512);
+        let dataNew = Buffer.alloc(512);
+        let offset = 34816;
+        const ps2GameIDRegex = /[a-zA-Z]{4}_[0-9]{3}\.[0-9]{2};1/g;
+
+        while (byteSize >= offset + 512) {
+          fs.readSync(fd, dataNew, 0, 512, offset);
+          let fullDataString = Buffer.concat([dataPrev, dataNew]).toString(
+            'utf-8'
+          );
+          let gameIDIndex = fullDataString.search(ps2GameIDRegex);
+
+          if (gameIDIndex !== -1) {
+            gameID = fullDataString
+              .substring(gameIDIndex, gameIDIndex + 11)
+              .replaceAll('_', '-')
+              .replaceAll('.', '');
+            break;
+          }
+          offset += 512;
+          dataNew.copy(dataPrev);
+        }
+
+        if (ps2_db_json[gameID]) {
+          const gameName = ps2_db_json[gameID].name;
+          let gameCover = await getCover(gameName, 'PS2');
+
+          let ps2SingleGame = {
+            name: gameName,
+            image: gameCover,
+            gamePath,
+            gameConsole: 'PS2',
+          };
+
+          callback(ps2SingleGame);
+          return;
+        }
+      }
+    }
+    callback(null);
+  };
+
+  for await (const gamePath of getFiles(
+    store.get('PS2.gameDirectory'),
+    allowedFileExtensions
+  )) {
+    promises.push(
+      new Promise((resolve, reject) => {
+        getPS2Game(gamePath, (ps2SingleGame) => {
+          if (ps2SingleGame) {
+            ps2Games.push(ps2SingleGame);
+          }
+          resolve();
+        });
+      })
+    );
   }
-  return result;
+
+  await Promise.allSettled(promises);
+
+  return ps2Games.sort((a, b) =>
+    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+  );
 };
 
 const getPSPGames = async () => {

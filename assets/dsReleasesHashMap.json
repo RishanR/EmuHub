@@ -31,14 +31,14 @@
     "languages": "JA"
   },
   "A27P": {
-    "name": "Yoshi Touch &amp; Go (Demo)",
+    "name": "Yoshi Touch & Go (Demo)",
     "region": "PAL",
     "languages": "EN"
   },
   "A29E": { "name": "Pac-Pix (Demo)", "region": "NTSC-U", "languages": "EN" },
   "A29P": { "name": "Pac-Pix (Demo)", "region": "PAL", "languages": "EN" },
   "A2AJ": {
-    "name": "Atama no Kaiten no Training - Rubik's Cube &amp; Chou Yuumei Puzzle-tachi",
+    "name": "Atama no Kaiten no Training - Rubik's Cube & Chou Yuumei Puzzle-tachi",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -182,12 +182,12 @@
     "languages": "EN,JA"
   },
   "A2VE": {
-    "name": "M&amp;M's - Break 'em",
+    "name": "M&M's - Break 'em",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "A2VP": {
-    "name": "M&amp;M's - Break 'em",
+    "name": "M&M's - Break 'em",
     "region": "PAL",
     "languages": "EN"
   },
@@ -283,7 +283,7 @@
     "languages": "EN,JA"
   },
   "A3EE": {
-    "name": "Diner Dash - Sizzle &amp; Serve",
+    "name": "Diner Dash - Sizzle & Serve",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -305,12 +305,12 @@
     "languages": "KO"
   },
   "A3HE": {
-    "name": "The Suite Life of Zack &amp; Cody - Circle of Spies",
+    "name": "The Suite Life of Zack & Cody - Circle of Spies",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "A3HP": {
-    "name": "The Suite Life of Zack &amp; Cody - Circle of Spies",
+    "name": "The Suite Life of Zack & Cody - Circle of Spies",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT,NL"
   },
@@ -407,22 +407,22 @@
     "languages": "EN,JA"
   },
   "A3WE": {
-    "name": "Race Driver - Create &amp; Race",
+    "name": "Race Driver - Create & Race",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "A3WP": {
-    "name": "Race Driver - Create &amp; Race",
+    "name": "Race Driver - Create & Race",
     "region": "PAL",
     "languages": "EN"
   },
   "A3WU": {
-    "name": "V8 Supercars Australia 3 - Create &amp; Race",
+    "name": "V8 Supercars Australia 3 - Create & Race",
     "region": "PAL",
     "languages": "EN"
   },
   "A3WX": {
-    "name": "DTM Race Driver 3 - Create &amp; Race",
+    "name": "DTM Race Driver 3 - Create & Race",
     "region": "PAL",
     "languages": "EN"
   },
@@ -637,12 +637,12 @@
     "languages": "EN"
   },
   "A58E": {
-    "name": "Mario &amp; Luigi - Partners in Time",
+    "name": "Mario & Luigi - Partners in Time",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "A58P": {
-    "name": "Mario &amp; Luigi - Partners in Time",
+    "name": "Mario & Luigi - Partners in Time",
     "region": "PAL",
     "languages": "EN"
   },
@@ -1744,7 +1744,7 @@
     "languages": "EN"
   },
   "ACIJ": {
-    "name": "Chocoken no Omise - Patissier &amp; Sweets Shop Game",
+    "name": "Chocoken no Omise - Patissier & Sweets Shop Game",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -1910,42 +1910,42 @@
   "ACZY": { "name": "Cars", "region": "PAL", "languages": "ES,PT" },
   "ACZZ": { "name": "Cars", "region": "PAL", "languages": "SE,DK,NO,FI" },
   "AD2E": {
-    "name": "Nintendogs - Chihuahua &amp; Friends",
+    "name": "Nintendogs - Chihuahua & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AD2J": {
-    "name": "Nintendogs - Chihuahua &amp; Friends",
+    "name": "Nintendogs - Chihuahua & Friends",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
   "AD2K": {
-    "name": "Nintendogs - Chihuahua &amp; Chingudeul",
+    "name": "Nintendogs - Chihuahua & Chingudeul",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "AD2P": {
-    "name": "Nintendogs - Chihuahua &amp; Friends",
+    "name": "Nintendogs - Chihuahua & Friends",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
   "AD3E": {
-    "name": "Nintendogs - Lab &amp; Friends",
+    "name": "Nintendogs - Lab & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AD3J": {
-    "name": "Nintendogs - Shiba &amp; Friends",
+    "name": "Nintendogs - Shiba & Friends",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
   "AD3K": {
-    "name": "Nintendogs - Labrador &amp; Chingudeul",
+    "name": "Nintendogs - Labrador & Chingudeul",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "AD3P": {
-    "name": "Nintendogs - Labrador &amp; Friends",
+    "name": "Nintendogs - Labrador & Friends",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -1970,12 +1970,12 @@
     "languages": "EN"
   },
   "AD7E": {
-    "name": "Nintendogs - Dalmatian &amp; Friends",
+    "name": "Nintendogs - Dalmatian & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AD7P": {
-    "name": "Nintendogs - Dalmatian &amp; Friends",
+    "name": "Nintendogs - Dalmatian & Friends",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -2078,22 +2078,22 @@
   "ADFE": { "name": "Touch the Dead", "region": "NTSC-U", "languages": "EN" },
   "ADFP": { "name": "Dead'n'Furious", "region": "PAL", "languages": "EN" },
   "ADGE": {
-    "name": "Nintendogs - Dachshund &amp; Friends",
+    "name": "Nintendogs - Dachshund & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "ADGJ": {
-    "name": "Nintendogs - Miniature Dachshund &amp; Friends",
+    "name": "Nintendogs - Miniature Dachshund & Friends",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
   "ADGK": {
-    "name": "Nintendogs - Dachshund &amp; Chingudeul",
+    "name": "Nintendogs - Dachshund & Chingudeul",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "ADGP": {
-    "name": "Nintendogs - Dachshund &amp; Friends",
+    "name": "Nintendogs - Dachshund & Friends",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -2200,7 +2200,7 @@
   "ADVP": { "name": "Devilish", "region": "PAL", "languages": "EN" },
   "ADWK": { "name": "Touch Dictionary", "region": "NTSC-K", "languages": "KO" },
   "ADXJ": {
-    "name": "Momotarou Dentetsu DS - Tokyo &amp; Japan",
+    "name": "Momotarou Dentetsu DS - Tokyo & Japan",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -2266,7 +2266,7 @@
     "languages": "EN,DE"
   },
   "AEBE": {
-    "name": "Elf Bowling 1 &amp; 2",
+    "name": "Elf Bowling 1 & 2",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -2455,12 +2455,12 @@
     "languages": "KO"
   },
   "AFBE": {
-    "name": "Original Frisbee Disc Sports - Ultimate &amp; Golf",
+    "name": "Original Frisbee Disc Sports - Ultimate & Golf",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AFBP": {
-    "name": "Original Frisbee Disc Sports - Ultimate &amp; Golf",
+    "name": "Original Frisbee Disc Sports - Ultimate & Golf",
     "region": "PAL",
     "languages": "EN"
   },
@@ -2476,7 +2476,7 @@
     "languages": "EN,FR,DE,ES,IT"
   },
   "AFEE": {
-    "name": "New International Track &amp; Field",
+    "name": "New International Track & Field",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -2486,12 +2486,12 @@
     "languages": "EN,JA"
   },
   "AFEK": {
-    "name": "New International Track &amp; Field",
+    "name": "New International Track & Field",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "AFEP": {
-    "name": "New International Track &amp; Field",
+    "name": "New International Track & Field",
     "region": "PAL",
     "languages": "EN"
   },
@@ -2985,7 +2985,7 @@
     "languages": "EN,JA"
   },
   "AH2J": {
-    "name": "DS Teku Teku Nikki - Walking &amp; Diet Diary",
+    "name": "DS Teku Teku Nikki - Walking & Diet Diary",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -3071,7 +3071,7 @@
     "languages": "EN,JA"
   },
   "AHDP": {
-    "name": "Jam Sessions - Sing &amp; Play Guitar",
+    "name": "Jam Sessions - Sing & Play Guitar",
     "region": "PAL",
     "languages": "EN"
   },
@@ -3090,12 +3090,12 @@
     "languages": "EN,JA"
   },
   "AHHE": {
-    "name": "Hi Hi Puffy AmiYumi - The Genie &amp; the Amp",
+    "name": "Hi Hi Puffy AmiYumi - The Genie & the Amp",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AHHP": {
-    "name": "Hi Hi Puffy AmiYumi - The Genie &amp; the Amp",
+    "name": "Hi Hi Puffy AmiYumi - The Genie & the Amp",
     "region": "PAL",
     "languages": "EN"
   },
@@ -3105,17 +3105,17 @@
     "languages": "EN,JA"
   },
   "AHJE": {
-    "name": "Paws &amp; Claws - Best Friends - Dogs &amp; Cats",
+    "name": "Paws & Claws - Best Friends - Dogs & Cats",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AHJP": {
-    "name": "My Best Friends - Dogs &amp; Cats",
+    "name": "My Best Friends - Dogs & Cats",
     "region": "PAL",
     "languages": "EN,DE"
   },
   "AHJX": {
-    "name": "My Best Friends - Cats &amp; Dogs",
+    "name": "My Best Friends - Cats & Dogs",
     "region": "PAL",
     "languages": "EN,DE"
   },
@@ -3236,27 +3236,27 @@
     "languages": "EN,DE"
   },
   "AI3P": {
-    "name": "Horse &amp; Foal - My Riding Stables",
+    "name": "Horse & Foal - My Riding Stables",
     "region": "PAL",
     "languages": "EN,DE"
   },
   "AI3W": {
-    "name": "Horse &amp; Foal - My Riding Stables",
+    "name": "Horse & Foal - My Riding Stables",
     "region": "PAL",
     "languages": "EN,SE,DK,NO"
   },
   "AI3X": {
-    "name": "Paard &amp; Pony - Mijn Paardenstal",
+    "name": "Paard & Pony - Mijn Paardenstal",
     "region": "PAL",
     "languages": "EN"
   },
   "AI3Y": {
-    "name": "Horse &amp; Foal - My Riding Stables",
+    "name": "Horse & Foal - My Riding Stables",
     "region": "PAL",
     "languages": "EN"
   },
   "AI3Z": {
-    "name": "Horse &amp; Foal - My Riding Stables",
+    "name": "Horse & Foal - My Riding Stables",
     "region": "PAL",
     "languages": "EN"
   },
@@ -3449,7 +3449,7 @@
     "languages": "EN,DE"
   },
   "AJ2P": {
-    "name": "DS Download Europe - Meteos &amp; Polarium",
+    "name": "DS Download Europe - Meteos & Polarium",
     "region": "PAL",
     "languages": "EN"
   },
@@ -3625,7 +3625,7 @@
     "languages": "EN,FR,DE,ES,IT"
   },
   "AK3E": {
-    "name": "Cookie &amp; Cream",
+    "name": "Cookie & Cream",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -3634,7 +3634,7 @@
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
-  "AK3P": { "name": "Cookie &amp; Cream", "region": "PAL", "languages": "EN" },
+  "AK3P": { "name": "Cookie & Cream", "region": "PAL", "languages": "EN" },
   "AK4J": {
     "name": "Kabu Trader Shun",
     "region": "NTSC-J",
@@ -3992,7 +3992,7 @@
   "ALJP": { "name": "Pet Alien", "region": "PAL", "languages": "EN" },
   "ALKE": { "name": "Lunar Knights", "region": "NTSC-U", "languages": "EN" },
   "ALKJ": {
-    "name": "Bokura no Taiyou - Django &amp; Sabata",
+    "name": "Bokura no Taiyou - Django & Sabata",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -4247,7 +4247,7 @@
     "languages": "EN,JA"
   },
   "AMOE": {
-    "name": "Super Monkey Ball - Touch &amp; Roll",
+    "name": "Super Monkey Ball - Touch & Roll",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -4257,7 +4257,7 @@
     "languages": "EN,JA"
   },
   "AMOP": {
-    "name": "Super Monkey Ball - Touch &amp; Roll",
+    "name": "Super Monkey Ball - Touch & Roll",
     "region": "PAL",
     "languages": "EN"
   },
@@ -4323,7 +4323,7 @@
   },
   "AMXP": { "name": "Monster Trucks DS", "region": "PAL", "languages": "EN" },
   "AMYJ": {
-    "name": "My Melody Angel Book - Denshi Techou &amp; Enjoy Game",
+    "name": "My Melody Angel Book - Denshi Techou & Enjoy Game",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -4553,7 +4553,7 @@
     "languages": "EN"
   },
   "ANQJ": {
-    "name": "DS Puzzler - Nanpure Fan &amp; Oekaki Logic",
+    "name": "DS Puzzler - Nanpure Fan & Oekaki Logic",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -4695,7 +4695,7 @@
     "languages": "EN,JA"
   },
   "AOFP": {
-    "name": "Top Trumps - Horror &amp; Predators",
+    "name": "Top Trumps - Horror & Predators",
     "region": "PAL",
     "languages": "EN"
   },
@@ -4755,7 +4755,7 @@
     "languages": "EN,JA"
   },
   "AOQP": {
-    "name": "Top Trumps - Dogs &amp; Dinosaurs",
+    "name": "Top Trumps - Dogs & Dinosaurs",
     "region": "PAL",
     "languages": "EN"
   },
@@ -4797,7 +4797,7 @@
   "AOWE": { "name": "Power Play Pool", "region": "NTSC-U", "languages": "EN" },
   "AOWP": { "name": "Power Play Pool", "region": "PAL", "languages": "EN" },
   "AOXP": {
-    "name": "Asterix &amp; Obelix XXL 2 - Mission Wifix",
+    "name": "Asterix & Obelix XXL 2 - Mission Wifix",
     "region": "PAL",
     "languages": "EN,DE"
   },
@@ -5030,7 +5030,7 @@
     "languages": "EN,JA"
   },
   "AQ2E": {
-    "name": "Paws &amp; Claws - Pet Resort",
+    "name": "Paws & Claws - Pet Resort",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -5264,7 +5264,7 @@
     "languages": "EN,JA"
   },
   "AQVE": {
-    "name": "Paws &amp; Claws - Pet Vet",
+    "name": "Paws & Claws - Pet Vet",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -5356,7 +5356,7 @@
     "languages": "EN"
   },
   "AR6J": {
-    "name": "Sansuu Olympic Iinkai Kouan - Suuji de Kitaeru Nouryoku Training - Algo &amp; Trinca",
+    "name": "Sansuu Olympic Iinkai Kouan - Suuji de Kitaeru Nouryoku Training - Algo & Trinca",
     "region": "NTSC-J",
     "languages": "JA"
   },
@@ -5483,22 +5483,22 @@
     "languages": "EN,JA"
   },
   "ARME": {
-    "name": "Mario &amp; Luigi - Partners in Time",
+    "name": "Mario & Luigi - Partners in Time",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "ARMJ": {
-    "name": "Mario &amp; Luigi RPG 2x2",
+    "name": "Mario & Luigi RPG 2x2",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
   "ARMK": {
-    "name": "Mario &amp; Luigi RPG - Siganui Partner",
+    "name": "Mario & Luigi RPG - Siganui Partner",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "ARMP": {
-    "name": "Mario &amp; Luigi - Partners in Time",
+    "name": "Mario & Luigi - Partners in Time",
     "region": "PAL",
     "languages": "EN"
   },
@@ -5716,7 +5716,7 @@
     "languages": "EN,FR,DE,ES,IT"
   },
   "ASLE": {
-    "name": "The Suite Life of Zack &amp; Cody - Tipton Trouble",
+    "name": "The Suite Life of Zack & Cody - Tipton Trouble",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -6127,7 +6127,7 @@
     "languages": "EN"
   },
   "AUOP": {
-    "name": "3 Game Pack! - Uno &amp; Skip-Bo &amp; Uno Free Fall",
+    "name": "3 Game Pack! - Uno & Skip-Bo & Uno Free Fall",
     "region": "PAL",
     "languages": "EN"
   },
@@ -6726,12 +6726,12 @@
     "languages": "EN"
   },
   "AWTE": {
-    "name": "Game &amp; Watch Collection",
+    "name": "Game & Watch Collection",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AWTJ": {
-    "name": "Game &amp; Watch Collection",
+    "name": "Game & Watch Collection",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -6782,7 +6782,7 @@
     "languages": "EN,JA"
   },
   "AX2E": {
-    "name": "Sudokuro - Sudoku &amp; Kakuro Games",
+    "name": "Sudokuro - Sudoku & Kakuro Games",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -6908,7 +6908,7 @@
     "languages": "EN,JA"
   },
   "AXSJ": {
-    "name": "Xenosaga I &amp; II",
+    "name": "Xenosaga I & II",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -6995,12 +6995,12 @@
   },
   "AY8E": { "name": "Backyard Hockey", "region": "NTSC-U", "languages": "EN" },
   "AY9E": {
-    "name": "Mario &amp; Sonic at the Olympic Games",
+    "name": "Mario & Sonic at the Olympic Games",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "AY9J": {
-    "name": "Mario &amp; Sonic at Beijing Olympic",
+    "name": "Mario & Sonic at Beijing Olympic",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -7010,7 +7010,7 @@
     "languages": "KO"
   },
   "AY9P": {
-    "name": "Mario &amp; Sonic at the Olympic Games",
+    "name": "Mario & Sonic at the Olympic Games",
     "region": "PAL",
     "languages": "EN,DE"
   },
@@ -7064,7 +7064,7 @@
     "languages": "EN"
   },
   "AYIE": {
-    "name": "Yoshi Touch &amp; Go",
+    "name": "Yoshi Touch & Go",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -7074,7 +7074,7 @@
     "languages": "EN,JA"
   },
   "AYIP": {
-    "name": "Yoshi Touch &amp; Go",
+    "name": "Yoshi Touch & Go",
     "region": "PAL",
     "languages": "EN"
   },
@@ -7228,7 +7228,7 @@
     "languages": "EN,JA"
   },
   "AZAJ": {
-    "name": "Zunou ni Asekaku Game Series! Vol. 1 - Cool 104 Joker &amp; Setline",
+    "name": "Zunou ni Asekaku Game Series! Vol. 1 - Cool 104 Joker & Setline",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -7275,7 +7275,7 @@
   },
   "AZHJ": { "name": "Zoids Dash", "region": "NTSC-J", "languages": "EN,JA" },
   "AZIJ": {
-    "name": "Simple DS Series Vol. 7 - The Illust Puzzle &amp; Suuji Puzzle",
+    "name": "Simple DS Series Vol. 7 - The Illust Puzzle & Suuji Puzzle",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -7566,7 +7566,7 @@
     "languages": "EN,JA"
   },
   "B33J": {
-    "name": "Uchi no 3 Shimai no Karaoke Utagassen &amp; Party Game",
+    "name": "Uchi no 3 Shimai no Karaoke Utagassen & Party Game",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -7611,7 +7611,7 @@
     "languages": "EN,FR,DE,ES,IT,NL"
   },
   "B3CE": {
-    "name": "Cooking Mama 3 - Shop &amp; Chop",
+    "name": "Cooking Mama 3 - Shop & Chop",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -7719,7 +7719,7 @@
     "languages": "EN,FR,DE,ES,IT,NL"
   },
   "B3WE": {
-    "name": "My Baby 3 &amp; Friends",
+    "name": "My Baby 3 & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -7734,12 +7734,12 @@
     "languages": "JA"
   },
   "B3YE": {
-    "name": "Loving Life with Hello Kitty &amp; Friends",
+    "name": "Loving Life with Hello Kitty & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "B3YP": {
-    "name": "Loving Life with Hello Kitty &amp; Friends",
+    "name": "Loving Life with Hello Kitty & Friends",
     "region": "PAL",
     "languages": "EN"
   },
@@ -7849,12 +7849,12 @@
     "languages": "EN,JA"
   },
   "B4HE": {
-    "name": "Max &amp; the Magic Marker",
+    "name": "Max & the Magic Marker",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "B4HP": {
-    "name": "Max &amp; the Magic Marker",
+    "name": "Max & the Magic Marker",
     "region": "PAL",
     "languages": "EN"
   },
@@ -7984,17 +7984,17 @@
     "languages": "EN"
   },
   "B58E": {
-    "name": "Dora &amp; Kai-Lan's Pet Shelter",
+    "name": "Dora & Kai-Lan's Pet Shelter",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "B58L": {
-    "name": "Dora &amp;amp; Kai-Lan's Pet Shelter",
+    "name": "Dora & Kai-Lan's Pet Shelter",
     "region": "PAL",
     "languages": "EN"
   },
   "B58P": {
-    "name": "Dora &amp; Friends' - Pet Shelter",
+    "name": "Dora & Friends' - Pet Shelter",
     "region": "PAL",
     "languages": "EN,FR,ES,NL"
   },
@@ -8078,7 +8078,7 @@
     "languages": "NL"
   },
   "B5ME": {
-    "name": "The Mysterious Case of Dr. Jekyll &amp; Mr. Hyde",
+    "name": "The Mysterious Case of Dr. Jekyll & Mr. Hyde",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -8187,12 +8187,12 @@
   },
   "B6AE": { "name": "Gremlins - Gizmo", "region": "NTSC-U", "languages": "EN" },
   "B6BE": {
-    "name": "SpongeBob's Surf &amp; Skate - Roadtrip",
+    "name": "SpongeBob's Surf & Skate - Roadtrip",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "B6BP": {
-    "name": "SpongeBob's Surf &amp; Skate - Roadtrip",
+    "name": "SpongeBob's Surf & Skate - Roadtrip",
     "region": "PAL",
     "languages": "EN"
   },
@@ -8465,7 +8465,7 @@
     "languages": "EN"
   },
   "B7LP": {
-    "name": "3 in 1 - Solitaire, Mahjong &amp; Tangram",
+    "name": "3 in 1 - Solitaire, Mahjong & Tangram",
     "region": "PAL",
     "languages": "EN"
   },
@@ -8808,7 +8808,7 @@
     "languages": "EN"
   },
   "BB2P": {
-    "name": "My Baby 2 - Boy &amp; Girl",
+    "name": "My Baby 2 - Boy & Girl",
     "region": "PAL",
     "languages": "EN"
   },
@@ -8884,12 +8884,12 @@
     "languages": "JA"
   },
   "BBED": {
-    "name": "Bibi &amp; Tina - Das Grosse Unwetter",
+    "name": "Bibi & Tina - Das Grosse Unwetter",
     "region": "PAL",
     "languages": "DE"
   },
   "BBFD": {
-    "name": "Englisch entdecken mit Ben &amp; Bella",
+    "name": "Englisch entdecken mit Ben & Bella",
     "region": "PAL",
     "languages": "DE"
   },
@@ -8923,7 +8923,7 @@
     "languages": "NL"
   },
   "BBOJ": {
-    "name": "Monokuro Boo &amp; Baby Boo - Kururin Boo",
+    "name": "Monokuro Boo & Baby Boo - Kururin Boo",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -8933,7 +8933,7 @@
     "languages": "FR"
   },
   "BBQE": {
-    "name": "Junior Classic Books &amp; Fairytales",
+    "name": "Junior Classic Books & Fairytales",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -9017,7 +9017,7 @@
     "languages": "EN,JA"
   },
   "BC5P": {
-    "name": "My Baby 3 &amp; Friends",
+    "name": "My Baby 3 & Friends",
     "region": "PAL",
     "languages": "EN"
   },
@@ -9181,7 +9181,7 @@
     "languages": "EN"
   },
   "BD3P": {
-    "name": "Cats &amp; Dogs - The Revenge of Kitty Galore - The Videogame",
+    "name": "Cats & Dogs - The Revenge of Kitty Galore - The Videogame",
     "region": "PAL",
     "languages": "EN"
   },
@@ -9560,7 +9560,7 @@
   },
   "BEPE": { "name": "Easy Piano", "region": "NTSC-U", "languages": "EN" },
   "BEPP": {
-    "name": "Easy Piano - Learn, Play &amp; Compose",
+    "name": "Easy Piano - Learn, Play & Compose",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -9756,7 +9756,7 @@
     "languages": "EN"
   },
   "BFYF": {
-    "name": "Fort Boyard - Casse-tetes &amp; Enigmes",
+    "name": "Fort Boyard - Casse-tetes & Enigmes",
     "region": "PAL",
     "languages": "FR"
   },
@@ -10038,7 +10038,7 @@
   },
   "BHIP": { "name": "Fix It", "region": "PAL", "languages": "EN" },
   "BHKJ": {
-    "name": "Hello Kitty no Paku Paku &amp; Logic",
+    "name": "Hello Kitty no Paku Paku & Logic",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -10064,7 +10064,7 @@
     "languages": "SE,DK,NO,FI"
   },
   "BHNJ": {
-    "name": "Aodon DS - Hanabi no Kiwami &amp; Hanabi no Takumi",
+    "name": "Aodon DS - Hanabi no Kiwami & Hanabi no Takumi",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -10321,7 +10321,7 @@
     "languages": "EN,FR,DE,ES,IT,NL"
   },
   "BJ8P": {
-    "name": "Cooking Mama World - Hobbies &amp; Fun",
+    "name": "Cooking Mama World - Hobbies & Fun",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -10360,22 +10360,22 @@
     "languages": "SE,NO"
   },
   "BJHF": {
-    "name": "Dr. Jekyll &amp; Mr. Hyde - Enigmes &amp; Objets Caches",
+    "name": "Dr. Jekyll & Mr. Hyde - Enigmes & Objets Caches",
     "region": "PAL",
     "languages": "FR"
   },
   "BJHP": {
-    "name": "The Mysterious Case of Dr. Jekyll &amp; Mr. Hyde",
+    "name": "The Mysterious Case of Dr. Jekyll & Mr. Hyde",
     "region": "PAL",
     "languages": "EN"
   },
   "BJHX": {
-    "name": "The Mysterious Case of Dr. Jekyll &amp; Mr. Hyde",
+    "name": "The Mysterious Case of Dr. Jekyll & Mr. Hyde",
     "region": "PAL",
     "languages": "FR,DE"
   },
   "BJHY": {
-    "name": "The Mysterious Case of Dr. Jekyll &amp; Mr. Hyde",
+    "name": "The Mysterious Case of Dr. Jekyll & Mr. Hyde",
     "region": "PAL",
     "languages": "FR,NL"
   },
@@ -10407,7 +10407,7 @@
     "languages": "EN"
   },
   "BJOP": {
-    "name": "Percy Jackson &amp; the Lightning Thief",
+    "name": "Percy Jackson & the Lightning Thief",
     "region": "PAL",
     "languages": "EN"
   },
@@ -10875,7 +10875,7 @@
     "languages": "EN,JA"
   },
   "BM3J": {
-    "name": "Shounen Sunday &amp; Shounen Magazine - White Comic",
+    "name": "Shounen Sunday & Shounen Magazine - White Comic",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -11028,7 +11028,7 @@
     "languages": "DE"
   },
   "BMYE": {
-    "name": "Paws &amp; Claws - Regal Resort",
+    "name": "Paws & Claws - Regal Resort",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -11111,7 +11111,7 @@
     "languages": "EN,JA"
   },
   "BNHJ": {
-    "name": "Marie &amp; Gali no Let's Science",
+    "name": "Marie & Gali no Let's Science",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -11477,7 +11477,7 @@
     "languages": "EN,SE,DK,NO"
   },
   "BPHJ": {
-    "name": "Maruhan Pachinko &amp; Pachi-Slot Hisshou Guide Kyouryoku - The Pachinko Hall",
+    "name": "Maruhan Pachinko & Pachi-Slot Hisshou Guide Kyouryoku - The Pachinko Hall",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -11637,7 +11637,7 @@
     "languages": "EN,JA"
   },
   "BQEH": {
-    "name": "Quest Braintainment - 1313 vragen &amp; antwoorden",
+    "name": "Quest Braintainment - 1313 vragen & antwoorden",
     "region": "PAL",
     "languages": "NL"
   },
@@ -11835,12 +11835,12 @@
     "languages": "EN"
   },
   "BRLE": {
-    "name": "Ringling Bros. and Barnum &amp; Bailey - Circus Friends - Asian Elephants",
+    "name": "Ringling Bros. and Barnum & Bailey - Circus Friends - Asian Elephants",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "BRLX": {
-    "name": "Ringling Bros. and Barnum &amp; Bailey - It's My Circus - Elephant Friend",
+    "name": "Ringling Bros. and Barnum & Bailey - It's My Circus - Elephant Friend",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -12171,12 +12171,12 @@
     "languages": "EN,JA"
   },
   "BT4P": {
-    "name": "Thomas &amp; Friends - Hero of the Rails",
+    "name": "Thomas & Friends - Hero of the Rails",
     "region": "PAL",
     "languages": "EN"
   },
   "BT4X": {
-    "name": "Thomas &amp; Friends - Hero of the Rails",
+    "name": "Thomas & Friends - Hero of the Rails",
     "region": "PAL",
     "languages": "SE,DK,NO"
   },
@@ -12445,7 +12445,7 @@
     "languages": "JA"
   },
   "BUEF": {
-    "name": "La Malediction de Toutankhamon - Enigmes &amp; Objets Caches",
+    "name": "La Malediction de Toutankhamon - Enigmes & Objets Caches",
     "region": "PAL",
     "languages": "FR"
   },
@@ -12465,7 +12465,7 @@
     "languages": "FR,NL"
   },
   "BUFE": {
-    "name": "Petz - Puppyz &amp; Kittenz",
+    "name": "Petz - Puppyz & Kittenz",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -12511,7 +12511,7 @@
     "languages": "SE,NO"
   },
   "BUPD": {
-    "name": "Bibi &amp; Tina - Jump &amp; Ride",
+    "name": "Bibi & Tina - Jump & Ride",
     "region": "PAL",
     "languages": "DE"
   },
@@ -12881,17 +12881,17 @@
     "languages": "EN"
   },
   "BWVE": {
-    "name": "Witches &amp; Vampires - The Secrets of Ashburry",
+    "name": "Witches & Vampires - The Secrets of Ashburry",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "BWVH": {
-    "name": "Witches &amp; Vampires - The Secrets of Ashburry",
+    "name": "Witches & Vampires - The Secrets of Ashburry",
     "region": "PAL",
     "languages": "NL"
   },
   "BWVP": {
-    "name": "Witches &amp; Vampires - The Secrets of Ashburry",
+    "name": "Witches & Vampires - The Secrets of Ashburry",
     "region": "PAL",
     "languages": "EN,DE"
   },
@@ -13387,7 +13387,7 @@
   },
   "C24P": { "name": "Phantasy Star 0", "region": "PAL", "languages": "EN" },
   "C25D": {
-    "name": "Anna &amp; die Liebe",
+    "name": "Anna & die Liebe",
     "region": "PAL",
     "languages": "DE"
   },
@@ -13902,7 +13902,7 @@
     "languages": "EN"
   },
   "C54E": {
-    "name": "Petz Fashion - Dogz &amp; Catz",
+    "name": "Petz Fashion - Dogz & Catz",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -14093,7 +14093,7 @@
     "languages": "EN,JA"
   },
   "C64J": {
-    "name": "Kuroshitsuji - Phantom &amp; Ghost",
+    "name": "Kuroshitsuji - Phantom & Ghost",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -14300,7 +14300,7 @@
     "languages": "EN,FR"
   },
   "C7KJ": {
-    "name": "Meitantei Conan &amp; Kindaichi Shounen no Jikenbo - Meguriau Futari no Meitantei",
+    "name": "Meitantei Conan & Kindaichi Shounen no Jikenbo - Meguriau Futari no Meitantei",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -14437,7 +14437,7 @@
     "languages": "EN"
   },
   "CAEF": {
-    "name": "Adi l'Entraineur - Mathematiques, Francais 6e &amp; 5e",
+    "name": "Adi l'Entraineur - Mathematiques, Francais 6e & 5e",
     "region": "PAL",
     "languages": "EN"
   },
@@ -14862,7 +14862,7 @@
   "CCME": { "name": "TouchMaster 2", "region": "NTSC-U", "languages": "EN" },
   "CCMP": { "name": "More TouchMaster", "region": "PAL", "languages": "EN" },
   "CCNP": {
-    "name": "Bibi &amp; Tina - The Great Paper Chase",
+    "name": "Bibi & Tina - The Great Paper Chase",
     "region": "PAL",
     "languages": "EN,FR,DE"
   },
@@ -14885,7 +14885,7 @@
     "languages": "EN,JA"
   },
   "CCVX": {
-    "name": "D&amp;CO - Ta Maison de Reve en 7 Jours",
+    "name": "D&CO - Ta Maison de Reve en 7 Jours",
     "region": "PAL",
     "languages": "FR,IT"
   },
@@ -14996,7 +14996,7 @@
     "languages": "EN,FR,DE"
   },
   "CDDJ": {
-    "name": "Dun-Dam - Dungeons &amp; Dam",
+    "name": "Dun-Dam - Dungeons & Dam",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -15013,7 +15013,7 @@
   },
   "CDGP": { "name": "Disgaea DS", "region": "PAL", "languages": "EN" },
   "CDHJ": {
-    "name": "Minna de Dokusho DS - Torimonochou - Hanshichi &amp; Umon &amp; Ango &amp; Agojuurou &amp; Hatamoto Taikutsu Otoko",
+    "name": "Minna de Dokusho DS - Torimonochou - Hanshichi & Umon & Ango & Agojuurou & Hatamoto Taikutsu Otoko",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -15139,7 +15139,7 @@
   },
   "CDYP": { "name": "Riding Academy", "region": "PAL", "languages": "EN,DE" },
   "CDYX": {
-    "name": "Cavallo &amp; Pony - La Scuola di Equitazione",
+    "name": "Cavallo & Pony - La Scuola di Equitazione",
     "region": "PAL",
     "languages": "EN"
   },
@@ -15154,7 +15154,7 @@
     "languages": "EN"
   },
   "CE2F": {
-    "name": "C'Est Pas Sorcier - Les Fabuleux Defis de Fred &amp; Jamy",
+    "name": "C'Est Pas Sorcier - Les Fabuleux Defis de Fred & Jamy",
     "region": "PAL",
     "languages": "EN"
   },
@@ -15190,7 +15190,7 @@
     "languages": "EN"
   },
   "CE9P": {
-    "name": "Element Girls - Love, Fashion &amp; Friends",
+    "name": "Element Girls - Love, Fashion & Friends",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -15483,7 +15483,7 @@
     "languages": "EN"
   },
   "CG2P": {
-    "name": "Horse &amp; Foal - My Riding Stables - Life with Horses",
+    "name": "Horse & Foal - My Riding Stables - Life with Horses",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -15635,12 +15635,12 @@
     "languages": "EN"
   },
   "CGWE": {
-    "name": "Game &amp; Watch Collection 2",
+    "name": "Game & Watch Collection 2",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CGWJ": {
-    "name": "Game &amp; Watch Collection 2",
+    "name": "Game & Watch Collection 2",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -15734,7 +15734,7 @@
     "languages": "EN,JA"
   },
   "CHEP": {
-    "name": "Learn to Play Chess with Fritz &amp; Chesster",
+    "name": "Learn to Play Chess with Fritz & Chesster",
     "region": "PAL",
     "languages": "EN"
   },
@@ -15794,12 +15794,12 @@
     "languages": "EN"
   },
   "CHNE": {
-    "name": "Might &amp; Magic - Clash of Heroes",
+    "name": "Might & Magic - Clash of Heroes",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CHNP": {
-    "name": "Might &amp; Magic - Clash of Heroes",
+    "name": "Might & Magic - Clash of Heroes",
     "region": "PAL",
     "languages": "EN"
   },
@@ -16176,7 +16176,7 @@
     "languages": "EN,JA"
   },
   "CJEJ": {
-    "name": "Keiji J.B. Harold no Jikenbo - Manhattan Requiem &amp; Kiss of Murder",
+    "name": "Keiji J.B. Harold no Jikenbo - Manhattan Requiem & Kiss of Murder",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -16280,7 +16280,7 @@
   },
   "CJXE": { "name": "Riding Academy 2", "region": "NTSC-U", "languages": "EN" },
   "CJXP": {
-    "name": "Pferd &amp; Pony - Die Reitakademie - Das Entscheidende Turnier",
+    "name": "Pferd & Pony - Die Reitakademie - Das Entscheidende Turnier",
     "region": "PAL",
     "languages": "EN"
   },
@@ -16565,22 +16565,22 @@
     "languages": "ES,IT"
   },
   "CLJE": {
-    "name": "Mario &amp; Luigi - Bowser's Inside Story",
+    "name": "Mario & Luigi - Bowser's Inside Story",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CLJJ": {
-    "name": "Mario &amp; Luigi RPG 3!!!",
+    "name": "Mario & Luigi RPG 3!!!",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
   "CLJK": {
-    "name": "Mario &amp; Luigi RPG 3 - Kupa Momsok Daemoheom",
+    "name": "Mario & Luigi RPG 3 - Kupa Momsok Daemoheom",
     "region": "NTSC-K",
     "languages": "KO"
   },
   "CLJP": {
-    "name": "Mario &amp; Luigi - Bowser's Inside Story",
+    "name": "Mario & Luigi - Bowser's Inside Story",
     "region": "PAL",
     "languages": "EN"
   },
@@ -16897,7 +16897,7 @@
     "languages": "EN"
   },
   "CMXE": {
-    "name": "M&amp;M's - Adventure",
+    "name": "M&M's - Adventure",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -16927,7 +16927,7 @@
     "languages": "EN,JA"
   },
   "CN6J": {
-    "name": "Majin Tantei Nougami Neuro - Neuro to Yako no Bishoku Zanmai - Suiri Tsuki - Gourmet &amp; Mystery",
+    "name": "Majin Tantei Nougami Neuro - Neuro to Yako no Bishoku Zanmai - Suiri Tsuki - Gourmet & Mystery",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -17217,12 +17217,12 @@
     "languages": "EN,JA"
   },
   "COLE": {
-    "name": "Mario &amp; Sonic at the Olympic Winter Games",
+    "name": "Mario & Sonic at the Olympic Winter Games",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "COLJ": {
-    "name": "Mario &amp; Sonic at Vancouver Olympic",
+    "name": "Mario & Sonic at Vancouver Olympic",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -17232,7 +17232,7 @@
     "languages": "KO"
   },
   "COLP": {
-    "name": "Mario &amp; Sonic at the Olympic Winter Games",
+    "name": "Mario & Sonic at the Olympic Winter Games",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT,NL,PT"
   },
@@ -17511,7 +17511,7 @@
     "languages": "EN,FR,DE,ES,IT,NL,SE,DK,NO,FI"
   },
   "CPTJ": {
-    "name": "Pachi &amp; Slot Hisshoubon DS",
+    "name": "Pachi & Slot Hisshoubon DS",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -17586,7 +17586,7 @@
     "languages": "EN,FR,DE,ES,IT,NL"
   },
   "CPZE": {
-    "name": "Paws &amp; Claws - Pampered Pets",
+    "name": "Paws & Claws - Pampered Pets",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -17618,12 +17618,12 @@
     "languages": "EN,JA"
   },
   "CQAE": {
-    "name": "Brain Quest - Grades 3 &amp; 4",
+    "name": "Brain Quest - Grades 3 & 4",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CQBE": {
-    "name": "Brain Quest - Grades 5 &amp; 6",
+    "name": "Brain Quest - Grades 5 & 6",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -17670,7 +17670,7 @@
     "languages": "EN,FR,NL"
   },
   "CQFJ": {
-    "name": "Nazonazo &amp; Quiz - Ittou Nyuukon Q Mate!",
+    "name": "Nazonazo & Quiz - Ittou Nyuukon Q Mate!",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -17828,7 +17828,7 @@
     "languages": "EN"
   },
   "CR5X": {
-    "name": "Reader Rabbit - Play &amp; Learn - age 4-7",
+    "name": "Reader Rabbit - Play & Learn - age 4-7",
     "region": "PAL",
     "languages": "SE,DK,NO,FI"
   },
@@ -18031,12 +18031,12 @@
     "languages": "EN"
   },
   "CS3E": {
-    "name": "Sonic &amp; Sega All-Stars Racing",
+    "name": "Sonic & Sega All-Stars Racing",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CS3P": {
-    "name": "Sonic &amp; Sega All-Stars Racing",
+    "name": "Sonic & Sega All-Stars Racing",
     "region": "PAL",
     "languages": "EN"
   },
@@ -18298,7 +18298,7 @@
     "languages": "DE"
   },
   "CTDE": {
-    "name": "Paws &amp; Claws - Pet Vet - Australian Adventures",
+    "name": "Paws & Claws - Pet Vet - Australian Adventures",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -18590,7 +18590,7 @@
     "region": "PAL",
     "languages": "EN"
   },
-  "CV6P": { "name": "Lola &amp; Virginia", "region": "PAL", "languages": "EN" },
+  "CV6P": { "name": "Lola & Virginia", "region": "PAL", "languages": "EN" },
   "CV7E": { "name": "Logic Machines", "region": "NTSC-U", "languages": "EN" },
   "CV7P": { "name": "Logic Machines", "region": "PAL", "languages": "EN" },
   "CV8E": {
@@ -18975,12 +18975,12 @@
   "CXGE": { "name": "XG Blast!", "region": "NTSC-U", "languages": "EN" },
   "CXGP": { "name": "XG Blast!", "region": "PAL", "languages": "EN" },
   "CXHE": {
-    "name": "My Horse &amp; Me - Riding for Gold",
+    "name": "My Horse & Me - Riding for Gold",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "CXHP": {
-    "name": "My Horse &amp; Me 2",
+    "name": "My Horse & Me 2",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT,NL,SE,DK,NO,FI"
   },
@@ -19163,7 +19163,7 @@
     "languages": "ES"
   },
   "CYEE": {
-    "name": "Legacy of Ys - Books I &amp; II",
+    "name": "Legacy of Ys - Books I & II",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -19238,7 +19238,7 @@
     "languages": "EN"
   },
   "CYVJ": {
-    "name": "VitaminY - Super Supplement Minigames with B6 &amp; T6",
+    "name": "VitaminY - Super Supplement Minigames with B6 & T6",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -19798,7 +19798,7 @@
     "languages": "EN"
   },
   "TBYY": {
-    "name": "3 in 1 - My Riding Stables - Life with Horses + My Pet Hotel 2 &amp; + My Pet School",
+    "name": "3 in 1 - My Riding Stables - Life with Horses + My Pet Hotel 2 & + My Pet School",
     "region": "PAL",
     "languages": "FR,DE,IT"
   },
@@ -19900,7 +19900,7 @@
     "languages": "FR,NL"
   },
   "TCHJ": {
-    "name": "Gakken Chuugokugo Zanmai DS - Kiki &amp; Kaki Training",
+    "name": "Gakken Chuugokugo Zanmai DS - Kiki & Kaki Training",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -19970,7 +19970,7 @@
     "languages": "EN"
   },
   "TCTJ": {
-    "name": "Maji de Manabu - LEC de Ukaru - DS Takuchi Tatemono Torihiki Shuninsha - 2011 Nen &amp; 2012 Nendo Ban",
+    "name": "Maji de Manabu - LEC de Ukaru - DS Takuchi Tatemono Torihiki Shuninsha - 2011 Nen & 2012 Nendo Ban",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -20026,12 +20026,12 @@
     "languages": "EN"
   },
   "TDUP": {
-    "name": "Dora &amp; Friends' - Fantastic Flight",
+    "name": "Dora & Friends' - Fantastic Flight",
     "region": "PAL",
     "languages": "EN"
   },
   "TDUX": {
-    "name": "Dora &amp; Friends' - Fantastic Flight",
+    "name": "Dora & Friends' - Fantastic Flight",
     "region": "PAL",
     "languages": "EN,FR,ES,NL"
   },
@@ -20224,7 +20224,7 @@
     "languages": "EN"
   },
   "THGJ": {
-    "name": "Gakken Hangul Zanmai DS - Kiki &amp; Kaki Training",
+    "name": "Gakken Hangul Zanmai DS - Kiki & Kaki Training",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -20465,7 +20465,7 @@
     "languages": "DE"
   },
   "TLPE": {
-    "name": "2-Pack - Pinkalicious - It's Party Time! &amp; Silverlicious - Sweet Adventure",
+    "name": "2-Pack - Pinkalicious - It's Party Time! & Silverlicious - Sweet Adventure",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -20576,7 +20576,7 @@
     "languages": "EN,FR,DE,ES,IT,NL,SE,DK,NO,FI"
   },
   "TM7P": {
-    "name": "3 in 1 - My Vet Practice &amp; Riding Star &amp; My Vet Practice in Australia",
+    "name": "3 in 1 - My Vet Practice & Riding Star & My Vet Practice in Australia",
     "region": "PAL",
     "languages": "EN,FR,DE,ES,IT"
   },
@@ -20659,7 +20659,7 @@
     "languages": "EN"
   },
   "TMTE": {
-    "name": "Kids Learn &amp; Play - Pets &amp; Vets Bundle",
+    "name": "Kids Learn & Play - Pets & Vets Bundle",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -20932,12 +20932,12 @@
     "languages": "EN,FR,DE,ES,IT,NL,SE,DK,NO"
   },
   "TR3D": {
-    "name": "Around the World in 80 Days &amp; Fishdom",
+    "name": "Around the World in 80 Days & Fishdom",
     "region": "PAL",
     "languages": "FR,DE"
   },
   "TR4D": {
-    "name": "Jewel Match &amp; 4 Elements",
+    "name": "Jewel Match & 4 Elements",
     "region": "PAL",
     "languages": "FR,DE"
   },
@@ -21040,7 +21040,7 @@
     "languages": "IT"
   },
   "UZPJ": {
-    "name": "Battle &amp; Get! - Pokémon Typing DS",
+    "name": "Battle & Get! - Pokémon Typing DS",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -21714,7 +21714,7 @@
     "languages": "EN"
   },
   "VMEE": {
-    "name": "Paws &amp; Claws - Marine Rescue",
+    "name": "Paws & Claws - Marine Rescue",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -21755,27 +21755,27 @@
     "languages": "EN"
   },
   "VMZE": {
-    "name": "Barbie - Jet, Set &amp; Style!",
+    "name": "Barbie - Jet, Set & Style!",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "VMZP": {
-    "name": "Barbie - Jet, Set &amp; Style!",
+    "name": "Barbie - Jet, Set & Style!",
     "region": "PAL",
     "languages": "DE,ES,IT"
   },
   "VMZV": {
-    "name": "Barbie - Jet, Set &amp; Style!",
+    "name": "Barbie - Jet, Set & Style!",
     "region": "PAL",
     "languages": "EN,FR,NL"
   },
   "VMZX": {
-    "name": "Barbie - Jet, Set &amp; Style!",
+    "name": "Barbie - Jet, Set & Style!",
     "region": "PAL",
     "languages": "DE,ES,IT"
   },
   "VMZY": {
-    "name": "Barbie - Jet, Set &amp;amp; Style!",
+    "name": "Barbie - Jet, Set & Style!",
     "region": "PAL",
     "languages": "EN"
   },
@@ -22003,7 +22003,7 @@
     "languages": "EN,SE,DK,NO"
   },
   "VTIE": {
-    "name": "Paws &amp; Claws - Pampered Pets 2",
+    "name": "Paws & Claws - Pampered Pets 2",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -22029,12 +22029,12 @@
     "languages": "EN"
   },
   "VWVP": {
-    "name": "Witches &amp; Vampires - Ghost Pirates of Ashburry",
+    "name": "Witches & Vampires - Ghost Pirates of Ashburry",
     "region": "PAL",
     "languages": "EN"
   },
   "VWVV": {
-    "name": "Witches &amp; Vampires - Ghost Pirates of Ashburry",
+    "name": "Witches & Vampires - Ghost Pirates of Ashburry",
     "region": "PAL",
     "languages": "EN"
   },
@@ -22261,7 +22261,7 @@
     "languages": "EN"
   },
   "Y5HE": {
-    "name": "Mario &amp;amp; Sonic at the Olympic Games (Demo)",
+    "name": "Mario & Sonic at the Olympic Games (Demo)",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -22327,17 +22327,17 @@
     "languages": "EN"
   },
   "Y6OE": {
-    "name": "Shaymin &amp; Regigigas Distribution 2009",
+    "name": "Shaymin & Regigigas Distribution 2009",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "Y6PE": {
-    "name": "Mario &amp;amp; Luigi - Bowser's Inside Story (Demo)",
+    "name": "Mario & Luigi - Bowser's Inside Story (Demo)",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "Y6PP": {
-    "name": "Mario &amp; Luigi - Bowser's Inside Story (Demo)",
+    "name": "Mario & Luigi - Bowser's Inside Story (Demo)",
     "region": "PAL",
     "languages": "EN"
   },
@@ -22459,7 +22459,7 @@
     "languages": "EN"
   },
   "Y86P": {
-    "name": "Shelmet &amp; Karrablast Distribution 2011",
+    "name": "Shelmet & Karrablast Distribution 2011",
     "region": "PAL",
     "languages": "EN"
   },
@@ -22576,7 +22576,7 @@
     "languages": "EN,FR,DE,ES,IT,NL"
   },
   "YA8E": {
-    "name": "World Championship Games - A Track &amp; Field Event",
+    "name": "World Championship Games - A Track & Field Event",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -22668,7 +22668,7 @@
     "languages": "EN"
   },
   "YAMP": {
-    "name": "2 Games on 1 Card - Monster Trucks Mayhem &amp; ATV - Thunder Ridge Riders",
+    "name": "2 Games on 1 Card - Monster Trucks Mayhem & ATV - Thunder Ridge Riders",
     "region": "PAL",
     "languages": "EN"
   },
@@ -22841,7 +22841,7 @@
   "YB4P": { "name": "Bee Movie Game", "region": "PAL", "languages": "EN" },
   "YB4S": { "name": "Bee Movie Game", "region": "PAL", "languages": "ES" },
   "YB5D": {
-    "name": "Pferd &amp; Pony - Best Friends - Mein Pferd",
+    "name": "Pferd & Pony - Best Friends - Mein Pferd",
     "region": "PAL",
     "languages": "DE"
   },
@@ -23365,7 +23365,7 @@
     "languages": "EN,JA"
   },
   "YDAJ": {
-    "name": "Toshokan DS - Meisaku &amp; Suiri &amp; Kaidan &amp; Bungaku",
+    "name": "Toshokan DS - Meisaku & Suiri & Kaidan & Bungaku",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -23413,7 +23413,7 @@
     "languages": "KO"
   },
   "YDJE": {
-    "name": "Drake &amp; Josh - Talent Showdown",
+    "name": "Drake & Josh - Talent Showdown",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -24297,12 +24297,12 @@
     "languages": "EN,JA"
   },
   "YHFE": {
-    "name": "Holly Hobbie &amp; Friends",
+    "name": "Holly Hobbie & Friends",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "YHFP": {
-    "name": "Holly Hobbie &amp; Friends",
+    "name": "Holly Hobbie & Friends",
     "region": "PAL",
     "languages": "EN"
   },
@@ -24317,7 +24317,7 @@
     "languages": "EN,JA"
   },
   "YHIJ": {
-    "name": "Hiromichi Oniisan no Oyako Taisou Navi - Oyako no Skin-Ship &amp; Tairyoku Zukuri",
+    "name": "Hiromichi Oniisan no Oyako Taisou Navi - Oyako no Skin-Ship & Tairyoku Zukuri",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -24375,11 +24375,11 @@
   },
   "YHRE": { "name": "Homie Rollerz", "region": "NTSC-U", "languages": "EN" },
   "YHSE": {
-    "name": "My Horse &amp; Me",
+    "name": "My Horse & Me",
     "region": "NTSC-U",
     "languages": "EN"
   },
-  "YHSP": { "name": "My Horse &amp; Me", "region": "PAL", "languages": "EN" },
+  "YHSP": { "name": "My Horse & Me", "region": "PAL", "languages": "EN" },
   "YHTJ": {
     "name": "Haneru no Tobira DS - Tanshuku Tetsudou no Yoru",
     "region": "NTSC-J",
@@ -24622,7 +24622,7 @@
     "languages": "FR"
   },
   "YIXJ": {
-    "name": "Nazonazo &amp; Quiz - Ittou Nyuukon Q Mate!",
+    "name": "Nazonazo & Quiz - Ittou Nyuukon Q Mate!",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -24889,7 +24889,7 @@
     "languages": "EN,FR,ES,IT"
   },
   "YK4J": {
-    "name": "Kachou Shima Kosaku DS - Dekiru Otoko no Love &amp; Success",
+    "name": "Kachou Shima Kosaku DS - Dekiru Otoko no Love & Success",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -24936,7 +24936,7 @@
     "languages": "KO"
   },
   "YKCJ": {
-    "name": "Karada, Yorokobu Shokuji &amp; Exercise - Kenkou Kentei",
+    "name": "Karada, Yorokobu Shokuji & Exercise - Kenkou Kentei",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -25362,7 +25362,7 @@
     "languages": "EN,JA"
   },
   "YM4J": {
-    "name": "Quiz &amp; Touch Kensaku - Mushi Zukan DS - Mushi o Sagasou Shirabeyou",
+    "name": "Quiz & Touch Kensaku - Mushi Zukan DS - Mushi o Sagasou Shirabeyou",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -25471,7 +25471,7 @@
     "languages": "DE"
   },
   "YMUE": {
-    "name": "Paws &amp; Claws - Pet Vet 2",
+    "name": "Paws & Claws - Pet Vet 2",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -25518,7 +25518,7 @@
   "YMYE": { "name": "Myst", "region": "NTSC-U", "languages": "EN" },
   "YMYP": { "name": "Myst", "region": "PAL", "languages": "EN" },
   "YMZE": {
-    "name": "M&amp;M's - Kart Racing",
+    "name": "M&M's - Kart Racing",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -25685,12 +25685,12 @@
   },
   "YNXE": { "name": "N+", "region": "NTSC-U", "languages": "EN" },
   "YNYE": {
-    "name": "The Aly &amp; AJ Adventure",
+    "name": "The Aly & AJ Adventure",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "YNYP": {
-    "name": "The Aly &amp; AJ Adventure",
+    "name": "The Aly & AJ Adventure",
     "region": "PAL",
     "languages": "EN"
   },
@@ -25765,8 +25765,8 @@
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
-  "YOEE": { "name": "Orcs &amp; Elves", "region": "NTSC-U", "languages": "EN" },
-  "YOEP": { "name": "Orcs &amp; Elves", "region": "PAL", "languages": "EN" },
+  "YOEE": { "name": "Orcs & Elves", "region": "NTSC-U", "languages": "EN" },
+  "YOEP": { "name": "Orcs & Elves", "region": "PAL", "languages": "EN" },
   "YOFJ": {
     "name": "Ookiku Furikabutte - Honto no Ace ni Nareru kamo",
     "region": "NTSC-J",
@@ -26067,7 +26067,7 @@
     "languages": "DE"
   },
   "YQ3E": {
-    "name": "Shrek - Ogres &amp; Dronkeys",
+    "name": "Shrek - Ogres & Dronkeys",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -26077,7 +26077,7 @@
     "languages": "FR"
   },
   "YQ3H": {
-    "name": "Shrek - Ogres &amp; Dronkeys",
+    "name": "Shrek - Ogres & Dronkeys",
     "region": "PAL",
     "languages": "EN"
   },
@@ -26087,7 +26087,7 @@
     "languages": "IT"
   },
   "YQ3P": {
-    "name": "Shrek - Ogres &amp; Dronkeys",
+    "name": "Shrek - Ogres & Dronkeys",
     "region": "PAL",
     "languages": "EN"
   },
@@ -26636,7 +26636,7 @@
     "region": "PAL",
     "languages": "EN"
   },
-  "YSCD": { "name": "Schach &amp; Matt", "region": "PAL", "languages": "DE" },
+  "YSCD": { "name": "Schach & Matt", "region": "PAL", "languages": "DE" },
   "YSCE": { "name": "Learn Chess", "region": "NTSC-U", "languages": "EN" },
   "YSCX": {
     "name": "Je Decouvre les Echecs",
@@ -27443,7 +27443,7 @@
     "languages": "EN,JA"
   },
   "YW3P": {
-    "name": "Happy Party with Hello Kitty &amp; Friends!",
+    "name": "Happy Party with Hello Kitty & Friends!",
     "region": "PAL",
     "languages": "EN"
   },
@@ -27621,12 +27621,12 @@
     "languages": "EN"
   },
   "YWRE": {
-    "name": "Wacky Races - Crash &amp; Dash",
+    "name": "Wacky Races - Crash & Dash",
     "region": "NTSC-U",
     "languages": "EN"
   },
   "YWRP": {
-    "name": "Wacky Races - Crash &amp; Dash",
+    "name": "Wacky Races - Crash & Dash",
     "region": "PAL",
     "languages": "EN"
   },
@@ -27850,7 +27850,7 @@
     "languages": "EN,JA"
   },
   "YY7F": {
-    "name": "Boule &amp; Bill - Vive les Vacances!",
+    "name": "Boule & Bill - Vive les Vacances!",
     "region": "PAL",
     "languages": "FR"
   },
@@ -27981,7 +27981,7 @@
     "languages": "EN,JA"
   },
   "YZ2J": {
-    "name": "DS Puzzler - Nanpure Fan &amp; Oekaki Logic - Wi-Fi Taiou",
+    "name": "DS Puzzler - Nanpure Fan & Oekaki Logic - Wi-Fi Taiou",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -28031,7 +28031,7 @@
     "languages": "EN,JA"
   },
   "YZCJ": {
-    "name": "Simple DS Series Vol. 33 - The Crossword &amp; Kanji Puzzle",
+    "name": "Simple DS Series Vol. 33 - The Crossword & Kanji Puzzle",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -28063,7 +28063,7 @@
     "languages": "EN,FR,DE,ES,IT"
   },
   "YZIJ": {
-    "name": "Simple DS Series Vol. 28 - The Illust Puzzle &amp; Suuji Puzzle 2",
+    "name": "Simple DS Series Vol. 28 - The Illust Puzzle & Suuji Puzzle 2",
     "region": "NTSC-J",
     "languages": "EN,JA"
   },
@@ -28618,37 +28618,37 @@
   },
   "KG7V": { "name": "Gold Fever", "region": "PAL", "languages": "EN" },
   "KGBO": {
-    "name": "Game &amp; Watch - Ball",
+    "name": "Game & Watch - Ball",
     "region": "PAL",
     "languages": "EN"
   },
   "KGCO": {
-    "name": "Game &amp; Watch - Chef",
+    "name": "Game & Watch - Chef",
     "region": "PAL",
     "languages": "EN"
   },
   "KGDO": {
-    "name": "Game &amp; Watch - Donkey Kong Jr.",
+    "name": "Game & Watch - Donkey Kong Jr.",
     "region": "PAL",
     "languages": "EN"
   },
   "KGFO": {
-    "name": "Game &amp; Watch - Mario's Cement Factory",
+    "name": "Game & Watch - Mario's Cement Factory",
     "region": "PAL",
     "languages": "EN"
   },
   "KGGO": {
-    "name": "Game &amp; Watch - Flagman",
+    "name": "Game & Watch - Flagman",
     "region": "PAL",
     "languages": "EN"
   },
   "KGHO": {
-    "name": "Game &amp; Watch - Helmet",
+    "name": "Game & Watch - Helmet",
     "region": "PAL",
     "languages": "EN"
   },
   "KGJO": {
-    "name": "Game &amp; Watch - Judge",
+    "name": "Game & Watch - Judge",
     "region": "PAL",
     "languages": "EN"
   },
@@ -28659,7 +28659,7 @@
   },
   "KGLE": { "name": "Glow Artisan", "region": "NTSC-U", "languages": "EN" },
   "KGMO": {
-    "name": "Game &amp; Watch - Manhole",
+    "name": "Game & Watch - Manhole",
     "region": "PAL",
     "languages": "EN"
   },
@@ -28683,7 +28683,7 @@
   },
   "KGUV": { "name": "Flipnote Studio", "region": "PAL", "languages": "EN" },
   "KGVO": {
-    "name": "Game &amp; Watch - Vermin",
+    "name": "Game & Watch - Vermin",
     "region": "PAL",
     "languages": "EN"
   },
@@ -28805,7 +28805,7 @@
     "languages": "EN"
   },
   "KNDE": {
-    "name": "Brain Age Express - Arts &amp; Letters",
+    "name": "Brain Age Express - Arts & Letters",
     "region": "NTSC-U",
     "languages": "EN"
   },
@@ -28854,7 +28854,7 @@
   },
   "KOTE": { "name": "Oscar in Toyland", "region": "NTSC-U", "languages": "EN" },
   "KOWP": { "name": "Surfacer+", "region": "PAL", "languages": "EN" },
-  "KP6E": { "name": "Bird &amp; Beans", "region": "NTSC-U", "languages": "EN" },
+  "KP6E": { "name": "Bird & Beans", "region": "NTSC-U", "languages": "EN" },
   "KP6J": { "name": "Tori to Mame", "region": "NTSC-J", "languages": "EN,JA" },
   "KPAE": { "name": "A Kappa's Trail", "region": "NTSC-U", "languages": "EN" },
   "KPBE": { "name": "Photo Dojo", "region": "NTSC-U", "languages": "EN" },
@@ -28948,7 +28948,7 @@
   "KSKV": { "name": "Soul of Darkness", "region": "PAL", "languages": "EN" },
   "KSLV": { "name": "2-in-1 Solitaire", "region": "PAL", "languages": "EN" },
   "KSME": { "name": "Sudoku Master", "region": "NTSC-U", "languages": "EN" },
-  "KSPV": { "name": "Bird &amp; Bombs", "region": "PAL", "languages": "EN" },
+  "KSPV": { "name": "Bird & Bombs", "region": "PAL", "languages": "EN" },
   "KSRE": {
     "name": "Aura-Aura Climber",
     "region": "NTSC-U",
@@ -29072,7 +29072,7 @@
     "languages": "EN"
   },
   "KWNP": {
-    "name": "Pocket Pack - Words &amp; Numbers",
+    "name": "Pocket Pack - Words & Numbers",
     "region": "PAL",
     "languages": "EN"
   },

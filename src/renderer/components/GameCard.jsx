@@ -8,6 +8,7 @@ import PSPCover from '../../../assets/images/psp-cover.png';
 import WiiUCover from '../../../assets/images/wii-u-cover.png';
 import GBACover from '../../../assets/images/gba-cover-new.png';
 import DSCover from '../../../assets/images/ds-cover.png';
+import PS2Cover from '../../../assets/images/ps2-cover.png';
 
 const GameCard = ({
   image,
@@ -38,6 +39,8 @@ const GameCard = ({
       return GBACover;
     } else if (gameConsole == 'DS') {
       return DSCover;
+    } else if (gameConsole == 'PS2') {
+      return PS2Cover;
     }
     return WiiCover;
   };

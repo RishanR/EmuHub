@@ -30,6 +30,10 @@
   aspect-ratio: 778/1354;
 }
 
+.aspect-ratio-PS2 {
+  aspect-ratio: 942/1330;
+}
+
 .game-card-container {
   position: relative;
   width: 100%;

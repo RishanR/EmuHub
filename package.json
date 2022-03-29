@@ -225,7 +225,6 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.2",
     "axios": "^0.26.1",
-    "browserfs": "^1.4.3",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.4",
     "electron-store": "^8.0.1",
