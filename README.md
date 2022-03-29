@@ -14,3 +14,4 @@ A multi-console emulator game launcher that serves as a hub for all your video g
 | DS       | DeSmuME  | .zip, .nds     |
 | GBA      | mGBA     | .zip, .gba     |
 | PSP      | PPSSPP   | .iso           |
+| PS2      | PCSX2    | .iso           |
