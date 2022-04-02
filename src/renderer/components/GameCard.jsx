@@ -42,10 +42,11 @@ const GameCard = ({
     } else if (gameConsole == 'PS2') {
       return PS2Cover;
     }
-    return WiiCover;
+    return null;
   };
   const launchGame = async () => {
     if (!gameRunning) {
+      playSelect();
       const result = await window.api[`exec${gameConsole}`]({
         gamePath,
         gameConsole,
@@ -58,7 +59,6 @@ const GameCard = ({
           return { ...prevState, message: result.message };
         });
       } else {
-        playSelect();
         setRunning(name, gameConsole, true);
       }
     }
