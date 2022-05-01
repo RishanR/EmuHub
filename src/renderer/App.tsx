@@ -430,18 +430,26 @@ const Dashboard = () => {
         <div className="navigation-menu">
           {consoles.map((gameConsole) => (
             <div className="navigation-item-container">
-              <img
-                className={`navigation-item${
+              <div
+                className={`navigation-item-outer${
                   gameConsole.name === selectedConsole
-                    ? ' navigation-item-selected'
+                    ? ' navigation-item-outer-selected'
                     : ''
                 }`}
-                src={gameConsole.icon}
-                alt={gameConsole.name}
-                onClick={() => {
-                  setSelectedConsole(gameConsole.name);
-                }}
-              />
+              >
+                <img
+                  className={`navigation-item${
+                    gameConsole.name === selectedConsole
+                      ? ' navigation-item-selected'
+                      : ''
+                  }`}
+                  src={gameConsole.icon}
+                  alt={gameConsole.name}
+                  onClick={() => {
+                    setSelectedConsole(gameConsole.name);
+                  }}
+                />
+              </div>
             </div>
           ))}
           {!showCursor && (
@@ -459,6 +467,9 @@ const Dashboard = () => {
         </div>
         <div className="content">
           <div className="game-grid">
+            <div
+              className={`game-grid-console-default game-grid-${selectedConsole}`}
+            ></div>
             {status.loading && (
               <div className="game-grid-loading-container">
                 <Triangle

@@ -100,24 +100,37 @@ a:hover {
   position: relative;
 }
 
-.navigation-item {
+.navigation-item-outer {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 15px;
-  background-color: #2c3e50;
   transition: background-color 0.15s ease-in-out;
+  background-color: #2c3e50;
 }
 
-.navigation-item:hover {
+.navigation-item-outer:hover {
   background-color: #435466;
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
 }
 
-.navigation-item-selected {
+.navigation-item-outer-selected {
   background-color: #34495e !important;
-  transition: background-color 0.25s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.navigation-item {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 15px;
+  image-rendering: -webkit-optimize-contrast;
+  filter: brightness(0.03) invert(1);
+  transition: filter 0.2s ease-in-out;
+}
+
+.navigation-item-selected {
+  filter: none;
+  transition: filter 0.2s ease-in-out;
 }
 
 .controls-bumper-left-container,
@@ -174,6 +187,7 @@ a:hover {
 }
 
 .game-grid {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -183,9 +197,58 @@ a:hover {
   height: calc(100% - 40px);
   flex-direction: row;
   background-color: #34495e;
+}
+
+.game-grid-console-default {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 1;
   -moz-box-shadow: inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow: inset 0 0 10px #000000;
+  transition: background 200ms ease-in-out;
+}
+
+.game-grid-Switch {
+  background-image: url('../../assets/images/switch-background.png');
+}
+
+.game-grid-Wii {
+  background-image: url('../../assets/images/wii-background.png');
+}
+
+.game-grid-WiiU {
+  background-image: url('../../assets/images/wii-u-background.png');
+}
+
+.game-grid-GC {
+  background-image: url('../../assets/images/gc-background.png');
+}
+
+.game-grid-3DS {
+  background-image: url('../../assets/images/3ds-background.png');
+}
+
+.game-grid-DS {
+  background-image: url('../../assets/images/ds-background.png');
+}
+
+.game-grid-GBA {
+  background-image: url('../../assets/images/gba-background.png');
+}
+
+.game-grid-PS2 {
+  background-image: url('../../assets/images/ps2-background.png');
+}
+
+.game-grid-PSP {
+  background-image: url('../../assets/images/psp-background.png');
 }
 
 .game-grid-loading {
