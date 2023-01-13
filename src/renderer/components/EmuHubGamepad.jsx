@@ -209,6 +209,7 @@ const EmuHubGamepad = (props) => {
       onDisconnect={handleDisconnect}
       onButtonUp={handleButtonUp}
       onAxisChange={handleAxisChange}
+      deadZone={0.25}
     >
       <div></div>
     </Gamepad>
